@@ -1,0 +1,14 @@
+.dialogs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialogsBlock {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.messagesBlock {
+    flex-grow: 1;
+    padding: 20px;
+}
