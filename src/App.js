@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route} from "react-router-dom";
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
@@ -19,7 +19,7 @@ function App(props) {
                                           messagesData = {props.state.dialogsPage.messagesData}/>;
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
@@ -33,7 +33,7 @@ function App(props) {
                     <Route path='/settings' component={Settings}/>
                 </div>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 
