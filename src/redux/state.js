@@ -5,6 +5,7 @@ let state = {
     profilePage: {
         postData: [
             {id:2, message: 'My first react app!', likesCount: 32},
+            {id:3, message: 'I need more CSS', likesCount: 15},
             {id:3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15},
             {id:4, message: 'React is cool!', likesCount: 45},
         ],
