@@ -26,9 +26,9 @@ const MyPosts = (props) => {
         <div className={style.postsBlock}>
             <div className={style.newPostBlock}>
                 <h3>New post</h3>
-                <p>Version is updated!!!</p>
+                <p>Welcome to the updated app! You can add a new post now</p>
                 <p>
-                    Click "Add post" button or write your text and click the button to add to post it
+                    Click "Add post" button or write your text and click the button to add a new post
                     <span> *CSS will be soon</span> ;)
                 </p>
                 <div>
