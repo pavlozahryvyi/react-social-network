@@ -24,7 +24,9 @@ let state = {
             {id: 3, message: 'What are you doing?'},
             {id: 4, message: 'Hi!'},
         ]
-    }
+    },
+
+    siteBar: {}
 
 
 };

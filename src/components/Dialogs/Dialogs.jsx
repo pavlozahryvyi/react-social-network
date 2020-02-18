@@ -15,6 +15,13 @@ const Dialogs = (props) => {
 
     let messagesElements = messagesData.map(messageItem => <Message message={messageItem.message} />);
 
+    let linkTextareaMessages = React.createRef();
+    let buttonEvent = () => {
+        let text = linkTextareaMessages.current.value;
+        alert(text);
+
+    };
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogsBlock}>
@@ -25,6 +32,9 @@ const Dialogs = (props) => {
             <div className={styles.messagesBlock}>
 
                 { messagesElements }
+
+                <textarea ref={ linkTextareaMessages }></textarea>
+                <button onClick={ buttonEvent }>Add</button>
 
             </div>
         </div>
