@@ -34,6 +34,7 @@ const Dialogs = (props) => {
                 { messagesElements }
 
                 <textarea ref={ linkTextareaMessages }></textarea>
+
                 <button onClick={ buttonEvent }>Add</button>
 
             </div>
