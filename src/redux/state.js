@@ -34,14 +34,18 @@ let state = {
 };
 
 export let addPost = () => {
+    let text = state.profilePage.newPostText;
     let newPost = {
         id:5,
-        message: state.profilePage.newPostText,
+        message: text,
         likesCount: 0
     };
-    state.profilePage.postData.push(newPost);
-    state.profilePage.newPostText = '';
-    rerenderEntireTree(state);
+
+    if(text !== '') {
+        state.profilePage.postData.push(newPost);
+        state.profilePage.newPostText = '';
+        rerenderEntireTree(state);
+    }
 };
 
 export let updateNewPostText = newtext => {
