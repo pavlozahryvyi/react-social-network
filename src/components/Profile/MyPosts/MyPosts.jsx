@@ -14,8 +14,8 @@ const MyPosts = (props) => {
 
     let addPost = () => {
         let text = newPostElement.current.value;
-
-        props.addPost(text);
+        props.addPost(text); // call BLL func to adding data to state and rerendering UI
+        newPostElement.current.value = '';
     };
 
     return (
