@@ -8,7 +8,7 @@ let state = {
             {id:3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15},
             {id:4, message: 'React is cool!', likesCount: 45},
         ],
-
+        newPostText: 'some textarea value from state',
     },
 
     dialogsPage: {
@@ -32,9 +32,19 @@ let state = {
 
 };
 
-export let addPost = postMassage => {
-    let newPost = {id:5, message: postMassage, likesCount: 0};
+export let addPost = () => {
+    let newPost = {
+        id:5,
+        message: state.profilePage.newPostText,
+        likesCount: 0
+    };
     state.profilePage.postData.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+};
+
+export let updateNewPostText = newtext => {
+    state.profilePage.newPostText = newtext;
     rerenderEntireTree(state);
 };
 

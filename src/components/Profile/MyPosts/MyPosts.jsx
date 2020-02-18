@@ -4,7 +4,7 @@ import Post from "./Post/Post";
 
 const MyPosts = (props) => {
 
-    console.log("---MyPosts props ", props);
+    //console.log("---MyPosts props ", props);
 
     let postData = props.postData;
 
@@ -13,9 +13,13 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
+        props.addPost(); // call BLL func to adding data to state and rerendering UI
+    };
+
+    let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.addPost(text); // call BLL func to adding data to state and rerendering UI
-        newPostElement.current.value = '';
+        console.log(text);
+        props.updateNewPostText(text);
     };
 
     return (
@@ -23,7 +27,7 @@ const MyPosts = (props) => {
             <div className={style.newPostBlock}>
                 <h3>New post</h3>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={ addPost }>Add post</button>

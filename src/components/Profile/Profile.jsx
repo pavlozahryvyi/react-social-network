@@ -7,12 +7,16 @@ const Profile = (props) => {
 
     console.log('---props in Profile ', props);
 
-    let postData = props.postData;
 
     return (
         <div className={styles.ProfileContent}>
             <ProfileInfo/>
-            <MyPosts postData = {postData} addPost = {props.addPost}/>
+            <MyPosts
+                postData = {props.postData}
+                addPost = {props.addPost}
+                newPostText = {props.newPostText}
+                updateNewPostText = {props.updateNewPostText}
+            />
         </div>
     );
 };

@@ -16,7 +16,9 @@ function App(props) {
 
     let ProfileComponent = () => <Profile
         postData={props.state.profilePage.postData}
-        addPost={props.addPost}/>;
+        addPost={props.addPost}
+        newPostText = {props.state.profilePage.newPostText}
+        updateNewPostText = {props.updateNewPostText}/>;
     let DialogsComponent = () => <Dialogs
         dialogData={props.state.dialogsPage.dialogData}
         messagesData={props.state.dialogsPage.messagesData}/>;
