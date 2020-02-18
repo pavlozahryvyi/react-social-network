@@ -14,9 +14,12 @@ function App(props) {
     console.log('--- App props ', props);
 
 
-    let ProfileComponent = () => <Profile postData = {props.state.profilePage.postData}/>;
-    let DialogsComponent = () => <Dialogs dialogData = {props.state.dialogsPage.dialogData}
-                                          messagesData = {props.state.dialogsPage.messagesData}/>;
+    let ProfileComponent = () => <Profile
+        postData={props.state.profilePage.postData}
+        addPost={props.addPost}/>;
+    let DialogsComponent = () => <Dialogs
+        dialogData={props.state.dialogsPage.dialogData}
+        messagesData={props.state.dialogsPage.messagesData}/>;
 
     return (
         <HashRouter>

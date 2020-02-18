@@ -2,7 +2,6 @@ let state = {
 
     profilePage: {
         postData: [
-            {id:1, message: 'Hi, how are you?', likesCount: 12},
             {id:2, message: 'My first react app!', likesCount: 32},
             {id:3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15},
             {id:4, message: 'React is cool!', likesCount: 45},
@@ -29,6 +28,12 @@ let state = {
     siteBar: {}
 
 
+};
+
+export let addPost = postMassage => {
+    let newPost = {id:5, message: postMassage, likesCount: 0};
+    state.profilePage.postData.push(newPost);
+    console.log(state);
 };
 
 export default state;
