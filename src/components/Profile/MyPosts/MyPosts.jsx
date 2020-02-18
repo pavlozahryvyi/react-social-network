@@ -26,6 +26,8 @@ const MyPosts = (props) => {
         <div className={style.postsBlock}>
             <div className={style.newPostBlock}>
                 <h3>New post</h3>
+                <p>Version is updated!!!</p>
+                <p>Click the button or write your text and click the button to add to post it ;)</p>
                 <div>
                     <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>

@@ -8,7 +8,7 @@ let state = {
             {id:3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15},
             {id:4, message: 'React is cool!', likesCount: 45},
         ],
-        newPostText: 'some textarea value from state',
+        newPostText: 'Welcome! Have a nice day!',
     },
 
     dialogsPage: {
