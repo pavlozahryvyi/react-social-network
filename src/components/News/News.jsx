@@ -1,10 +1,9 @@
 import React from "react";
-import logo from "../../img/logo.png";
-import classes from "./News.module.css";
+import styles from "./News.module.css";
 
 const News = () => {
     return (
-        <div>
+        <div className={styles.newsBlock}>
             News
         </div>
     );

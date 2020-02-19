@@ -17,8 +17,8 @@ function App(props) {
     let ProfileComponent = () => <Profile
         postData={props.state.profilePage.postData}
         addPost={props.addPost}
-        newPostText = {props.state.profilePage.newPostText}
-        updateNewPostText = {props.updateNewPostText}/>;
+        newPostText={props.state.profilePage.newPostText}
+        updateNewPostText={props.updateNewPostText}/>;
     let DialogsComponent = () => <Dialogs
         dialogData={props.state.dialogsPage.dialogData}
         messagesData={props.state.dialogsPage.messagesData}/>;
@@ -28,14 +28,16 @@ function App(props) {
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
-                <div className='app-wrapper-content'>
-                    {/*<Route path='/profile' component={Profile}/>
+                <div className='app-wrapper-block'>
+                    <div className="app-wrapper-content">
+                        {/*<Route path='/profile' component={Profile}/>
                     <Route path='/dialogs' component={Dialogs}/>*/}
-                    <Route path='/profile' render={ProfileComponent}/>
-                    <Route path='/dialogs' render={DialogsComponent}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
+                        <Route path='/profile' render={ProfileComponent}/>
+                        <Route path='/dialogs' render={DialogsComponent}/>
+                        <Route path='/news' component={News}/>
+                        <Route path='/music' component={Music}/>
+                        <Route path='/settings' component={Settings}/>
+                    </div>
                 </div>
             </div>
         </HashRouter>

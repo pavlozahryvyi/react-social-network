@@ -1,10 +1,9 @@
 import React from "react";
-import logo from "../../img/logo.png";
 import styles from "./Settings.module.css";
 
 const Settings = () => {
     return (
-        <div>
+        <div className={styles.settingsBlock}>
             Settings
         </div>
     );

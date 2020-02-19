@@ -4,7 +4,7 @@ import style from "./ProfileInfo.module.css";
 const ProfileInfo = (props) => {
     return (
         <div className="profileInfo">
-            <div>
+            <div className={style.profileImage}>
                 <img
                     src="https://image.winudf.com/v2/image/Y29tLmJlYWNoLmJhbGliZWFjaHdhbGxwYXBlcl9zY3JlZW5fMF8xNTMyOTc5NTE3XzA0NQ/screen-0.jpg?fakeurl=1&type=.jpg"
                     alt=""/>
