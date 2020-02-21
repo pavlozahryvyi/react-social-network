@@ -5,3 +5,11 @@
 p span{
     font-size: 10px;
 }
+
+textarea{
+    resize: none;
+    font-family: inherit;
+    height: 55px;
+    width: 100%;
+    box-sizing: border-box;
+}
