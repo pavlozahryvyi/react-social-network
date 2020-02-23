@@ -5,7 +5,7 @@ import DialogItem from "./DialogItem/DialogItem";
 
 const Dialogs = (props) => {
 
-    console.log('--- Dialogs props ', props);
+    //console.log('--- Dialogs props ', props);
 
     let dialogData = props.dialogData;
     let messagesData = props.messagesData;

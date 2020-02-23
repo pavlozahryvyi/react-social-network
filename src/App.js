@@ -11,7 +11,7 @@ import Settings from "./components/Settings/Settings";
 
 function App(props) {
 
-    console.log('--- App props ', props);
+    //console.log('--- App props ', props);
 
 
     let ProfileComponent = () => <Profile

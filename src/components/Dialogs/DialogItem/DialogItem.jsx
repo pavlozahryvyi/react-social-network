@@ -4,7 +4,7 @@ import styles from './DialogItem.module.css';
 
 const DialogItem = (props) => {
 
-    console.log('--- DialogItem props ', props);
+    //console.log('--- DialogItem props ', props);
 
     let path = `/dialogs/${props.id}`;
     return (
