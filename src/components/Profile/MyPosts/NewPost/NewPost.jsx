@@ -1,5 +1,8 @@
 import React from "react";
 import style from "./NewPost.module.css";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../../redux/state";
+
+
 
 const NewPost = (props) => {
 
@@ -8,18 +11,12 @@ const NewPost = (props) => {
     let onPostChange = () => {
         let text = newPostElement.current.value;
         //console.log('--- NewPost.jsx ', text);
-        let action = {
-            type: 'UPDATE-NEW-POST-TEXT',
-            newText: text
-        };
-        props.dispatch(action);
+        props.dispatch(updateNewPostTextActionCreator(text));
     };
 
     // call BLL func to adding data to state and rerendering UI
     let addPost = () => {
-        props.dispatch({
-            type: "ADD-POST"
-        });
+        props.dispatch(addPostActionCreator());
     };
 
     return (
