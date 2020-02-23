@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./NewPost.module.css";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../../redux/state";
-
+import sendImg from "./../../../../img/add.png"
 
 
 const NewPost = (props) => {
@@ -22,16 +22,19 @@ const NewPost = (props) => {
     return (
         <div className={style.newPostBlock}>
             <h3>New post</h3>
-            <p>Welcome! You can add a new post now!</p>
+            <p>Welcome! You can add
+                <span className={style.boldText}> a new post</span> and
+                <span className={style.boldText}> a new message</span> now!</p>
             <p>
-                Click "Add post" button or write your text and click the button to add a new post
-                <span> *CSS will be soon</span> ;)
+                Click "Add post" button or write your text and click the button to add a new post ;)
             </p>
-            <div>
-                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
-            </div>
-            <div>
-                <button onClick={ addPost }>Add post</button>
+            <div className={style.newPostCreationBlock}>
+                <div className={style.textareaBlock}>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
+                </div>
+                <div className={style.buttonBlock}>
+                    <button onClick={addPost}><img alt={'send'} src={sendImg}/><div>Add post</div></button>
+                </div>
             </div>
         </div>
     );

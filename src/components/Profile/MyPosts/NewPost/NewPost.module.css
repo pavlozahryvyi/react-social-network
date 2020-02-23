@@ -2,14 +2,50 @@
     margin-bottom: 30px;
 }
 
-p span{
-    font-size: 10px;
+p .boldText{
+    font-weight: 700;
 }
 
-textarea{
+
+.newPostCreationBlock{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textareaBlock{
+    flex-basis: 92%;
+}
+
+.textareaBlock textarea{
     resize: none;
     font-family: inherit;
-    height: 55px;
+    height: 70px;
     width: 100%;
     box-sizing: border-box;
+    padding: 5px;
+}
+
+/*.buttonBlock{
+    flex-basis: 10%;
+}*/
+
+.newPostCreationBlock button{
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.newPostCreationBlock button:hover{
+    background-color: #777;
+}
+
+button img{
+    width: 20px;
+}
+
+button div{
+    font-size: 10px;
+    color: #9f9da3;
 }

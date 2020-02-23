@@ -22,6 +22,8 @@ function App(props) {
     let DialogsComponent = () => <Dialogs
         dialogData={props.state.dialogsPage.dialogData}
         messagesData={props.state.dialogsPage.messagesData}
+        newMessageText={props.state.dialogsPage.newMessageText}
+        dispatch={props.dispatch}
     />;
 
     return (

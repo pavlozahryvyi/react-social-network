@@ -1,6 +1,10 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+
+
 let store = {
     _state: {
 
@@ -27,7 +31,9 @@ let store = {
                 {id: 2, message: 'How are you?'},
                 {id: 3, message: 'What are you doing?'},
                 {id: 4, message: 'Hi!'},
-            ]
+            ],
+
+            newMessageText: 'Add your message',
         },
 
         siteBar: {}
@@ -86,12 +92,35 @@ let store = {
                 this._state.profilePage.newPostText = '';
                 this._callSubscriber(this._state);
             }
+
         }else if(action.type === UPDATE_NEW_POST_TEXT){
 
             //this._updateNewPostText(action.newText)
 
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
+
+        }else if(action.type === ADD_MESSAGE){
+
+            let text = this._state.dialogsPage.newMessageText;
+            let newMessage = {
+                id:5,
+                message: text,
+            };
+
+            if(text !== '') {
+                console.log("---newMessage Obj", newMessage);
+                this._state.dialogsPage.messagesData.push(newMessage);
+                console.log("---dialogData", this._state.dialogsPage.dialogData);
+                this._state.dialogsPage.newMessageText = '';
+                this._callSubscriber(this._state);
+            }
+
+        }else if(action.type === UPDATE_NEW_MESSAGE){
+
+            this._state.dialogsPage.newMessageText = action.newText;
+            this._callSubscriber(this._state);
+
         }
     }
 };
@@ -105,6 +134,16 @@ export const updateNewPostTextActionCreator = (text) => (
         newText: text
     }
 );
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
+
+export const updateNewMessageTextActionCreator = (text) => {
+    console.log('---message: ', text);
+    return {
+        type: UPDATE_NEW_MESSAGE,
+        newText:text
+    }
+};
 
 window.store = store;
 

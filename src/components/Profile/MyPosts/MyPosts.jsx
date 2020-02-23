@@ -3,6 +3,7 @@ import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import NewPost from "./NewPost/NewPost";
 
+
 const MyPosts = (props) => {
 
     //console.log("---NewPost props ", props);
