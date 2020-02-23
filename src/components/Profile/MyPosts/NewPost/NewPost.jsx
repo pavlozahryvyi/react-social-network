@@ -8,11 +8,18 @@ const NewPost = (props) => {
     let onPostChange = () => {
         let text = newPostElement.current.value;
         //console.log('--- NewPost.jsx ', text);
-        props.updateNewPostText(text);
+        let action = {
+            type: 'UPDATE-NEW-POST-TEXT',
+            newText: text
+        };
+        props.dispatch(action);
     };
 
+    // call BLL func to adding data to state and rerendering UI
     let addPost = () => {
-        props.addPost(); // call BLL func to adding data to state and rerendering UI
+        props.dispatch({
+            type: "ADD-POST"
+        });
     };
 
     return (
