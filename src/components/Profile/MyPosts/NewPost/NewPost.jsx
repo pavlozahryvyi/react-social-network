@@ -33,7 +33,7 @@ const NewPost = (props) => {
                     <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div className={style.buttonBlock}>
-                    <button onClick={addPost}><img alt={'send'} src={sendImg}/><div>Add post</div></button>
+                    <button onClick={addPost}><img alt={'send'} src={sendImg}/><div>Publish</div></button>
                 </div>
             </div>
         </div>

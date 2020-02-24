@@ -35,6 +35,7 @@ function App(props) {
                     <div className="app-wrapper-content">
                         {/*<Route path='/profile' component={Profile}/>
                     <Route path='/dialogs' component={Dialogs}/>*/}
+                        <Route exact path='/' render={ProfileComponent}/>
                         <Route path='/profile' render={ProfileComponent}/>
                         <Route path='/dialogs' render={DialogsComponent}/>
                         <Route path='/news' component={News}/>

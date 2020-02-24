@@ -14,7 +14,7 @@ p .boldText{
 }
 
 .textareaBlock{
-    flex-basis: 92%;
+    flex-basis: 93%;
 }
 
 .textareaBlock textarea{
@@ -24,6 +24,10 @@ p .boldText{
     width: 100%;
     box-sizing: border-box;
     padding: 5px;
+}
+
+.buttonBlock{
+    flex-basis: 5%;
 }
 
 /*.buttonBlock{
