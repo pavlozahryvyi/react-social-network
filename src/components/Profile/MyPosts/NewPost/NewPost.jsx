@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./NewPost.module.css";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../../redux/profileReducer";
 import sendImg from "./../../../../img/add.png"
 
 
