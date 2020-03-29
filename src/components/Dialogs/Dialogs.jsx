@@ -8,9 +8,12 @@ import sendImg from "./../../img/paper-plane-1.png"
 const Dialogs = (props) => {
 
     //console.log('--- Dialogs props ', props);
+    let state = props.dialogsPage;
 
-    let dialogData = props.dialogData;
-    let messagesData = props.messagesData;
+    console.log('---state in dialogs', state);
+
+    let dialogData = state.dialogData;
+    let messagesData = state.messagesData;
 
     //array of components
     let dialogsElements = dialogData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>);
@@ -20,12 +23,12 @@ const Dialogs = (props) => {
     let linkTextareaMessages = React.createRef();
 
     let buttonEvent = () => {
-        props.dispatch(addMessageActionCreator());
+        props.addMessageActionCreator();
     };
 
     let onUpdateMessage = () => {
         let text = linkTextareaMessages.current.value;
-        props.dispatch(updateNewMessageTextActionCreator(text));
+        props.updateNewMessageText(text);
     };
 
     return (
@@ -44,7 +47,7 @@ const Dialogs = (props) => {
                         <textarea
                             onChange={onUpdateMessage}
                             ref={linkTextareaMessages}
-                            value={props.newMessageText}
+                            value={state.newMessageText}
                         ></textarea>
                     </div>
                     <div className={styles.btnBlock}>

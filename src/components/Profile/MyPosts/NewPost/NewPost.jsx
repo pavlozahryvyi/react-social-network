@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./NewPost.module.css";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../../redux/profileReducer";
 import sendImg from "./../../../../img/add.png"
 
 
@@ -10,13 +9,12 @@ const NewPost = (props) => {
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        //console.log('--- NewPost.jsx ', text);
-        props.dispatch(updateNewPostTextActionCreator(text));
+        props.updateNewPostText(text);
     };
 
     // call BLL func to adding data to state and rerendering UI
     let addPost = () => {
-        props.dispatch(addPostActionCreator());
+        props.addPost();
     };
 
     return (

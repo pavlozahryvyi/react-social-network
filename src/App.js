@@ -8,6 +8,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 function App(props) {
 
@@ -15,15 +16,17 @@ function App(props) {
 
 
     let ProfileComponent = () => <Profile
-        postData={props.state.profilePage.postData}
+        /*postData={props.state.profilePage.postData}*/
+        store = {props.store}
+        /*state = {props.state}
         newPostText={props.state.profilePage.newPostText}
-        dispatch={props.dispatch}
+        dispatch={props.dispatch}*/
     />;
-    let DialogsComponent = () => <Dialogs
-        dialogData={props.state.dialogsPage.dialogData}
+    let DialogsComponent = () => <DialogsContainer store = {props.store}
+        /*dialogData={props.state.dialogsPage.dialogData}
         messagesData={props.state.dialogsPage.messagesData}
         newMessageText={props.state.dialogsPage.newMessageText}
-        dispatch={props.dispatch}
+        dispatch={props.dispatch}*/
     />;
 
     return (
