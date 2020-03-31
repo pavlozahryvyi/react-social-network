@@ -5,20 +5,24 @@ import store from "./redux/redux-store";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {Provider} from "./StoreContext";
+import {HashRouter} from "react-router-dom";
 
 let rerenderEntireTree = (state) => {
-    ReactDOM.render(<App
-            state={state}
-            dispatch={store.dispatch.bind(store)}
-            store={store}
-        />,
+    ReactDOM.render(
+        <HashRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </HashRouter>
+        ,
         document.getElementById('root'));
 };
 
 
 rerenderEntireTree(store.getState());
 
-store.subscribe(()=>{
+store.subscribe(() => {
     let state = store.getState();
     rerenderEntireTree(state);
 });
