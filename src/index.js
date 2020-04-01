@@ -5,8 +5,8 @@ import store from "./redux/redux-store";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {Provider} from "./StoreContext";
 import {HashRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
 let rerenderEntireTree = (state) => {
     ReactDOM.render(

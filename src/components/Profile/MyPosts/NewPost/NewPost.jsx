@@ -2,7 +2,6 @@ import React from "react";
 import style from "./NewPost.module.css";
 import sendImg from "./../../../../img/add.png"
 
-
 const NewPost = (props) => {
 
     let newPostElement = React.createRef();

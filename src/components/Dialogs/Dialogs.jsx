@@ -23,7 +23,7 @@ const Dialogs = (props) => {
     let linkTextareaMessages = React.createRef();
 
     let buttonEvent = () => {
-        props.addMessageActionCreator();
+        props.addMessage();
     };
 
     let onUpdateMessage = () => {
