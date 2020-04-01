@@ -8,24 +8,15 @@ import App from './App';
 import {HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
-let rerenderEntireTree = (state) => {
-    ReactDOM.render(
-        <HashRouter>
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </HashRouter>
-        ,
-        document.getElementById('root'));
-};
-
-
-rerenderEntireTree(store.getState());
-
-store.subscribe(() => {
-    let state = store.getState();
-    rerenderEntireTree(state);
-});
+ReactDOM.render(
+    <HashRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </HashRouter>
+    ,
+    document.getElementById('root')
+);
 
 
 serviceWorker.unregister();
