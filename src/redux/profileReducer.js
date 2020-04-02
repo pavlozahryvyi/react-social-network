@@ -14,8 +14,10 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case(ADD_POST):{
+        case(ADD_POST):
+
             let text = state.newPostText;
+
             let newPost = {
                 id: 5,
                 message: text,
@@ -23,22 +25,22 @@ const profileReducer = (state = initialState, action) => {
             };
 
             //?
-            if (text !== '') {
-                let stateCopy = {...state};
-                stateCopy.postData = [...state.postData];
-                stateCopy.postData.push(newPost);
-                stateCopy.newPostText = '';
-
-                return stateCopy
+            if (text.trim() !== '') {
+                return {
+                    ...state,
+                    postData: [...state.postData, newPost],
+                    newPostText: ''
+                };
             }
 
             return state;
-        }
-        case(UPDATE_NEW_POST_TEXT):{
-            let stateCopy = {...state};
-            stateCopy.newPostText = action.newText;
-            return stateCopy;
-        }
+
+        case(UPDATE_NEW_POST_TEXT):
+            return {
+                ...state,
+                newPostText: action.newText
+            };
+
         default:
             return state;
 

@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dislogsReducer";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogsReducer";
 import sendImg from "./../../img/paper-plane-1.png"
 
 const Dialogs = (props) => {
