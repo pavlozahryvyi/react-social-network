@@ -4,23 +4,11 @@ import userPhoto from "../../../src/assets/img/user2.jpg"
 
 const Users = (props) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    let pages = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
 
     return (
-        <div className={styles.usersBlock}>
-            <div>
-                {pages.map((page) => (<span
-                    className={`${props.currentPage === page && styles.selectedPage} ${styles.page}`}
-                    onClick={(e) => {
-                        props.setCurrentPage(page)
-                    }}>{page}</span>))}
-            </div>
+        <div>
+
             {props.users.map(user => <div key={user.id}>
                 <div><img
                     src={user.photos.small !== null ? user.photos.small : userPhoto}
