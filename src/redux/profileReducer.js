@@ -3,8 +3,8 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 let initialState = {
     postData: [
-        {id:2, message: 'My first react app!', likesCount: 32},
-        {id:3, message: 'I need more CSS', likesCount: 15},
+        {id:1, message: 'My first react app!', likesCount: 32},
+        {id:2, message: 'I need more CSS', likesCount: 15},
         {id:3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15},
         {id:4, message: 'React is cool!', likesCount: 45},
     ],
@@ -49,9 +49,9 @@ const profileReducer = (state = initialState, action) => {
 
 
 
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPost = () => ({type: ADD_POST});
 
-export const updateNewPostTextActionCreator = (text) => (
+export const updateNewPostText = (text) => (
     {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
