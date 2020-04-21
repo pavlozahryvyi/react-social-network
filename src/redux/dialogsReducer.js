@@ -55,7 +55,7 @@ const dialogsReducer = (state = initialState, action) => {
 export const addMessage = () => ({type: ADD_MESSAGE});
 
 export const updateNewMessageText = (text) => {
-    console.log('---message: ', text);
+    //console.log('---message: ', text);
     return {
         type: UPDATE_NEW_MESSAGE,
         newText: text

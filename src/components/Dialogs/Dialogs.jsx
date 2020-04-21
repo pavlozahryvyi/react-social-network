@@ -10,7 +10,7 @@ const Dialogs = (props) => {
     //console.log('--- Dialogs props ', props);
     let state = props.dialogsPage;
 
-    console.log('---state in dialogs', state);
+    //console.log('---state in dialogs', state);
 
     let dialogData = state.dialogData;
     let messagesData = state.messagesData;
