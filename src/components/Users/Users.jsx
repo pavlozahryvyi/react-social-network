@@ -22,40 +22,46 @@ const Users = (props) => {
                 <div>City - {'user.location.city'}</div>
                 <div>Country - {'user.location.country'}</div>
                 {user.followed
-                    ? <button onClick={() => {
+                    ? <button
+                        disabled={props.followingInProgress.some( id => id === user.id)}
+                        onClick={() => {
+                            props.toggleFollowingProgress(true, user.id);
+                            axios
+                                .delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                                    withCredentials: true,
+                                    headers: {
+                                        "API-KEY": "506264c7-e08d-447a-ae53-bbc91bc9de7d"
+                                    }
+                                })
+                                .then(resp => {
+                                    if (resp.data.resultCode === 0) {
+                                        props.unFollow(user.id);
+                                    }
+                                    props.toggleFollowingProgress(false, user.id);
+                                });
 
-                        axios
-                            .delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                                withCredentials: true,
-                                headers: {
-                                    "API-KEY" : "506264c7-e08d-447a-ae53-bbc91bc9de7d"
-                                }
-                            })
-                            .then(resp => {
-                                if (resp.data.resultCode === 0){
-                                    props.unFollow(user.id);
-                                }
-                            });
-
-                    }}>Unfollow</button>
-                    : <button onClick={() => {
-
-                        axios
-                            .post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-                                withCredentials: true,
-                                headers: {
-                                    "API-KEY" : "506264c7-e08d-447a-ae53-bbc91bc9de7d"
-                                }
-                            })
-                            .then(resp => {
-                                console.log('---follow resp', resp);
-                                if (resp.data.resultCode === 0){
-                                    props.follow(user.id)
-                                }
-                            });
+                        }}>Unfollow</button>
+                    : <button
+                        disabled={props.followingInProgress.some( id => id === user.id)}
+                        onClick={() => {
+                            props.toggleFollowingProgress(true, user.id);
+                            axios
+                                .post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                                    withCredentials: true,
+                                    headers: {
+                                        "API-KEY": "506264c7-e08d-447a-ae53-bbc91bc9de7d"
+                                    }
+                                })
+                                .then(resp => {
+                                    console.log('---follow resp', resp);
+                                    if (resp.data.resultCode === 0) {
+                                        props.follow(user.id)
+                                    }
+                                    props.toggleFollowingProgress(false, user.id);
+                                });
 
 
-                    }}>Follow</button>}
+                        }}>Follow</button>}
             </div>)}
         </div>
     )
