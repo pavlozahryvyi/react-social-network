@@ -8,6 +8,8 @@ import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import styles from "./Users.module.css";
 import Pagination from "./Pagination";
+import {compose} from "redux";
+import WithAuthRedirect from "../../hoc/WithAuthRedirect";
 
 class UsersContainer extends Component {
 
@@ -57,9 +59,10 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {
+export default compose(
+    connect(mapStateToProps, {
     setCurrentPage,
     getUsersThunk,
     followThunk, unFollowThunk
-})(UsersContainer);
+}))(UsersContainer);
 
