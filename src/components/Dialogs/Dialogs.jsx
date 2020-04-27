@@ -3,13 +3,10 @@ import styles from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import sendImg from "./../../img/paper-plane-1.png"
+import {Redirect} from "react-router-dom";
 
 const Dialogs = (props) => {
-
-    //console.log('--- Dialogs props ', props);
     let state = props.dialogsPage;
-
-    //console.log('---state in dialogs', state);
 
     let dialogData = state.dialogData;
     let messagesData = state.messagesData;
@@ -21,14 +18,18 @@ const Dialogs = (props) => {
 
     let linkTextareaMessages = React.createRef();
 
+   //console.log('--- Dialogs props ', props.isAuth);
     let buttonEvent = () => {
+
         props.addMessage();
     };
-
     let onUpdateMessage = () => {
+
         let text = linkTextareaMessages.current.value;
         props.updateNewMessageText(text);
     };
+
+    if(!props.isAuth) return <Redirect to={'/login'}/>;
 
     return (
         <div className={styles.dialogs}>
