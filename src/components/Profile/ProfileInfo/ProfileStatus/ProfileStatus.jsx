@@ -1,10 +1,25 @@
 import React, {Component} from 'react';
 
 export default class ProfileStatus extends Component {
+
     state = {
         editMode: false,
         status: this.props.status,
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("--- componentDidUpdate");
+        console.log("---prevProps", prevProps);
+        console.log("---prevState", prevState);
+        console.log("---this.props", this.props);
+        console.log("---this.state", this.state);
+
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
 
     disableActiveMode = () => {
         // console.log("disableActiveMode");
@@ -36,7 +51,8 @@ export default class ProfileStatus extends Component {
                     </span>
                 </div>
                 : <div>
-                    <input onChange={this.onStatusChange} type="text" value={this.state.status} onBlur={this.disableActiveMode} autoFocus/>
+                    <input onChange={this.onStatusChange} type="text" value={this.state.status}
+                           onBlur={this.disableActiveMode} autoFocus/>
                 </div>
             }
 
