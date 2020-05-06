@@ -7,13 +7,30 @@ import {compose} from "redux";
 
 class ProfileContainer extends Component {
 
-    componentDidMount() {
-        let userId = this.props.match.params.userId || 7394 || 2;
+    refreshProfile = () => {
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = this.props.myId;
+            if (!userId) {
+                this.props.history.push("/login")
+            }
+        }
         this.props.getProfileThunk(userId);
         this.props.getUserStatus(userId);
     }
 
+    componentDidMount() {
+        this.refreshProfile();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.match.params.userId !== this.props.match.params.userId) {
+            this.refreshProfile()
+        }
+    }
+
     render() {
+        console.log(this.props.myId);
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         );
@@ -21,6 +38,7 @@ class ProfileContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    myId: state.auth.id,
     profile: state.profilePage.profile,
     status: state.profilePage.status,
 });
