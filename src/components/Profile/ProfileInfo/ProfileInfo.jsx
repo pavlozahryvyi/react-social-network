@@ -4,7 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
-    if(!props.profile){
+    if (!props.profile) {
         return <Preloader/>
     }
     return (
@@ -20,9 +20,13 @@ const ProfileInfo = (props) => {
                 <p>ID: {props.profile.userId}</p>
                 <p>status: {props.status}</p>
             </div>
-            <div>
-                <ProfileStatus updateStatus={props.updateStatus} status={props.status} />
-            </div>
+            {props.isOwner
+                ? <div>
+                    <ProfileStatus updateStatus={props.updateStatus} status={props.status}/>
+                </div>
+                : null
+            }
+
         </div>
     );
 };
