@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Field, reduxForm} from "redux-form";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 const LoginForm = (props) => {
     return <form onSubmit={props.handleSubmit}>
@@ -20,17 +22,18 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({form: "login"})(LoginForm);
 
-const Login = () => {
+class Login extends Component {
+    render() {
 
-    const onSubmit = (formData) => {
-        console.log(formData)
-    };
+        const onSubmit = (formData) => {
+            console.log(formData)
+        };
 
-    return <div>
-        <h1>Login</h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
-    </div>
-};
-
+        return <div>
+                <h1>Login</h1>
+                <LoginReduxForm onSubmit={onSubmit}/>
+            </div>
+    }
+}
 
 export default Login;

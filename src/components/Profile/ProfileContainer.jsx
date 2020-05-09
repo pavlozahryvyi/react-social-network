@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getProfileThunk, getUserStatus, updateStatus} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
+import WithAuthRedirect from "../../hoc/WithAuthRedirect";
 
 class ProfileContainer extends Component {
 
@@ -17,7 +18,7 @@ class ProfileContainer extends Component {
         }
         this.props.getProfileThunk(userId);
         this.props.getUserStatus(userId);
-    }
+    };
 
     componentDidMount() {
         this.refreshProfile();
@@ -46,5 +47,6 @@ const mapStateToProps = (state) => ({
 
 export default compose(
     withRouter,
+    WithAuthRedirect,
     connect(mapStateToProps, {getProfileThunk, getUserStatus, updateStatus})
 )(ProfileContainer);
