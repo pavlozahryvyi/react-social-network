@@ -2,9 +2,6 @@ import React from "react";
 import styles from "./Users.module.css"
 import userPhoto from "../../../src/assets/img/usr.png"
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import { followAPI } from "../../api/api";
-import {followThunk} from "../../redux/usersReducer";
 
 const Users = (props) => {
 
@@ -26,32 +23,10 @@ const Users = (props) => {
                 {user.followed
                     ? <button
                         disabled={props.followingInProgress.some(id => id === user.id)}
-                        onClick={() => {
-                            /*props.toggleFollowingProgress(true, user.id);
-                            followAPI.unFollow(user.id)
-                                .then(resp => {
-                                    if (resp.resultCode === 0) {
-                                        props.unFollow(user.id);
-                                    }
-                                    props.toggleFollowingProgress(false, user.id);
-                                });*/
-                            props.unFollowThunk(user.id)
-
-                        }}>Unfollow</button>
+                        onClick={() => {props.unFollowThunk(user.id)}}>Unfollow</button>
                     : <button
                         disabled={props.followingInProgress.some(id => id === user.id)}
-                        onClick={() => {
-                            /*props.toggleFollowingProgress(true, user.id);
-                            followAPI.follow(user.id)
-                                .then(resp => {
-                                    console.log('---follow resp', resp);
-                                    if (resp.resultCode === 0) {
-                                        props.follow(user.id)
-                                    }
-                                    props.toggleFollowingProgress(false, user.id);
-                                });*/
-                            props.followThunk(user.id);
-                        }}>Follow</button>}
+                        onClick={() => {props.followThunk(user.id);}}>Follow</button>}
             </div>)}
         </div>
     )

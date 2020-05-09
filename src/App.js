@@ -19,8 +19,8 @@ function App() {
             <Navbar/>
             <div className='app-wrapper-block'>
                 <div className="app-wrapper-content">
-                    <Route exact path='/' render={() => <ProfileContainer />}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
+                    <Route path='/' render={() => <ProfileContainer />} exact/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer />} exact/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/users' render={() => <UsersContainer />}/>
                     <Route path='/login' render={() => <Login />}/>

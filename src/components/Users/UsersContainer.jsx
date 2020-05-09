@@ -34,9 +34,9 @@ class UsersContainer extends Component {
                 setCurrentPage={this.setCurrentPage}
             />
             {
-                this.props.isFetching ?
-                    <Preloader/> :
-                    <Users
+                this.props.isFetching
+                    ? <Preloader/>
+                    : <Users
                         users={this.props.users}
                         followingInProgress={this.props.followingInProgress}
                         followThunk={this.props.followThunk}
