@@ -17,7 +17,6 @@ const ProfileInfo = (props) => {
             <div className={style.descriptionBlock}>
                 <img src={props.profile.photos.large} alt=""/>
                 <p>Name: {props.profile.fullName}</p>
-                <p>ID: {props.profile.userId}</p>
                 <p>status: {props.status}</p>
             </div>
             {props.isOwner

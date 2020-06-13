@@ -8,11 +8,11 @@ export default class ProfileStatus extends Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("--- componentDidUpdate");
+        /*console.log("--- componentDidUpdate");
         console.log("---prevProps", prevProps);
         console.log("---prevState", prevState);
         console.log("---this.props", this.props);
-        console.log("---this.state", this.state);
+        console.log("---this.state", this.state);*/
 
         if (prevProps.status !== this.props.status) {
             this.setState({
@@ -21,12 +21,12 @@ export default class ProfileStatus extends Component {
         }
     }
 
-    disableActiveMode = () => {
-        // console.log("disableActiveMode");
+    disableActiveMode = (e) => {
         this.setState({
-            editMode: false
+            editMode: false,
+            status:e.target.value
         });
-        this.props.updateStatus(this.state.status);
+        //this.props.updateStatus(this.state.status);
     };
 
     onStatusChange = (event) => {
@@ -47,7 +47,7 @@ export default class ProfileStatus extends Component {
             {!this.state.editMode
                 ? <div>
                     <span onDoubleClick={this.activateEditMode}>
-                        {this.props.status || "aaa"}
+                        {this.state.status || "aaa"}
                     </span>
                 </div>
                 : <div>
