@@ -2,6 +2,7 @@ import React from "react";
 import style from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatusHooks from "./ProfileStatus/ProfileStatusHooks";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -21,7 +22,7 @@ const ProfileInfo = (props) => {
             </div>
             {props.isOwner
                 ? <div>
-                    <ProfileStatus updateStatus={props.updateStatus} status={props.status}/>
+                    <ProfileStatusHooks updateStatus={props.updateStatus} status={props.status}/>
                 </div>
                 : null
             }
