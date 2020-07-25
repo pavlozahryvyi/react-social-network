@@ -14,9 +14,7 @@ let initialState = {
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'What are you doing?'},
         {id: 4, message: 'Hi!'},
-    ],
-
-    newMessageText: 'Add your message',
+    ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -24,27 +22,15 @@ const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case(ADD_MESSAGE):
 
-            let text = state.newMessageText;
             let newMessage = {
                 id: 5,
-                message: text,
+                message: action.newMessageText,
             };
-
-            if (text.trim() !== '') {
-                return {
-                    ...state,
-                    messagesData: [...state.messagesData, newMessage],
-                    newMessageText : ''
-                };
-            }
-
-            return state;
-
-        case(UPDATE_NEW_MESSAGE):
 
             return {
                 ...state,
-                newMessageText: action.newText
+                messagesData: [...state.messagesData, newMessage],
+                newMessageText: ''
             };
 
         default:
@@ -52,15 +38,7 @@ const dialogsReducer = (state = initialState, action) => {
     }
 };
 
-export const addMessage = () => ({type: ADD_MESSAGE});
-
-export const updateNewMessageText = (text) => {
-    //console.log('---message: ', text);
-    return {
-        type: UPDATE_NEW_MESSAGE,
-        newText: text
-    }
-};
+export const addMessage = (newMessageText) => ({type: ADD_MESSAGE, newMessageText});
 
 
 export default dialogsReducer;

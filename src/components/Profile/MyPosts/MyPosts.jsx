@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import NewPost from "./NewPost/NewPost";
+import NewPost from "./NewPost/NewPostForm";
 
 const MyPosts = (props) => {
 
@@ -11,7 +11,6 @@ const MyPosts = (props) => {
         <div className={style.postsBlock}>
 
             <NewPost
-                updateNewPostText={props.updateNewPostText}
                 addPost={props.addPost}
                 newPostText={props.newPostText}
 

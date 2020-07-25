@@ -12,7 +12,6 @@ let initialState = {
         {id: 3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15},
         {id: 4, message: 'React is cool!', likesCount: 45},
     ],
-    newPostText: 'Welcome! Have a nice day!',
     profile: null,
     status: ''
 };
@@ -20,31 +19,18 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case(ADD_POST):
 
-            let text = state.newPostText;
+        case(ADD_POST):
 
             let newPost = {
                 id: 5,
-                message: text,
+                message: action.newPostText,
                 likesCount: 0
             };
 
-            //?
-            if (text.trim() !== '') {
-                return {
-                    ...state,
-                    postData: [...state.postData, newPost],
-                    newPostText: ''
-                };
-            }
-
-            return state;
-
-        case(UPDATE_NEW_POST_TEXT):
             return {
                 ...state,
-                newPostText: action.newText
+                postData: [...state.postData, newPost]
             };
         case (SET_USER_PROFILE):
             return {
@@ -67,14 +53,7 @@ const profileReducer = (state = initialState, action) => {
 const setUserProfile = profile => ({type: SET_USER_PROFILE, profile});
 const setUserStatus = status => ({type: SET_USER_STATUS, status});
 
-export const addPost = () => ({type: ADD_POST});
-
-export const updateNewPostText = text => (
-    {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    }
-);
+export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
 
 export const getProfileThunk = userId => {
     return dispatch => {

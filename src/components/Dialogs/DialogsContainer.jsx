@@ -1,5 +1,5 @@
 import React from "react";
-import {addMessage, updateNewMessageText} from "../../redux/dialogsReducer";
+import {addMessage} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import WithAuthRedirect from "../../hoc/WithAuthRedirect";
@@ -13,18 +13,9 @@ let mapStateToProps = (state) => {
     }
 };
 
-//Доп проверка перед отрисовкой
-/*let AuthRedirectComponent = props => {
-
-    if (!props.isAuth) return <Redirect to={'/login'}/>;
-
-    return <Dialogs {...props} />
-};*/
-
-
 const DialogsContainer = compose(
     WithAuthRedirect,
-    connect(mapStateToProps, {addMessage, updateNewMessageText})
+    connect(mapStateToProps, {addMessage})
 )(Dialogs);
 
 export default DialogsContainer;

@@ -26,13 +26,18 @@ p .boldText{
     padding: 5px;
 }
 
+.textareaBlock .text{
+    resize: none;
+    font-family: inherit;
+    height: 70px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
 .buttonBlock{
     flex-basis: 5%;
 }
-
-/*.buttonBlock{
-    flex-basis: 10%;
-}*/
 
 .newPostCreationBlock button{
     border: none;
