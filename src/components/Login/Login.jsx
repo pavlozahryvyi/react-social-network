@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {requiredField} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {loginThunk} from "../../redux/authReducer";
+import {Redirect} from "react-router-dom";
 
 const LoginForm = props => {
     return (
@@ -25,19 +28,27 @@ const LoginForm = props => {
 const LoginReduxForm = reduxForm({form: "login"})(LoginForm);
 
 class Login extends Component {
+
+    onSubmit = formData => {
+        console.log(formData);
+        this.props.loginThunk(formData.email, formData.password, formData.rememberMe)
+    };
+
     render() {
 
-        const onSubmit = (formData) => {
-            console.log(formData)
-        };
-
-        return (
+        return this.props.isAuth ? (
+            <Redirect to={"/"} />
+        ) : (
             <div>
                 <h1>Login</h1>
-                <LoginReduxForm onSubmit={onSubmit}/>
+                <LoginReduxForm onSubmit={this.onSubmit}/>
             </div>
         )
     }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {loginThunk})(Login);
