@@ -2,15 +2,23 @@ import React, {Component} from "react";
 import style from "./NewPost.module.css";
 import sendImg from "./../../../../img/add.png"
 import {Field, reduxForm} from "redux-form";
+import {maxLength15, requiredField} from "../../../../utils/validators/validators";
+import {Textarea} from "../../../common/FormsControls/FormsControls";
 
 const NEW_POST = "newPost";
 
 const NewPostForm = props => {
-
     return (
         <form onSubmit={props.handleSubmit} className={style.newPostCreationBlock}>
             <div className={style.textareaBlock}>
-                <Field className={style.text} component={"textarea"} name={"newPost"} type={"text"} placeholder={"New post"}/>
+                <Field
+                    className={style.text}
+                    component={Textarea}
+                    name={"newPost"}
+                    type={"text"}
+                    placeholder={"New post"}
+                    validate={[requiredField, maxLength15]}
+                />
             </div>
             <div className={style.buttonBlock}>
                 <button>
