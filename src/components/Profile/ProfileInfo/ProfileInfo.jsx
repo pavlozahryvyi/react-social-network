@@ -4,11 +4,11 @@ import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import ProfileStatusHooks from "./ProfileStatus/ProfileStatusHooks";
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
-        return <Preloader/>
-    }
-    return (
+const ProfileInfo = React.memo(props => {
+
+    console.log("render");
+
+    return props.profile ? (
         <div className="profileInfo">
             <div className={style.profileImage}>
                 <img
@@ -28,7 +28,9 @@ const ProfileInfo = (props) => {
             }
 
         </div>
+    ) : (
+        <Preloader/>
     );
-};
+});
 
 export default ProfileInfo;
