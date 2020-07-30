@@ -7,7 +7,8 @@ const MyPosts = (props) => {
 
 
 
-    let postElements = props.postData.map(post => <Post key={post.id} message={post.message} likes={post.likesCount}/>);
+    const postElements = [...props.postData]
+        .reverse().map(post => <Post key={post.id} message={post.message} likes={post.likesCount}/>);
 
     return (
         <div className={style.postsBlock}>
