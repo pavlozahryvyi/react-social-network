@@ -1,10 +1,10 @@
 import {profileAPI, usersAPI} from "../api/api";
 
-const ADD_POST = "ADD_POST";
-const DELETE_POST = "DELETE_POST";
+const ADD_POST = "profileReducer/ADD_POST";
+const DELETE_POST = "profileReducer/DELETE_POST";
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_USER_STATUS = 'SET_USER_STATUS';
+const SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE';
+const SET_USER_STATUS = 'profileReducer/SET_USER_STATUS';
 
 let initialState = {
     postData: [

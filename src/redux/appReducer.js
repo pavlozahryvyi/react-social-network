@@ -1,6 +1,6 @@
 import {getAuthUserDataThunk} from "./authReducer";
 
-const SET_INITIALIZED = 'SET_INITIALIZED';
+const SET_INITIALIZED = 'appReducer/SET_INITIALIZED';
 
 let initialState = {
     initialized: false
