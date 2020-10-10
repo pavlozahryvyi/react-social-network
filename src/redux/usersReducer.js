@@ -10,7 +10,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'userReducer/TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
     users: [],
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
@@ -79,7 +79,7 @@ export const getUsersThunk = (currentPage, pageSize) => async dispatch => {
     const data = await usersAPI.getUsers(currentPage, pageSize);
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(data.items));
-    dispatch(setTotalUsersCount( /*resp.data.totalCount*/));
+    dispatch(setTotalUsersCount( data.totalCount));
 };
 
 const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) =>{

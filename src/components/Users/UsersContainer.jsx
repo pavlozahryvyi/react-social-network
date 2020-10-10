@@ -35,7 +35,7 @@ class UsersContainer extends Component {
 
         return <div className={styles.usersBlock}>
             <Pagination
-                totalUsersCount={this.props.totalUsersCount}
+                totalItemsCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
                 setCurrentPage={this.setCurrentPage}
