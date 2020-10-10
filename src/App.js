@@ -10,6 +10,9 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import SuspenseComponent from "./hoc/SuspenseComponent";
+import WithSuspense from "./hoc/WithSuspense";
+import Dialogs from "./components/Dialogs/Dialogs";
 
 //lazy loading
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
@@ -33,20 +36,12 @@ class App extends Component {
                 <div className='app-wrapper-block'>
                     <div className="app-wrapper-content">
                         <Route path='/' render={() => (
-                            <Suspense fallback={<Preloader/>}>
+                            <SuspenseComponent>
                                 <ProfileContainer/>
-                            </Suspense>
+                            </SuspenseComponent>
                         )} exact/>
-                        <Route path='/profile/:userId?' render={() => (
-                            <Suspense fallback={<Preloader/>}>
-                                <ProfileContainer/>
-                            </Suspense>
-                        )} exact/>
-                        <Route path='/dialogs' render={() => (
-                            <Suspense fallback={<Preloader/>}>
-                                <DialogsContainer/>
-                            </Suspense>
-                        )}/>
+                        <Route path='/profile/:userId?' render={WithSuspense(ProfileContainer)} exact/>
+                        <Route path='/dialogs' render={WithSuspense(Dialogs)}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='/news' render={() => (
