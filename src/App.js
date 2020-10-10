@@ -1,19 +1,22 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import {Route, withRouter} from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+// import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+
+//lazy loading
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const News = React.lazy(() => import('./components/News/News'));
+const Music = React.lazy(() => import('./components/Music/Music'));
+const Settings = React.lazy(() => import('./components/Settings/Settings'));
 
 class App extends Component {
 
@@ -29,14 +32,38 @@ class App extends Component {
                 <Navbar/>
                 <div className='app-wrapper-block'>
                     <div className="app-wrapper-content">
-                        <Route path='/' render={() => <ProfileContainer/>} exact/>
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>} exact/>
-                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                        <Route path='/' render={() => (
+                            <Suspense fallback={<Preloader/>}>
+                                <ProfileContainer/>
+                            </Suspense>
+                        )} exact/>
+                        <Route path='/profile/:userId?' render={() => (
+                            <Suspense fallback={<Preloader/>}>
+                                <ProfileContainer/>
+                            </Suspense>
+                        )} exact/>
+                        <Route path='/dialogs' render={() => (
+                            <Suspense fallback={<Preloader/>}>
+                                <DialogsContainer/>
+                            </Suspense>
+                        )}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/login' render={() => <Login/>}/>
-                        <Route path='/news' component={News}/>
-                        <Route path='/music' component={Music}/>
-                        <Route path='/settings' component={Settings}/>
+                        <Route path='/news' render={() => (
+                            <Suspense fallback={<Preloader/>}>
+                                <News/>
+                            </Suspense>
+                        )}/>
+                        <Route path='/music' render={() => (
+                            <Suspense fallback={<Preloader/>}>
+                                <Music/>
+                            </Suspense>
+                        )}/>
+                        <Route path='/settings' render={() => (
+                            <Suspense fallback={<Preloader/>}>
+                                <Settings/>
+                            </Suspense>
+                        )}/>
                     </div>
                 </div>
             </div>
