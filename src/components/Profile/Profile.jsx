@@ -3,17 +3,17 @@ import styles from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = (props) => {
-
-
-
-
-    return (
-        <div className={styles.ProfileContent}>
-            <ProfileInfo isOwner={props.isOwner} profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
-            <MyPostsContainer/>
-        </div>
-    );
-};
+const Profile = (props) => (
+    <div className={styles.ProfileContent}>
+        <ProfileInfo
+            isOwner={props.isOwner}
+            profile={props.profile}
+            status={props.status}
+            updateStatus={props.updateStatus}
+            savePhoto={props.savePhoto}
+        />
+        <MyPostsContainer/>
+    </div>
+);
 
 export default Profile;

@@ -1,12 +1,17 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import userPhoto from "../../../assets/img/usr.png"
 import ProfileStatusHooks from "./ProfileStatus/ProfileStatusHooks";
 
 const ProfileInfo = React.memo(props => {
 
-    console.log("render");
+    console.log(props.profile)
+
+    function onMainPhotoSelected(event){
+        if(event.target.files.length>0)
+            props.savePhoto(event.target.files[0])
+    }
 
     return props.profile ? (
         <div className="profileInfo">
@@ -16,9 +21,16 @@ const ProfileInfo = React.memo(props => {
                     alt=""/>
             </div>
             <div className={style.descriptionBlock}>
-                <img src={props.profile.photos.large} alt=""/>
-                <p>Name: {props.profile.fullName}</p>
-                <p>status: {props.status}</p>
+                <div>
+                    <img src={props.profile.photos.large || userPhoto} alt=""/>
+                    {props.isOwner
+                        ? <input type="file"  onChange={onMainPhotoSelected}/>
+                        : null}
+                </div>
+                <div>
+                    <p>Name: {props.profile.fullName}</p>
+                    <p>status: {props.status}</p>
+                </div>
             </div>
             {props.isOwner
                 ? <div>

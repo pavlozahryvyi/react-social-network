@@ -41,7 +41,7 @@ class App extends Component {
                             </SuspenseComponent>
                         )} exact/>
                         <Route path='/profile/:userId?' render={WithSuspense(ProfileContainer)} exact/>
-                        <Route path='/dialogs' render={WithSuspense(Dialogs)}/>
+                        <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='/news' render={() => (

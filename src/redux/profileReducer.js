@@ -2,9 +2,9 @@ import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = "profileReducer/ADD_POST";
 const DELETE_POST = "profileReducer/DELETE_POST";
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profileReducer/SET_USER_STATUS';
+const SAVE_PHOTO_SUCCESS = 'profileReducer/SAVE_PHOTO_SUCCESS';
 
 let initialState = {
     postData: [
@@ -47,6 +47,17 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postData: state.postData.filter(post => post.id !== action.id)
+            };
+        case SAVE_PHOTO_SUCCESS :
+            //debugger
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: {
+                        ...action.photo
+                    }
+                }
             }
 
         default:
@@ -62,6 +73,8 @@ const setUserStatus = status => ({type: SET_USER_STATUS, status});
 export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
 
 export const deletePost = (id) => ({type: DELETE_POST, id});
+
+export const savePhotoSuccess = (photo) => ({type: SAVE_PHOTO_SUCCESS, photo});
 
 
 export const getProfileThunk = userId => async dispatch => {
@@ -82,5 +95,15 @@ export const updateStatus = status => async dispatch => {
         dispatch(setUserStatus(status));
     }
 };
+
+export const savePhoto = photo => async dispatch => {
+
+    const response = await profileAPI.updatePhoto(photo);
+
+    if (response.data.resultCode === 0) {
+        console.log(response);
+        dispatch(savePhotoSuccess(response.data.data.photos.large));
+    }
+}
 
 export default profileReducer;

@@ -70,6 +70,18 @@ export const profileAPI = {
     updateStatus(status){
         return instance
             .put(`profile/status`, {status})
+    },
+
+    updatePhoto(photo){
+        const formData = new FormData();
+        console.log('aa');
+        formData.append("image", photo);
+        return instance
+            .put(`profile/photo`, formData, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            })
     }
 };
 
