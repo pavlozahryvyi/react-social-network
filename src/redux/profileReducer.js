@@ -1,10 +1,13 @@
 import {profileAPI, usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "profileReducer/ADD_POST";
 const DELETE_POST = "profileReducer/DELETE_POST";
 const SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profileReducer/SET_USER_STATUS';
 const SAVE_PHOTO_SUCCESS = 'profileReducer/SAVE_PHOTO_SUCCESS';
+const UPDATE_DATA_SUCCESS = 'profileReducer/UPDATE_DATA_SUCCESS';
+
 
 let initialState = {
     postData: [
@@ -49,13 +52,13 @@ const profileReducer = (state = initialState, action) => {
                 postData: state.postData.filter(post => post.id !== action.id)
             };
         case SAVE_PHOTO_SUCCESS :
-            //debugger
+            debugger
             return {
                 ...state,
                 profile: {
                     ...state.profile,
                     photos: {
-                        ...action.photo
+                        ...action.photos
                     }
                 }
             }
@@ -74,7 +77,9 @@ export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
 
 export const deletePost = (id) => ({type: DELETE_POST, id});
 
-export const savePhotoSuccess = (photo) => ({type: SAVE_PHOTO_SUCCESS, photo});
+export const savePhotosSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
+
+export const updateProfileDataSuccess = () => ({type: UPDATE_DATA_SUCCESS})
 
 
 export const getProfileThunk = userId => async dispatch => {
@@ -101,8 +106,27 @@ export const savePhoto = photo => async dispatch => {
     const response = await profileAPI.updatePhoto(photo);
 
     if (response.data.resultCode === 0) {
-        console.log(response);
-        dispatch(savePhotoSuccess(response.data.data.photos.large));
+        dispatch(savePhotosSuccess(response.data.data.photos));
+    }
+}
+
+export const updateProfileData = data => async (dispatch, getState) => {
+    const userId = getState().auth.id;
+    const response = await profileAPI.updateProfileData(data);
+    if (response.data.resultCode === 0) {
+        dispatch(getProfileThunk(userId));
+    } else {
+        const err = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+        console.log(err.split(")"))
+        const action = stopSubmit("profile-edit", {
+                "contacts":
+                    {
+                        "facebook": err
+                    }
+            }
+        );
+        dispatch(action);
+        return Promise.reject();
     }
 }
 

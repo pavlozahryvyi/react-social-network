@@ -44,14 +44,12 @@ export const loginThunk = (email, password, rememberMe = false) => async dispatc
     const response = await authAPI.login(email, password, rememberMe);
 
     if (response.resultCode === 0) {
-        console.log(response);
         dispatch(getAuthUserDataThunk());
     } else {
         const err = response.messages.length > 0 ? response.messages[0] : "Some error";
         const action = stopSubmit("login", {_error: err});
         dispatch(action);
     }
-    console.log(response, email, password);
 };
 
 export const logoutThunk = () => async dispatch => {
