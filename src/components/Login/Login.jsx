@@ -39,25 +39,30 @@ const LoginReduxForm = reduxForm({form: "login"})(LoginForm);
 class Login extends Component {
 
     onSubmit = formData => {
-        console.log(formData);
+        // console.log(formData);
         this.props.loginThunk(formData.email, formData.password, formData.rememberMe)
     };
 
     render() {
 
-        return this.props.isAuth ? (
+        const {isAuth, captchaUrl} = this.props;
+
+        return isAuth ? (
             <Redirect to={"/"}/>
         ) : (
             <div>
                 <h1>Login</h1>
                 <LoginReduxForm onSubmit={this.onSubmit}/>
+                {captchaUrl
+                && <img src={captchaUrl} alt="captcha"/>}
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps, {loginThunk})(Login);
