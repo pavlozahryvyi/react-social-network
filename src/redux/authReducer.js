@@ -18,10 +18,10 @@ const authReducer = (state = initialState, action) => {
         case(SET_USER_DATA):
             return {
                 ...state,
-                ...action.payload
+                ...action.payload,
+                captchaUrl: null
             };
         case SET_CAPTCHA:
-            debugger;
             return {
                 ...state,
                 captchaUrl: action.url
@@ -49,9 +49,9 @@ export const getAuthUserDataThunk = () => async (dispatch) => {
 
 };
 
-export const loginThunk = (email, password, rememberMe = false) => async dispatch => {
+export const loginThunk = (email, password, rememberMe = false, captcha) => async dispatch => {
 
-    const response = await authAPI.login(email, password, rememberMe);
+    const response = await authAPI.login(email, password, rememberMe, captcha);
 
     if (response.resultCode === 0) {
         dispatch(getAuthUserDataThunk());

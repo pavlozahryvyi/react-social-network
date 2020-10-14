@@ -20,6 +20,19 @@ const LoginForm = props => {
             <div>
                 <Field component={"input"} name={"rememberMe"} type={"checkbox"}/> remember me
             </div>
+            {props.captchaUrl && (
+                <>
+                <img src={props.captchaUrl} alt="captcha"/>
+                <div>
+                    <Field
+                        component={"input"}
+                        validate={requiredField}
+                        name={"captcha"}
+                        type={"text"}
+                        placeholder={"Enter symbols from the image"}/>
+                </div>
+                </>
+                )}
             <div>
                 <button>Login</button>
             </div>
@@ -40,7 +53,7 @@ class Login extends Component {
 
     onSubmit = formData => {
         // console.log(formData);
-        this.props.loginThunk(formData.email, formData.password, formData.rememberMe)
+        this.props.loginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha)
     };
 
     render() {
@@ -52,9 +65,7 @@ class Login extends Component {
         ) : (
             <div>
                 <h1>Login</h1>
-                <LoginReduxForm onSubmit={this.onSubmit}/>
-                {captchaUrl
-                && <img src={captchaUrl} alt="captcha"/>}
+                <LoginReduxForm captchaUrl={captchaUrl} onSubmit={this.onSubmit}/>
             </div>
         )
     }
