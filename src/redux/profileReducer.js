@@ -1,5 +1,6 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {handleError} from "../utils/errorHandlers";
 
 const ADD_POST = "profileReducer/ADD_POST";
 const DELETE_POST = "profileReducer/DELETE_POST";
@@ -110,21 +111,25 @@ export const savePhoto = photo => async dispatch => {
     }
 }
 
-export const updateProfileData = data => async (dispatch, getState) => {
+export const saveProfileData = data => async (dispatch, getState) => {
     const userId = getState().auth.id;
     const response = await profileAPI.updateProfileData(data);
     if (response.data.resultCode === 0) {
         dispatch(getProfileThunk(userId));
     } else {
-        const err = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
-        console.log(err.split(")"))
-        const action = stopSubmit("profile-edit", {
-                "contacts":
-                    {
-                        "facebook": err
-                    }
+        let err = "Some error";
+        let errorsObj = {
+            _error: err
+        }
+        if (response.data.messages.length > 0) {
+            const errorName = handleError(response.data.messages[0]);
+            errorsObj = {
+                "contacts": {
+                    [errorName]: response.data.messages[0]
+                }
             }
-        );
+        }
+        const action = stopSubmit("profile-edit", errorsObj);
         dispatch(action);
         return Promise.reject();
     }

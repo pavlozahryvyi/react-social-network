@@ -15,10 +15,13 @@ const ProfileInfo = props => {
     }
 
     const onSubmit = formData => {
-        props.saveProfileData(formData)
-            .then(()=>{
+        const promice = props.saveProfileData(formData);
+        console.log(promice);
+        promice.then(
+            () => {
                 setEditMode(false);
-            });
+            }
+        );
     };
 
     return props.profile ? (
@@ -43,28 +46,28 @@ const ProfileInfo = props => {
                             status={props.status}
                             aboutMe={props.aboutMe}
                             onSubmit={onSubmit}
-                        /> ) : (
-                            <>
-                                <ProfileData
-                                    profile={props.profile}
-                                    status={props.status}
-                                    aboutMe={props.profile.aboutMe}
-                                    isOwner={props.isOwner}
-                                    enableEditMode={() => setEditMode(true)}
-                                />
+                        />) : (
+                        <>
+                            <ProfileData
+                                profile={props.profile}
+                                status={props.status}
+                                aboutMe={props.profile.aboutMe}
+                                isOwner={props.isOwner}
+                                enableEditMode={() => setEditMode(true)}
+                            />
 
-                                <div>
-                                    <h3>Contacts:</h3>
-                                    <Contact title={'Facebook'} data={props.profile.contacts.facebook}/>
-                                    <Contact title={'GitHub'} data={props.profile.contacts.github}/>
-                                    <Contact title={'Instagram'} data={props.profile.contacts.instagram}/>
-                                    <Contact title={'Website'} data={props.profile.contacts.website}/>
-                                    <Contact title={'Main link'} data={props.profile.contacts.mainLink}/>
-                                    <Contact title={'YouTube'} data={props.profile.contacts.youtube}/>
-                                    <Contact title={'VK'} data={props.profile.contacts.vk}/>
-                                </div>
-                            </>
-                        )
+                            <div>
+                                <h3>Contacts:</h3>
+                                <Contact title={'Facebook'} data={props.profile.contacts.facebook}/>
+                                <Contact title={'GitHub'} data={props.profile.contacts.github}/>
+                                <Contact title={'Instagram'} data={props.profile.contacts.instagram}/>
+                                <Contact title={'Website'} data={props.profile.contacts.website}/>
+                                <Contact title={'Main link'} data={props.profile.contacts.mainLink}/>
+                                <Contact title={'YouTube'} data={props.profile.contacts.youtube}/>
+                                <Contact title={'VK'} data={props.profile.contacts.vk}/>
+                            </div>
+                        </>
+                    )
                     }
                 </div>
             </div>

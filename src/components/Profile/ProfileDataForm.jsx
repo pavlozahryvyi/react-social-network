@@ -40,6 +40,7 @@ const ProfileDataForm = ({handleSubmit, profile, status, aboutMe, error}) => {
                     component={Textarea}
                     name={"lookingForAJobDescription"}
                     placeholder={"Job description"}
+                    validate={requiredField}
                 />
             </div>
             <div>
