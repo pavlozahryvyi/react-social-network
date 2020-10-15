@@ -21,21 +21,29 @@ const Pagination = (props) => {
 
     return (
         <div>
-            { portionNumber > 1 &&
-            <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button> }
+            {portionNumber > 1 &&
+            <button onClick={() => {
+                setPortionNumber(portionNumber - 1)
+            }}>PREV</button>}
             {
                 pages
-                    .filter(p => p >= leftPortionPageNumber && p<=rightPortionPageNumber)
-                    .map((page) => (<span key={page}
-                    className={`${props.currentPage === page && styles.selectedPage} ${styles.page}`}
-                    onClick={(e) => {
-                        props.setCurrentPage(page)
-                    }
-                    }>{page}</span>))
+                    .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+                    .map((page) => (
+                            <span key={page}
+                                  className={`${props.currentPage === page && styles.selectedPage} ${styles.page}`}
+                                  onClick={(e) => {
+                                      props.setCurrentPage(page)
+                                  }
+                                  }>{page}
+                        </span>
+                        )
+                    )
             }
 
-            { portionCount > portionNumber &&
-            <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button> }
+            {portionCount > portionNumber &&
+            <button onClick={() => {
+                setPortionNumber(portionNumber + 1)
+            }}>NEXT</button>}
         </div>
     )
 };

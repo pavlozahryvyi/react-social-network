@@ -1,5 +1,5 @@
 import React, {Component, Suspense} from 'react';
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {Redirect, Switch, BrowserRouter, Route, withRouter} from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -10,9 +10,7 @@ import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
-import SuspenseComponent from "./hoc/SuspenseComponent";
 import WithSuspense from "./hoc/WithSuspense";
-import Dialogs from "./components/Dialogs/Dialogs";
 import store from "./redux/redux-store";
 
 //lazy loading
@@ -35,26 +33,16 @@ class App extends Component {
                 <Navbar/>
                 <div className='app-wrapper-block'>
                     <div className="app-wrapper-content">
-                        <Route path='/' render={() => <ProfileContainer/>} exact/>
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>} exact/>
-                        <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
-                        <Route path='/login' render={() => <Login/>}/>
-                        <Route path='/news' render={() => (
-                            <Suspense fallback={<Preloader/>}>
-                                <News/>
-                            </Suspense>
-                        )}/>
-                        <Route path='/music' render={() => (
-                            <Suspense fallback={<Preloader/>}>
-                                <Music/>
-                            </Suspense>
-                        )}/>
-                        <Route path='/settings' render={() => (
-                            <Suspense fallback={<Preloader/>}>
-                                <Settings/>
-                            </Suspense>
-                        )}/>
+                        <Switch>
+                            <Route path={['/profile/:userId?', '/']} render={() => <ProfileContainer/>} exact/>
+                            <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
+                            <Route path='/users' render={() => <UsersContainer/>}/>
+                            <Route path='/login' render={() => <Login/>}/>
+                            <Route path='/news' render={WithSuspense(News)}/>
+                            <Route path='/music' render={WithSuspense(Music)}/>
+                            <Route path='/settings' render={WithSuspense(Settings)}/>
+                            <Route path={`*`} render={() => <div>ERROR, PAGE NOT FOUND, 404</div>}/>
+                        </Switch>
                     </div>
                 </div>
             </div>
