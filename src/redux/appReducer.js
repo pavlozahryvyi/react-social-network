@@ -3,7 +3,8 @@ import {getAuthUserDataThunk} from "./authReducer";
 const SET_INITIALIZED = 'appReducer/SET_INITIALIZED';
 
 let initialState = {
-    initialized: false
+    initialized: false,
+    globalError: null //for showing popup with amazing error
 };
 
 const appReducer = (state = initialState, action) => {
