@@ -1,14 +1,12 @@
 import React from "react";
 import User from "./User";
 
-const Users = (props) => {
-
-    const {
-        users,
-        followingInProgress,
-        followThunk,
-        unFollowThunk
-    } = props
+const Users = ({
+                   users,
+                   followingInProgress,
+                   followThunk,
+                   unFollowThunk
+               }) => {
 
     return (
         <div>
