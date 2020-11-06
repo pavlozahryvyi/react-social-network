@@ -4,21 +4,17 @@ import {stopSubmit} from "redux-form";
 const SET_USER_DATA = 'authReducer/SET_USER_DATA';
 const SET_CAPTCHA = 'authReducer/SET_CAPTCHA';
 
-type initialStateType = {
-    id: number | null,
-    email: string | null,
-    login: string | null,
-    isAuth: boolean,
-    captchaUrl: string | null
+
+
+const initialState = {
+    id: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
+    isAuth: false,
+    captchaUrl: null as string | null
 };
 
-const initialState: initialStateType = {
-    id: null,
-    email: null,
-    login: null,
-    isAuth: false,
-    captchaUrl: null
-};
+type initialStateType = typeof initialState;
 
 const authReducer = (state = initialState, action: any): initialStateType => {
 
@@ -33,7 +29,7 @@ const authReducer = (state = initialState, action: any): initialStateType => {
             return {
                 ...state,
                 captchaUrl: action.payload.captchaUrl
-            }
+            };
         default:
             return state;
     }
