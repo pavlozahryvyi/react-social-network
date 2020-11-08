@@ -17,18 +17,30 @@ import {
     getTotalUsersCount,
     getUsers, getUserSuperSelector
 } from "../../redux/selectors/usersSelectors";
+import {UserType} from "../../types/types";
 
-types PropsTypes = {
-    
+type PropsTypes = {
+    currentPage: number
+    pageSize: number
+    totalUsersCount: number
+    isFetching: boolean
+
+    followingInProgress: Array<number>
+    users: Array<UserType>
+
+    setCurrentPage: (currentPage: number) => void
+    getUsersThunk: (currentPage: number, pageSize: number) => void
+    followThunk: (userId: number) => void
+    unFollowThunk: (userId: number) => void
 }
 
-class UsersContainer extends Component {
+class UsersContainer extends Component<PropsTypes> {
 
     componentDidMount() {
         this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
     }
 
-    setCurrentPage = (page) => {
+    setCurrentPage = (page: number) => {
 
         this.props.setCurrentPage(page);
 
@@ -59,7 +71,7 @@ class UsersContainer extends Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     return {
         users: getUserSuperSelector(state),
         pageSize: getPageSize(state),
@@ -72,8 +84,8 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {
-    setCurrentPage,
-    getUsersThunk,
-    followThunk, unFollowThunk
-}))(UsersContainer);
+        setCurrentPage,
+        getUsersThunk,
+        followThunk, unFollowThunk
+    }))(UsersContainer);
 

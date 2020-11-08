@@ -101,7 +101,7 @@ type ToggleIsFetchingType = {
 }
 export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingType => ({type: TOGGLE_IS_FETCHING, isFetching});
 
-type toggleFollowingProgressType = {
+export type toggleFollowingProgressType = {
     type: typeof TOGGLE_IS_FOLLOWING_PROGRESS,
     followingInProgress: boolean,
     userId: number

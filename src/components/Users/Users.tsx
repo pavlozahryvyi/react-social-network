@@ -1,7 +1,15 @@
 import React from "react";
 import User from "./User";
+import {UserType} from "../../types/types";
 
-const Users = ({
+type PropsTypes = {
+    users: Array<UserType>
+    followingInProgress: Array<number>
+    followThunk: (userId: number) => void
+    unFollowThunk: (userId: number) => void
+}
+
+const Users: React.FC<PropsTypes> = ({
                    users,
                    followingInProgress,
                    followThunk,
