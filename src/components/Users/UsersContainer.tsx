@@ -18,6 +18,10 @@ import {
     getUsers, getUserSuperSelector
 } from "../../redux/selectors/usersSelectors";
 
+types PropsTypes = {
+    
+}
+
 class UsersContainer extends Component {
 
     componentDidMount() {
