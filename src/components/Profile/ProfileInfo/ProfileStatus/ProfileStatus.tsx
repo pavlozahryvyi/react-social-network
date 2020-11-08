@@ -1,13 +1,22 @@
-import React, {Component} from 'react';
+import React, {ChangeEvent, Component} from 'react';
 
-export default class ProfileStatus extends Component {
+type PropTypes = {
+    status: string
+}
 
-    state = {
+type StateTypes = {
+    editMode: boolean
+    status: string
+}
+
+export default class ProfileStatus extends Component<PropTypes, StateTypes> {
+
+    state: StateTypes = {
         editMode: false,
         status: this.props.status,
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps:PropTypes, prevState:StateTypes) {
         /*console.log("--- componentDidUpdate");
         console.log("---prevProps", prevProps);
         console.log("---prevState", prevState);
@@ -21,15 +30,15 @@ export default class ProfileStatus extends Component {
         }
     }
 
-    disableActiveMode = (e) => {
+    disableActiveMode = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             editMode: false,
-            status:e.target.value
+            status: event.target.value
         });
         //this.props.updateStatus(this.state.status);
     };
 
-    onStatusChange = (event) => {
+    onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             status: event.target.value
         })
