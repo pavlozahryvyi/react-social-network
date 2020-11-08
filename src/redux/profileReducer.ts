@@ -1,6 +1,7 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {handleError} from "../utils/errorHandlers";
+import {PhotosType, PostElementType, ProfileType} from "../types/types";
 
 const ADD_POST = "profileReducer/ADD_POST";
 const DELETE_POST = "profileReducer/DELETE_POST";
@@ -8,35 +9,6 @@ const SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profileReducer/SET_USER_STATUS';
 const SAVE_PHOTO_SUCCESS = 'profileReducer/SAVE_PHOTO_SUCCESS';
 const UPDATE_DATA_SUCCESS = 'profileReducer/UPDATE_DATA_SUCCESS';
-
-type PostElementType = {
-    id: number
-    message: string
-    likesCount: number
-}
-type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    aboutMe: string
-    contacts: ContactsType
-    photos: PhotosType
-}
-type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-type PhotosType = {
-    small: string | null
-    large: string | null
-}
 
 const initialState = {
     postData: [

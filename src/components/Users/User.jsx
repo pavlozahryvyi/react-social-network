@@ -15,8 +15,8 @@ const Users = (props) => {
 
     const followHandler = (userId, cb) => {
         console.log(userId);
-        //return cb(userId)
-    }
+        return cb(userId)
+    };
 
     return (
         <div key={user.id}>
