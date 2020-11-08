@@ -19,20 +19,32 @@ import {
 import {UserType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
 
-type PropsTypes = {
+//types from state
+type MapStateToPropsTypes = {
     currentPage: number
     pageSize: number
     totalUsersCount: number
     isFetching: boolean
-
     followingInProgress: Array<number>
     users: Array<UserType>
+}
 
+//types from reducers
+type MapDispatchToPropsTypes = {
     setCurrentPage: (currentPage: number) => void
     getUsersThunk: (currentPage: number, pageSize: number) => void
     followThunk: (userId: number) => void
     unFollowThunk: (userId: number) => void
 }
+
+//passed to the component type
+type OwnTypes = {
+    pageTitle: string
+}
+
+
+//all common types
+type PropsTypes = MapStateToPropsTypes & MapDispatchToPropsTypes & OwnTypes;
 
 class UsersContainer extends Component<PropsTypes> {
 
@@ -50,6 +62,7 @@ class UsersContainer extends Component<PropsTypes> {
     render() {
 
         return <div className={styles.usersBlock}>
+            <h2>{this.props.pageTitle}</h2>
             <Pagination
                 totalItemsCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
@@ -83,9 +96,9 @@ const mapStateToProps = (state: AppStateType) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {
-        setCurrentPage,
-        getUsersThunk,
-        followThunk, unFollowThunk
-    }))(UsersContainer);
+    //typing connect HOC
+    //<TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState>
+    connect<MapStateToPropsTypes, MapDispatchToPropsTypes, OwnTypes, AppStateType>
+    (mapStateToProps,
+        {setCurrentPage, getUsersThunk, followThunk, unFollowThunk}))(UsersContainer);
 
