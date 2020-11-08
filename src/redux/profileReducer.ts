@@ -9,19 +9,50 @@ const SET_USER_STATUS = 'profileReducer/SET_USER_STATUS';
 const SAVE_PHOTO_SUCCESS = 'profileReducer/SAVE_PHOTO_SUCCESS';
 const UPDATE_DATA_SUCCESS = 'profileReducer/UPDATE_DATA_SUCCESS';
 
+type PostElementType = {
+    id: number
+    message: string
+    likesCount: number
+}
+type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    aboutMe: string
+    contacts: ContactsType
+    photos: PhotosType
+}
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+type PhotosType = {
+    small: string | null
+    large: string | null
+}
 
-let initialState = {
+const initialState = {
     postData: [
         {id: 1, message: 'My first react app!', likesCount: 32},
         {id: 2, message: 'I need more CSS', likesCount: 15},
         {id: 3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15},
         {id: 4, message: 'React is cool!', likesCount: 45},
-    ],
-    profile: null,
-    status: ''
+    ] as Array<PostElementType>,
+    profile: null as any | null,
+    status: null as string | null
 };
 
-const profileReducer = (state = initialState, action) => {
+
+type InitialStateType = typeof initialState
+
+const profileReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
 
     switch (action.type) {
 
@@ -62,7 +93,7 @@ const profileReducer = (state = initialState, action) => {
                         ...action.photos
                     }
                 }
-            }
+            };
 
         default:
             return state;
@@ -70,38 +101,62 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
+type SetUserProfileType = {
+    type: typeof SET_USER_PROFILE
+    profile: ProfileType
+}
+const setUserProfile = (profile: any): SetUserProfileType => ({type: SET_USER_PROFILE, profile});
 
-const setUserProfile = profile => ({type: SET_USER_PROFILE, profile});
-const setUserStatus = status => ({type: SET_USER_STATUS, status});
+type SetUserStatusType = {
+    type: typeof SET_USER_STATUS
+    status: string
+}
+const setUserStatus = (status: string): SetUserStatusType => ({type: SET_USER_STATUS, status});
 
-export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
+type AddPostActionType = {
+    type: typeof ADD_POST,
+    newPostText: string
+}
+export const addPost = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText});
 
-export const deletePost = (id) => ({type: DELETE_POST, id});
+type DeletePosActionType = {
+    type: typeof DELETE_POST
+    id: number
+}
+export const deletePost = (id: number): DeletePosActionType => ({type: DELETE_POST, id});
 
-export const savePhotosSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
+type SavePhotosSuccessActionType = {
+    type: typeof SAVE_PHOTO_SUCCESS
+    photos: PhotosType
+}
+export const savePhotosSuccess = (photos: PhotosType): SavePhotosSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos});
 
-export const updateProfileDataSuccess = () => ({type: UPDATE_DATA_SUCCESS})
+
+type UpdateProfileDataSuccessActionType = {
+    type: typeof UPDATE_DATA_SUCCESS
+}
+export const updateProfileDataSuccess = ():UpdateProfileDataSuccessActionType => ({type: UPDATE_DATA_SUCCESS})
 
 
-export const getProfileThunk = userId => async dispatch => {
+export const getProfileThunk = (userId: number) => async (dispatch: any) => {
     const response = await usersAPI.getProfile(userId);
     dispatch(setUserProfile(response));
 };
 
-export const getUserStatus = userId => async dispatch => {
+export const getUserStatus = (userId: number) => async (dispatch: any) => {
     const response = await profileAPI.getStatus(userId);
     dispatch(setUserStatus(response.data));
 };
 
-export const updateStatus = status => async dispatch => {
+export const updateStatus = (status: string) => async (dispatch: any) => {
 
-    try{
+    try {
         const response = await profileAPI.updateStatus(status);
 
         if (response.data.resultCode === 0) {
             dispatch(setUserStatus(status));
         }
-    }catch (error){
+    } catch (error) {
         //dispatch
         //handle error
         //show error massage
@@ -109,25 +164,41 @@ export const updateStatus = status => async dispatch => {
 
 };
 
-export const savePhoto = photo => async dispatch => {
+export const savePhoto = (photo: File) => async (dispatch: any) => {
 
     const response = await profileAPI.updatePhoto(photo);
 
     if (response.data.resultCode === 0) {
         dispatch(savePhotosSuccess(response.data.data.photos));
     }
+};
+
+type ContactsErrorsObject = {
+    github?: string
+    vk?: string
+    facebook?: string
+    instagram?: string
+    twitter?: string
+    website?: string
+    youtube?: string
+    mainLink?: string
 }
 
-export const saveProfileData = data => async (dispatch, getState) => {
+type ErrorsObjType = {
+    _error?: string
+    "contacts"?:ContactsErrorsObject
+}
+
+export const saveProfileData = (data: ProfileType) => async (dispatch: any, getState: any) => {
     const userId = getState().auth.id;
     const response = await profileAPI.updateProfileData(data);
     if (response.data.resultCode === 0) {
         dispatch(getProfileThunk(userId));
     } else {
         let err = "Some error";
-        let errorsObj = {
+        let errorsObj: ErrorsObjType = {
             _error: err
-        }
+        };
         if (response.data.messages.length > 0) {
             const errorName = handleError(response.data.messages[0]);
             errorsObj = {
@@ -140,6 +211,6 @@ export const saveProfileData = data => async (dispatch, getState) => {
         dispatch(action);
         return Promise.reject();
     }
-}
+};
 
 export default profileReducer;
