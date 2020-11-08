@@ -18,6 +18,7 @@ import {
     getUsers, getUserSuperSelector
 } from "../../redux/selectors/usersSelectors";
 import {UserType} from "../../types/types";
+import {AppStateType} from "../../redux/redux-store";
 
 type PropsTypes = {
     currentPage: number
@@ -71,7 +72,7 @@ class UsersContainer extends Component<PropsTypes> {
 }
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         users: getUserSuperSelector(state),
         pageSize: getPageSize(state),
