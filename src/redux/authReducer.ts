@@ -1,9 +1,8 @@
-import {authAPI, securityAPI} from "../api/api";
+import {authAPI, ResultCodeForCaptchaEnum, ResultCodesEnum, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'authReducer/SET_USER_DATA';
 const SET_CAPTCHA = 'authReducer/SET_CAPTCHA';
-
 
 
 const initialState = {
@@ -48,10 +47,12 @@ type SetAuthUserDataType = {
 }
 
 export const setAuthUserData
-    = (id: number | null, email: string | null, login: string | null, isAuth: boolean | null): SetAuthUserDataType => ({
-    type: SET_USER_DATA,
-    payload: {id, email, login, isAuth}
-});
+    = (id: number | null, email: string | null, login: string | null, isAuth: boolean | null): SetAuthUserDataType => (
+    {
+        type: SET_USER_DATA,
+        payload: {id, email, login, isAuth}
+    }
+);
 
 type SetCaptureType = {
     type: typeof SET_CAPTCHA
@@ -68,8 +69,7 @@ export const setCaptcha = (captchaUrl: string): SetCaptureType => (
 export const getAuthUserDataThunk = () => async (dispatch: any) => {
 
     const response = await authAPI.me();
-
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResultCodesEnum.Success) {
         const {id, email, login} = response.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
@@ -82,7 +82,7 @@ export const loginThunk
 
         const response = await authAPI.login(email, password, rememberMe, captcha);
 
-        if (response.resultCode === 0) {
+        if (response.resultCode === ResultCodesEnum.Success) {
             dispatch(getAuthUserDataThunk());
         } else {
             const err = response.messages.length > 0 ? response.messages[0] : "Some error";
@@ -90,7 +90,7 @@ export const loginThunk
             const action = stopSubmit("login", {_error: err});
             dispatch(action);
 
-            if (response.resultCode === 10) {
+            if (response.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
                 console.log("need captcha");
                 dispatch(getCaptchaThunk());
             }
@@ -100,7 +100,7 @@ export const loginThunk
 export const logoutThunk = () => async (dispatch: any) => {
     const response = await authAPI.logOut()
 
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResultCodesEnum.Success) {
         console.log(response);
         dispatch(setAuthUserData(null, null, null, false));
     }

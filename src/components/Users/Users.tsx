@@ -4,30 +4,31 @@ import Pagination from "./Pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {
     getCurrentPage,
-    getFollowingInProgress,
+    getFollowingInProgress, getIsFetching,
     getPageSize,
     getTotalUsersCount,
     getUsers
 } from "../../redux/selectors/usersSelectors";
-import {followThunk, getUsersThunk, setCurrentPage, unFollowThunk} from "../../redux/usersReducer";
+import {followThunk, getUsersThunk, setCurrentPage, unFollowThunk, toggleIsFetching} from "../../redux/usersReducer";
+import Preloader from "../common/Preloader/Preloader";
 
-type PropsTypes = {
-}
+type PropsTypes = {}
 
 const Users: React.FC<PropsTypes> = (props) => {
 
-
+    console.log('----render');
 
     const users = useSelector(getUsers);
     const totalUsersCount = useSelector(getTotalUsersCount);
     const currentPage = useSelector(getCurrentPage);
     const pageSize = useSelector(getPageSize);
     const followingInProgress = useSelector(getFollowingInProgress);
+    const isFetching = useSelector(getIsFetching);
 
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        getUsersThunk(currentPage, pageSize);
+    useEffect(() => {
+        dispatch(getUsersThunk(currentPage, pageSize));
     }, []);
 
     const setPage = (currentPage: number) => {
@@ -50,14 +51,19 @@ const Users: React.FC<PropsTypes> = (props) => {
                 currentPage={currentPage}
                 setCurrentPage={setPage}
             />
-            {users.map(user => (
-                    <User
-                        key={user.id}
-                        user={user}
-                        followingInProgress={followingInProgress}
-                        followThunk={follow}
-                        unFollowThunk={unFollow}
-                    />
+
+            {isFetching ? (
+                <Preloader/>
+            ) : (
+                users.map(user => (
+                        <User
+                            key={user.id}
+                            user={user}
+                            followingInProgress={followingInProgress}
+                            followThunk={follow}
+                            unFollowThunk={unFollow}
+                        />
+                    )
                 )
             )}
         </div>

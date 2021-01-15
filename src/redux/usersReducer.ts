@@ -51,7 +51,6 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
             return {...state, isFetching: action.isFetching}
         }
         case TOGGLE_IS_FOLLOWING_PROGRESS: {
-            debugger;
             return {
                 ...state,
                 followingInProgress: action.followingInProgress
@@ -112,8 +111,7 @@ export const toggleFollowingProgress = (followingInProgress: boolean, userId: nu
     userId
 });
 
-export const getUsersThunk = (currentPage: number, pageSize: number) => async (dispatch: any) => {
-
+export const getUsersThunk = (currentPage: number, pageSize: number) =>  async (dispatch: any) => {
     dispatch(toggleIsFetching(true));
     const data = await usersAPI.getUsers(currentPage, pageSize);
     dispatch(toggleIsFetching(false));

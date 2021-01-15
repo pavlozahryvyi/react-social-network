@@ -39,15 +39,15 @@ type PropsPageTypes = {
 
 const UsersPage: React.FC<PropsPageTypes> = (props) => {
 
-    const isFetching = useSelector(getIsFetching);
+    // const isFetching = useSelector(getIsFetching);
 
     return (<div className={styles.usersBlock}>
         <h2>{props.pageTitle}</h2>
-        {
-            isFetching
-                ? <Preloader/>
-                : <Users />
-        }
+        {/*{*/}
+        {/*    isFetching*/}
+        {/*        ? <Preloader/>*/}
+                 <Users />
+        {/*}*/}
     </div>)
 };
 

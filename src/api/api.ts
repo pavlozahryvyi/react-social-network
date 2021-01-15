@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileType} from "../types/types";
 
 const instance = axios.create({
     withCredentials: true,
@@ -8,24 +9,54 @@ const instance = axios.create({
     }
 });
 
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
+}
+
+export enum ResultCodeForCaptchaEnum {
+    CaptchaIsRequired = 10
+}
+
+type MeResponseType = {
+    data: {
+        id: number,
+        email: string,
+        login: string
+    },
+    resultCode: ResultCodesEnum,
+    messages: Array<string>,
+}
+
+type LoginResponseType = {
+    data: {
+        id: number
+    },
+    resultCode: ResultCodesEnum | ResultCodeForCaptchaEnum,
+    messages: Array<string>,
+}
+
 export const authAPI = {
     me() {
         return instance
-            .get(`auth/me`)
+            .get<MeResponseType>(`auth/me`)
             .then(resp => resp.data);
     },
 
-    login(email, password, rememberMe = false, captcha = null){
+    login(email: string, password: string, rememberMe = false, captcha: null | string = null) {
         return instance
-            .post(`/auth/login`, {email, password, rememberMe, captcha})
+            .post<LoginResponseType>(`/auth/login`, {email, password, rememberMe, captcha})
             .then(resp => resp.data);
     },
-    logOut(){
+    logOut() {
         return instance
             .delete(`/auth/login`)
             .then(resp => resp.data);
     }
 };
+
+//authAPI.me().then((res: AxiosResponse<any>) => res.data);
+
 
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
@@ -36,19 +67,19 @@ export const usersAPI = {
             .then(resp => resp.data);
     },
 
-    unFollow(userId) {
+    unFollow(userId: number) {
         return instance
             .delete(`follow/${userId}`)
             .then(resp => resp.data);
     },
 
-    follow(userId) {
+    follow(userId: number) {
         return instance
             .post(`follow/${userId}`)
             .then(resp => resp.data);
     },
 
-    getProfile(userId) {
+    getProfile(userId: number) {
         console.warn("Use profileAPI obj!");
         return profileAPI.getProfile(userId);
     }
@@ -56,23 +87,23 @@ export const usersAPI = {
 
 export const profileAPI = {
 
-    getProfile(userId) {
+    getProfile(userId: number) {
         return instance
             .get(`profile/${userId}`)
             .then(resp => resp.data)
     },
 
-    getStatus(userId) {
+    getStatus(userId: number) {
         return instance
             .get(`profile/status/${userId}`)
     },
 
-    updateStatus(status){
+    updateStatus(status: string) {
         return instance
             .put(`profile/status`, {status})
     },
 
-    updatePhoto(photo){
+    updatePhoto(photo: File) {
         const formData = new FormData();
         formData.append("image", photo);
         return instance
@@ -83,14 +114,14 @@ export const profileAPI = {
             })
     },
 
-    updateProfileData(data) {
+    updateProfileData(data: ProfileType) {
         return instance
             .put(`profile`, data)
     }
 };
 
 export const securityAPI = {
-    getCaptcha(){
+    getCaptcha() {
         return instance
             .get('/security/get-captcha-url')
     }
