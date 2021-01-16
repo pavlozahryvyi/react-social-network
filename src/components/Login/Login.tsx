@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {requiredField} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {loginThunk} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
 import styles from "../common/FormsControls/FormsControls.module.css"
+import {AppStateType} from "../../redux/redux-store";
 
-const LoginForm = props => {
+
+type LoginFormOwnProps = {
+    captchaUrl: string | null
+}
+
+const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormOwnProps> & LoginFormOwnProps> = ({handleSubmit, captchaUrl, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field component={Input} name={"email"} type={"email"} placeholder={"Login"} validate={requiredField}/>
             </div>
@@ -20,26 +26,26 @@ const LoginForm = props => {
             <div>
                 <Field component={"input"} name={"rememberMe"} type={"checkbox"}/> remember me
             </div>
-            {props.captchaUrl && (
+            {captchaUrl && (
                 <>
-                <img src={props.captchaUrl} alt="captcha"/>
-                <div>
-                    <Field
-                        component={"input"}
-                        validate={requiredField}
-                        name={"captcha"}
-                        type={"text"}
-                        placeholder={"Enter symbols from the image"}/>
-                </div>
+                    <img src={captchaUrl} alt="captcha"/>
+                    <div>
+                        <Field
+                            component={"input"}
+                            validate={requiredField}
+                            name={"captcha"}
+                            type={"text"}
+                            placeholder={"Enter symbols from the image"}/>
+                    </div>
                 </>
-                )}
+            )}
             <div>
                 <button>Login</button>
             </div>
             {
-                props.error && (
+                error && (
                     <div className={styles.formSummaryError}>
-                        {props.error}
+                        {error}
                     </div>
                 )
             }
@@ -47,12 +53,27 @@ const LoginForm = props => {
     )
 };
 
-const LoginReduxForm = reduxForm({form: "login"})(LoginForm);
+const LoginReduxForm = reduxForm<FormDataType, LoginFormOwnProps>({form: "login"})(LoginForm);
 
-class Login extends Component {
+type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: string
+}
 
-    onSubmit = formData => {
-        // console.log(formData);
+type MapStatePropsType = {
+    isAuth: boolean,
+    captchaUrl: string | null
+}
+
+type MapDispatchPropsType = {
+    loginThunk: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+}
+
+class Login extends Component<MapStatePropsType & MapDispatchPropsType> {
+
+    onSubmit = (formData: FormDataType) => {
         this.props.loginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha)
     };
 
@@ -71,9 +92,9 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth,
     captchaUrl: state.auth.captchaUrl
-})
+});
 
 export default connect(mapStateToProps, {loginThunk})(Login);
