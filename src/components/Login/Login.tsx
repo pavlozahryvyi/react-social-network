@@ -13,7 +13,8 @@ type LoginFormOwnProps = {
     captchaUrl: string | null
 }
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormOwnProps> & LoginFormOwnProps> = ({handleSubmit, captchaUrl, error}) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormOwnProps> & LoginFormOwnProps>
+    = ({handleSubmit, captchaUrl, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -61,6 +62,7 @@ type FormDataType = {
     rememberMe: boolean
     captcha: string
 }
+type FormDataTypeKeys = keyof FormDataType;
 
 type MapStatePropsType = {
     isAuth: boolean,
