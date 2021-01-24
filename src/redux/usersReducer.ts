@@ -1,5 +1,5 @@
 import {UserType} from "../types/types";
-import {ActionsTypes} from "./redux-store";
+import {InferActionsTypes} from "./redux-store";
 import {usersAPI} from "../api/users-api";
 
 const FOLLOW = "userReducer/FOLLOW";
@@ -66,7 +66,7 @@ const usersReducer = (state = initialState, action: UsersActionsTypes): InitialS
 };
 
 
-type UsersActionsTypes = ActionsTypes<typeof usersActions>
+type UsersActionsTypes = InferActionsTypes<typeof usersActions>
 
 export const usersActions = {
     followSuccess: (userId: number) => ({type: FOLLOW, userId} as const),

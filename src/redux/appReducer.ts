@@ -1,5 +1,5 @@
 import {getAuthUserDataThunk} from "./authReducer";
-import {ActionsTypes} from "./redux-store";
+import {InferActionsTypes} from "./redux-store";
 
 const SET_INITIALIZED = 'sn/appReducer/SET_INITIALIZED';
 
@@ -9,7 +9,7 @@ const initialState = {
 
 type initialStateType = typeof initialState
 //getting types automatically
-type ActionType = ActionsTypes<typeof appActions>
+type ActionType = InferActionsTypes<typeof appActions>
 
 const appReducer = (state = initialState, action: ActionType): initialStateType => {
     switch (action.type) {

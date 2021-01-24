@@ -1,5 +1,3 @@
-import {initialStateType} from "./appReducer";
-
 const ADD_MESSAGE = 'dialogsReducer/ADD-MESSAGE';
 
 type DialogType = {
