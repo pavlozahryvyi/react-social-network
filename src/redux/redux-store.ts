@@ -18,6 +18,11 @@ const rootReducer = combineReducers({
     form: formReducer
 });
 
+//define type U and return it or return nothing
+type PropertiesType<T> = T extends {[key: string]: infer U} ? U : never;
+
+export type ActionsTypes<T extends {[key: string]:  (...args: any[])=> any}> = ReturnType<PropertiesType<T>>
+
 type RootReducerType = typeof rootReducer;
 //Define type from RootReducerType type
 export type AppStateType = ReturnType<RootReducerType>

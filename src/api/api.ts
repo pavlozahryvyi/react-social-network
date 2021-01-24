@@ -55,9 +55,6 @@ export const authAPI = {
     }
 };
 
-//authAPI.me().then((res: AxiosResponse<any>) => res.data);
-
-
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance

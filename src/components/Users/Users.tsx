@@ -9,7 +9,7 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../redux/selectors/usersSelectors";
-import {followThunk, getUsersThunk, setCurrentPage, unFollowThunk, toggleIsFetching} from "../../redux/usersReducer";
+import {followThunk, getUsersThunk, unFollowThunk, usersActions} from "../../redux/usersReducer";
 import Preloader from "../common/Preloader/Preloader";
 
 type PropsTypes = {}
@@ -32,7 +32,7 @@ const Users: React.FC<PropsTypes> = (props) => {
     }, []);
 
     const setPage = (currentPage: number) => {
-        dispatch(setCurrentPage(currentPage));
+        dispatch(usersActions.setCurrentPage(currentPage));
         dispatch(getUsersThunk(currentPage, pageSize));
     };
 
