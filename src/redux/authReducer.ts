@@ -1,5 +1,7 @@
-import {authAPI, ResultCodeForCaptchaEnum, ResultCodesEnum, securityAPI} from "../api/api";
+import {ResultCodeForCaptchaEnum, ResultCodesEnum} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {securityAPI} from "../api/security-api";
+import {authAPI} from "../api/auth-api";
 
 const SET_USER_DATA = 'authReducer/SET_USER_DATA';
 const SET_CAPTCHA = 'authReducer/SET_CAPTCHA';
@@ -107,10 +109,8 @@ export const logoutThunk = () => async (dispatch: any) => {
 };
 
 export const getCaptchaThunk = () => async (dispatch: any) => {
-    const response = await securityAPI.getCaptcha();
-    dispatch(setCaptcha(response.data.url));
-
-    console.log('---captcha response', response)
+    const data = await securityAPI.getCaptcha();
+    dispatch(setCaptcha(data.url));
 }
 
 export default authReducer;

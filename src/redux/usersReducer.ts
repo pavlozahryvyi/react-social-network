@@ -1,6 +1,6 @@
-import {usersAPI} from "../api/api";
 import {UserType} from "../types/types";
 import {ActionsTypes} from "./redux-store";
+import {usersAPI} from "../api/users-api";
 
 const FOLLOW = "userReducer/FOLLOW";
 const UNFOLLOW = "userReducer/UNFOLLOW";

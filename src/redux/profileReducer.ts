@@ -1,7 +1,7 @@
-import {profileAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {handleError} from "../utils/errorHandlers";
 import {PhotosType, PostElementType, ProfileType} from "../types/types";
+import {profileAPI} from "../api/profile-api";
 
 const ADD_POST = "profileReducer/ADD_POST";
 const DELETE_POST = "profileReducer/DELETE_POST";
@@ -111,13 +111,13 @@ export const updateProfileDataSuccess = ():UpdateProfileDataSuccessActionType =>
 
 
 export const getProfileThunk = (userId: number) => async (dispatch: any) => {
-    const response = await usersAPI.getProfile(userId);
+    const response = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(response));
 };
 
 export const getUserStatus = (userId: number) => async (dispatch: any) => {
     const response = await profileAPI.getStatus(userId);
-    dispatch(setUserStatus(response.data));
+    dispatch(setUserStatus(response));
 };
 
 export const updateStatus = (status: string) => async (dispatch: any) => {
@@ -140,8 +140,8 @@ export const savePhoto = (photo: File) => async (dispatch: any) => {
 
     const response = await profileAPI.updatePhoto(photo);
 
-    if (response.data.resultCode === 0) {
-        dispatch(savePhotosSuccess(response.data.data.photos));
+    if (response.resultCode === 0) {
+        dispatch(savePhotosSuccess(response.data));
     }
 };
 
