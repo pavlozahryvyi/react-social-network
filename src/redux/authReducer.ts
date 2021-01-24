@@ -17,7 +17,6 @@ const initialState = {
 };
 
 type initialStateType = typeof initialState;
-//getting types automatically
 type ActionType = InferActionsTypes<typeof authActions>
 type ThunkType = BaseThunkType<ActionType | ReturnType<typeof stopSubmit>>
 
