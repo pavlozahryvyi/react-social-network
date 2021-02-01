@@ -51,7 +51,7 @@ const dialogsReducer = (state = initialState, action: DialogsActionsType) : Init
     }
 };
 
-const dialogsActions = {
+export const dialogsActions = {
     addMessage: (newMessageText: string) => ({type: ADD_MESSAGE, newMessageText})
 };
 

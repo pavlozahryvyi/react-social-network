@@ -6,7 +6,6 @@ import ProfileStatusHooks from "./ProfileStatus/ProfileStatusHooks";
 import ProfileDataForm from "../ProfileDataForm";
 
 const ProfileInfo = props => {
-
     const [editMode, setEditMode] = useState(false);
 
     function onMainPhotoSelected(event) {
