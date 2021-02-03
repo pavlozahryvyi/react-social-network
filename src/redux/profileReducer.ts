@@ -18,7 +18,7 @@ const initialState = {
         {id: 3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15},
         {id: 4, message: 'React is cool!', likesCount: 45},
     ] as Array<PostElementType>,
-    profile: {},
+    profile: null as ProfileType | null,
     status: ''
 };
 type InitialStateType = typeof initialState;
@@ -63,7 +63,7 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
                 profile: {
                     ...state.profile,
                     photos: {...action.photos}
-                }
+                } as ProfileType
             };
 
         default:
