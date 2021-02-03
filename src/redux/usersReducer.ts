@@ -1,6 +1,8 @@
 import {UserType} from "../types/types";
 import {BaseThunkType, InferActionsTypes} from "./redux-store";
 import {usersAPI} from "../api/users-api";
+import {Dispatch} from "redux";
+import {ActionTypes} from "redux-form";
 
 const FOLLOW = "userReducer/FOLLOW";
 const UNFOLLOW = "userReducer/UNFOLLOW";
@@ -91,7 +93,7 @@ export const getUsersThunk = (currentPage: number, pageSize: number): ThunkType 
 };
 
 const followUnfollowFlow = async (
-    dispatch: any,
+    dispatch: Dispatch<UsersActionsTypes>,
     userId: number,
     apiMethod: Function,
     actionCreator: Function) => {
