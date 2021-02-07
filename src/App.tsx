@@ -1,4 +1,4 @@
-import React, {Component, Suspense} from 'react';
+import React, {Component, ComponentClass, ComponentType, Suspense} from 'react';
 import {Redirect, Switch, BrowserRouter, Route, withRouter} from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
@@ -11,7 +11,7 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import WithSuspense from "./hoc/WithSuspense";
-import store from "./redux/redux-store";
+import store, {AppStateType} from "./redux/redux-store";
 
 //lazy loading
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -19,10 +19,18 @@ const News = React.lazy(() => import('./components/News/News'));
 const Music = React.lazy(() => import('./components/Music/Music'));
 const Settings = React.lazy(() => import('./components/Settings/Settings'));
 
-class App extends Component {
+/*returning type*/
+//type MapPropsType = ReturnType<typeof mapStateToProps>
 
-    catchAllUnhandledErrors = (error) => {
-        alert('---some error', error)
+type PropsType = {
+    initializeApp: () => void,
+    initialized: boolean
+}
+
+class App extends Component<PropsType> {
+
+    catchAllUnhandledErrors = (error: PromiseRejectionEvent): void => {
+        alert(`---some error, ${error}`)
     }
 
     componentDidMount() {
@@ -35,8 +43,8 @@ class App extends Component {
     }
 
     render() {
-
-        return this.props.initialized
+        const {initialized} = this.props
+        return initialized
             ? <div className="app-wrapper">
                 <HeaderContainer/>
                 <Navbar/>
@@ -60,18 +68,18 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         initialized: state.app.initialized
     }
 };
 
-const AppContainer = compose(
+const AppContainer = compose<ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))
 (App);
 
-const SamuraiNetwork = () => {
+const SamuraiNetwork: React.FC = () => {
     return (
         <BrowserRouter>
             <Provider store={store}>
