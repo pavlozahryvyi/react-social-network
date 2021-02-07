@@ -2,25 +2,28 @@ import React from "react";
 import styles from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {Redirect} from "react-router-dom";
 import NewMessage from "./NewMessage/NewMessageForm";
+import {DialogPageType} from "../../types/types";
 
-const Dialogs = ({
-                     dialogsPage,
-                     isAuth,
-                     addMessage,
-                     updateNewMessageText
-                 }) => {
+type DialogsPropsType = {
+    dialogsPage: DialogPageType,
+    addMessage: (text: string) => void
+}
+
+const Dialogs: React.FC<DialogsPropsType> = ({
+                                                 dialogsPage,
+                                                 addMessage
+                                             }) => {
 
     const {dialogData, messagesData} = dialogsPage;
 
-    //array of components
+    //arrays of components
     const dialogsElements = dialogData.map(dialog => <DialogItem key={dialog.id} name={dialog.name} id={dialog.id}/>);
 
     const messagesElements = messagesData.map(messageItem => <Message key={messageItem.id}
                                                                       message={messageItem.message}/>);
 
-    return isAuth ? (
+    return (
         <div className={styles.dialogs}>
             <div className={styles.dialogsBlock}>
 
@@ -31,13 +34,9 @@ const Dialogs = ({
 
                 {messagesElements}
 
-                <NewMessage addMessage={addMessage}
-                            updateNewMessageText={updateNewMessageText}
-                            state={dialogsPage}/>
+                <NewMessage addMessage={addMessage}/>
             </div>
         </div>
-    ) : (
-        <Redirect to={'/login'}/>
     )
 };
 
