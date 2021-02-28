@@ -3,7 +3,7 @@ import style from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/img/usr.png"
 import ProfileStatusHooks from "./ProfileStatus/ProfileStatusHooks";
-import ProfileDataForm from "../ProfileDataForm";
+import ProfileDataForm from "./ProfileDataForm";
 
 const ProfileInfo = props => {
     const [editMode, setEditMode] = useState(false);

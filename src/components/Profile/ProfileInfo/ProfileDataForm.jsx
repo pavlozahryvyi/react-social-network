@@ -1,8 +1,8 @@
 import React from "react";
-import {Input, Textarea} from "../common/FormsControls/FormsControls";
+import {Input, Textarea} from "../../common/FormsControls/FormsControls";
 import {Field, reduxForm} from "redux-form";
-import {requiredField} from "../../utils/validators/validators";
-import styles from "../common/FormsControls/FormsControls.module.css";
+import {requiredField} from "../../../utils/validators/validators";
+import styles from "../../common/FormsControls/FormsControls.module.css";
 
 const ProfileDataForm = ({handleSubmit, profile, status, aboutMe, error}) => {
     return (
