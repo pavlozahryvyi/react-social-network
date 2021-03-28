@@ -3,7 +3,7 @@ import { Switch, BrowserRouter, Route, withRouter} from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+import {ProfilePage} from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -51,7 +51,7 @@ class App extends Component<PropsType> {
                 <div className='app-wrapper-block'>
                     <div className="app-wrapper-content">
                         <Switch>
-                            <Route path={['/profile/:userId?', '/']} render={() => <ProfileContainer/>} exact/>
+                            <Route path={['/profile/:userId?', '/']} render={() => <ProfilePage/>} exact/>
                             <Route path='/dialogs' render={() => WithSuspense(Dialogs)}/>
                             <Route path='/users' render={() => <UsersContainer pageTitle={"Users page"}/>}/>
                             <Route path='/login' render={() => <Login/>}/>

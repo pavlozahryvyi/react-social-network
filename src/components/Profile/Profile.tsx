@@ -2,22 +2,36 @@ import React from "react";
 import styles from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import { ProfileType } from "../../types/types";
 
-const Profile = (props) => {
-    console.log('---profile props', props);
-    return (
-        <div className={styles.ProfileContent}>
-            <ProfileInfo
-                isOwner={props.isOwner}
-                profile={props.profile}
-                status={props.status}
-                updateStatus={props.updateStatus}
-                savePhoto={props.savePhoto}
-                saveProfileData={props.saveProfileData}
-            />
-            <MyPostsContainer/>
-        </div>
-    )
+type PropsType = {
+  isOwner: boolean;
+  profile: ProfileType;
+  status: string;
+  updateStatus: (status: string) => void;
+  savePhoto: (file: File) => void;
+  saveProfileData: (data: any) => any; //fix
 };
 
-export default Profile;
+export const Profile: React.FC<PropsType> = ({
+  isOwner,
+  profile,
+  status,
+  updateStatus,
+  savePhoto,
+  saveProfileData,
+}) => {
+  return (
+    <div className={styles.ProfileContent}>
+      <ProfileInfo
+        isOwner={isOwner}
+        profile={profile}
+        status={status}
+        updateStatus={updateStatus}
+        savePhoto={savePhoto}
+        saveProfileData={saveProfileData}
+      />
+      <MyPostsContainer />
+    </div>
+  );
+};

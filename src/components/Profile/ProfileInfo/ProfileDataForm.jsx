@@ -4,7 +4,7 @@ import {Field, reduxForm} from "redux-form";
 import {requiredField} from "../../../utils/validators/validators";
 import styles from "../../common/FormsControls/FormsControls.module.css";
 
-const ProfileDataForm = ({handleSubmit, profile, status, aboutMe, error}) => {
+const ProfileForm = ({handleSubmit, profile, status, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <button>SAVE</button>
@@ -76,6 +76,4 @@ const ContactForm = ({title, data, name}) => {
     )
 }
 
-const ProfileReduxForm = reduxForm({form: "profile-edit"})(ProfileDataForm);
-
-export default ProfileReduxForm;
+export const ProfileDataForm = reduxForm({form: "profile-edit"})(ProfileForm);
