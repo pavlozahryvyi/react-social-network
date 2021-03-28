@@ -67,7 +67,6 @@ const ProfileInfo: React.FC<PropTypes> = (props) => {
               profile={profile}
               initialValues={profile}
               status={status}
-              aboutMe={profile.aboutMe}
               onSubmit={onSubmit}
             />
           ) : (
@@ -98,7 +97,7 @@ const ProfileInfo: React.FC<PropTypes> = (props) => {
       </div>
       {isOwner ? (
         <div>
-          <ProfileStatusHooks updateStatus={updateStatus} status={status} />
+          <ProfileStatusHooks updateStatus={updateStatus} propStatus={status} />
         </div>
       ) : null}
     </div>

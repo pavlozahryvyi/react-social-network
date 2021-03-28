@@ -1,10 +1,16 @@
 import React from "react";
 import {Input, Textarea} from "../../common/FormsControls/FormsControls";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {requiredField} from "../../../utils/validators/validators";
 import styles from "../../common/FormsControls/FormsControls.module.css";
+import {ProfileType} from "../../../types/types";
 
-const ProfileForm = ({handleSubmit, profile, status, error}) => {
+type ProfileFormProps = {
+    profile: ProfileType,
+    status: string
+}
+
+const ProfileForm: React.FC<InjectedFormProps<ProfileType, ProfileFormProps> & ProfileFormProps> = ({handleSubmit, profile, status, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <button>SAVE</button>
@@ -44,7 +50,7 @@ const ProfileForm = ({handleSubmit, profile, status, error}) => {
                 />
             </div>
             <div>
-                <p>About me: {aboutMe}</p>
+                <p>About me: {profile.aboutMe}</p>
                 <Field
                     component={Textarea}
                     name={"aboutMe"}
@@ -63,7 +69,13 @@ const ProfileForm = ({handleSubmit, profile, status, error}) => {
     )
 }
 
-const ContactForm = ({title, data, name}) => {
+
+type ContactFormType = {
+    title: string,
+    data: string,
+    name: string
+}
+const ContactForm: React.FC<ContactFormType> = ({title, data, name}) => {
     return (
         <div>
             <p>{title}: {data}</p>
@@ -76,4 +88,4 @@ const ContactForm = ({title, data, name}) => {
     )
 }
 
-export const ProfileDataForm = reduxForm({form: "profile-edit"})(ProfileForm);
+export const ProfileDataForm = reduxForm<ProfileType, ProfileFormProps>({form: "profile-edit"})(ProfileForm);
