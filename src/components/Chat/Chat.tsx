@@ -1,19 +1,21 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
+import { createAbstractBuilder } from 'typescript';
+import { AddMessageForm } from './AddMessageForm';
 import styles from './Chat.module.css';
 
-// const ws = new WebSocket(
-//     'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
-// );
-// ws.addEventListener('open', (e: Event) => {
-//     console.log('---ws open');
-// });
+type ChatMessageType = {
+    userId: number;
+    userName: string;
+    message: string;
+    photo: string;
+};
 
 export const Message: React.FC<{ message: ChatMessageType }> = ({
     message
 }) => {
     return (
         <div>
-            <img src={message.photo} />
+            <img src={message.photo} alt="User" />
             <div>
                 <div>{message.userName}</div>
                 <div>{message.message}</div>
@@ -22,41 +24,19 @@ export const Message: React.FC<{ message: ChatMessageType }> = ({
     );
 };
 
-export const Messages: React.FC = () => {
-
-    const ws = new WebSocket(
-            'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
-        );
-
+export const Messages: React.FC<{ wsChannel: WebSocket | null }> = ({
+    wsChannel
+}) => {
     const [messages, setMessages] = useState<ChatMessageType[]>([]);
 
-    // const wsMessageHandler = (e: MessageEvent) => {
-    //     debugger;
-    //     console.log('---ws event', JSON.parse(e.data));
-    //     setMessages((prevMessages) => [...prevMessages, ...JSON.parse(e.data)]);
-    // };
-
     useEffect(() => {
-
-        // console.log('ws', ws);
-        // window.addEventListener("keydown", () => console.log("123"));
-        // ws.addEventListener('open', (e: Event) => {
-        //     console.log('---ws open');
-        // });
-        
-        ws.addEventListener('message', (e: MessageEvent) => {
-            console.log('---ws event', JSON.parse(e.data));
+        wsChannel?.addEventListener('message', (e: MessageEvent) => {
             setMessages((prevMessages) => [
                 ...prevMessages,
                 ...JSON.parse(e.data)
             ]);
         });
-        // return () => {
-        //     console.log('---unmount');
-
-        //     ws.removeEventListener('message', wsMessageHandler);
-        // };
-    }, []);
+    }, [wsChannel]);
 
     return (
         <div style={{ height: 400, overflowY: 'auto' }}>
@@ -67,45 +47,39 @@ export const Messages: React.FC = () => {
     );
 };
 
-export const AddMessageForm: React.FC = () => {
-    const [message, setMessage] = useState('');
-
-    const ws = new WebSocket(
-        'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
-    );
-
-    const sendMessage = () => {
-        ws.send(message);
-        setMessage('');
-    };
-
-    return (
-        <div>
-            Add Message:{' '}
-            <div>
-                <textarea
-                    onChange={(e) => setMessage(e.currentTarget.value)}
-                    value={message}
-                />
-                <button onClick={sendMessage}>SEND</button>
-            </div>
-        </div>
-    );
-};
-
-type ChatMessageType = {
-    userId: 15148;
-    userName: string;
-    message: string;
-    photo: string;
-};
-
 export const Chat: React.FC = () => {
+    const [wsChannel, setWsChannel] = useState<WebSocket | null>(null);
+
+    useEffect(() => {
+        let ws: WebSocket;
+
+        const closeHandler = () => {
+            setTimeout(createChannel, 3000);
+        };
+
+        const createChannel = () => {
+            ws?.removeEventListener('close', closeHandler);
+            ws?.close();
+            ws = new WebSocket(
+                'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
+            );
+            ws.addEventListener('close', closeHandler);
+            setWsChannel(ws);
+        };
+
+        createChannel();
+
+        return () => {
+            ws.removeEventListener('close', closeHandler);
+            ws.close();
+        };
+    }, []);
+
     return (
         <div className={styles.chatWrapper}>
             Chat:
-            <Messages />
-            <AddMessageForm />
+            <Messages wsChannel={wsChannel} />
+            <AddMessageForm wsChannel={wsChannel} />
         </div>
     );
 };

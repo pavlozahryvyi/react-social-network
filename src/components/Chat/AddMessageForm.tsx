@@ -1,14 +1,19 @@
-import { useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-export const AddMessageForm: React.FC = () => {
+export const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({
+    wsChannel
+}) => {
     const [message, setMessage] = useState('');
-
-    const ws = new WebSocket(
-        'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
+    const [readyStatus, setReaadyStatus] = useState<'pending' | 'ready'>(
+        'pending'
     );
 
+    useEffect(() => {
+        wsChannel?.addEventListener('open', () => setReaadyStatus('ready'));
+    }, [wsChannel]);
+
     const sendMessage = () => {
-        ws.send(message);
+        wsChannel?.send(message);
         setMessage('');
     };
 
@@ -20,7 +25,12 @@ export const AddMessageForm: React.FC = () => {
                     onChange={(e) => setMessage(e.currentTarget.value)}
                     value={message}
                 />
-                <button onClick={sendMessage}>SEND</button>
+                <button
+                    onClick={sendMessage}
+                    disabled={!wsChannel || readyStatus === 'pending'}
+                >
+                    SEND
+                </button>
             </div>
         </div>
     );
