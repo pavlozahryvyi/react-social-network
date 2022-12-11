@@ -38,6 +38,8 @@ export const Messages: React.FC<{ wsChannel: WebSocket | null }> = ({
         });
     }, [wsChannel]);
 
+    console.log('---wsChannel', wsChannel);
+
     return (
         <div style={{ height: 400, overflowY: 'auto' }}>
             {messages.map((item, index) => (

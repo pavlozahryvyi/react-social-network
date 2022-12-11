@@ -1,15 +1,13 @@
-type ChatMessageType = {
+export type ChatMessageType = {
     userId: number;
     userName: string;
     message: string;
     photo: string;
 };
 
-//21599
-
 type SubscriberType = (messages: ChatMessageType[]) => void;
 
-const subscribers = [] as SubscriberType[];
+let subscribers = [] as SubscriberType[];
 
 let ws: WebSocket;
 
@@ -35,5 +33,9 @@ const messageHandler = (e: MessageEvent) => {
 export const chatApi = {
     subscribe(cb: SubscriberType) {
         subscribers.push(cb);
+        return () => (subscribers = subscribers.filter((item) => item !== cb));
+    },
+    unSubscribe(cb: SubscriberType) {
+        subscribers = subscribers.filter((item) => item !== cb);
     }
 };
