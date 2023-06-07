@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmy_app=self.webpackChunkmy_app||[]).push([[331],{6331:function(e,n,s){s.r(n),s.d(n,{default:function(){return a}});s(2791);var u="News_newsBlock__3VwmU",c=s(184),a=function(){return(0,c.jsx)("div",{className:u,children:"News"})}}}]);
+//# sourceMappingURL=331.48b5228d.chunk.js.map
