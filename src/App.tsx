@@ -1,5 +1,5 @@
 import React, { Component, ComponentType } from 'react';
-import { Switch, BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import UsersContainer from './components/Users/UsersContainer';
@@ -10,9 +10,11 @@ import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { initializeApp } from './redux/appReducer';
 import Preloader from './components/common/Preloader/Preloader';
-import WithSuspense from './hoc/WithSuspense';
-import store, { AppStateType } from './redux/redux-store';
+// import WithSuspense from './hoc/WithSuspense';
+import store, { RootState } from './redux/redux-store';
 import { Chat } from './components/Chat/Chat';
+import { withRouter } from './utils/withRouter';
+import { pages } from './components/utils/pages';
 
 //lazy loading
 const Dialogs = React.lazy(
@@ -58,43 +60,15 @@ class App extends Component<PropsType> {
                 <Navbar />
                 <div className="app-wrapper-block">
                     <div className="app-wrapper-content">
-                        <Switch>
-                            <Route
-                                path={['/profile/:userId?', '/']}
-                                render={() => <ProfilePage />}
-                                exact
-                            />
-                            <Route
-                                path="/dialogs"
-                                render={() => WithSuspense(Dialogs)}
-                            />
-                            <Route path="/chat" render={() => <Chat />} />
-                            <Route
-                                path="/users"
-                                render={() => (
-                                    <UsersContainer pageTitle={'Users page'} />
-                                )}
-                            />
-                            <Route path="/login" render={() => <Login />} />
-                            <Route
-                                path="/news"
-                                render={() => WithSuspense(News)}
-                            />
-                            <Route
-                                path="/music"
-                                render={() => WithSuspense(Music)}
-                            />
-                            <Route
-                                path="/settings"
-                                render={() => WithSuspense(Settings)}
-                            />
-                            <Route
-                                path={`*`}
-                                render={() => (
-                                    <div>ERROR, PAGE NOT FOUND, 404</div>
-                                )}
-                            />
-                        </Switch>
+                        <Routes>
+                            {pages.map(({ link, component }) => (
+                                <Route
+                                    key={link}
+                                    path={link}
+                                    element={component}
+                                />
+                            ))}
+                        </Routes>
                     </div>
                 </div>
             </div>
@@ -104,7 +78,7 @@ class App extends Component<PropsType> {
     }
 }
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: RootState) => {
     return {
         initialized: state.app.initialized
     };

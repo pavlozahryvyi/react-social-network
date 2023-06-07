@@ -9,7 +9,7 @@ const DialogItem: React.FC<DialogType> = ({id, name}) => {
 
     return (
         <div className={styles.dialog}>
-            <NavLink activeClassName={styles.active} to={path}>{name}</NavLink>
+            <NavLink to={path}>{name}</NavLink>
         </div>
     )
 };

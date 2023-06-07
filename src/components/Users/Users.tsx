@@ -20,10 +20,12 @@ import {
 } from '../../redux/usersReducer';
 import Preloader from '../common/Preloader/Preloader';
 import { UsersSearchForm } from './UsersSearchForm';
+import { AppDispatch } from '../../redux/redux-store';
+import { useAppDispatch } from '../../hooks';
 
 type PropsTypes = {};
 
-export const Users: React.FC<PropsTypes> = (props) => {
+export const Users: React.FC<PropsTypes> = () => {
     console.log('----render');
 
     const users = useSelector(getUsers);
@@ -34,7 +36,8 @@ export const Users: React.FC<PropsTypes> = (props) => {
     const followingInProgress = useSelector(getFollowingInProgress);
     const isFetching = useSelector(getIsFetching);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(getUsersThunk(currentPage, pageSize, filter));

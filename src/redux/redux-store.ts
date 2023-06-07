@@ -9,7 +9,7 @@ import thunkMiddleware, { ThunkAction } from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 import chatReducer from './chatReducer';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
@@ -34,16 +34,18 @@ export type InferActionsTypes<T> = T extends {
 
 export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<
     R,
-    AppStateType,
+    RootState,
     unknown,
     A
 >;
 
 type RootReducerType = typeof rootReducer;
 //Define type from RootReducerType type
-export type AppStateType = ReturnType<RootReducerType>;
+export type RootState = ReturnType<RootReducerType>;
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
+export type AppDispatch = typeof store.dispatch
 
 // @ts-ignore
 window.store = store;

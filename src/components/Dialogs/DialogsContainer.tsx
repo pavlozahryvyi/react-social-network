@@ -4,10 +4,10 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import WithAuthRedirect from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
-import {AppStateType} from "../../redux/redux-store";
+import {RootState} from "../../redux/redux-store";
 
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: RootState) => {
     return {
         dialogsPage: state.dialogsPage,
         isAuth: state.auth.isAuth

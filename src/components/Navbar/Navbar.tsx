@@ -1,45 +1,20 @@
 import React from 'react';
 import style from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
+import { pages } from '../utils/pages';
 
 const Navbar: React.FC = () => {
     return (
         <nav className={style.nav}>
-            <div className={style.item}>
-                <NavLink to="/" activeClassName={style.active} exact>
-                    Profile
-                </NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to="/dialogs" activeClassName={style.active}>
-                    Messages
-                </NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to="/chat" activeClassName={style.active}>
-                    Chat
-                </NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to="/users" activeClassName={style.active}>
-                    Users
-                </NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to="/news" activeClassName={style.active}>
-                    News
-                </NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to="/music" activeClassName={style.active}>
-                    Music
-                </NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to="/settings" activeClassName={style.active}>
-                    Settings
-                </NavLink>
-            </div>
+            {pages.map(({ name, link, notDisplay }) => {
+                if (notDisplay) return null;
+
+                return (
+                    <div key={link} className={style.item}>
+                        <NavLink to={link}>{name}</NavLink>
+                    </div>
+                );
+            })}
         </nav>
     );
 };

@@ -1,9 +1,10 @@
-import { Dispatch } from 'redux';
-import { ActionTypes } from 'redux-form';
+import { AnyAction, Dispatch } from 'redux';
+import { ActionTypes, FormAction } from 'redux-form';
 
 import { usersAPI } from '../api/users-api';
 import { UserType } from '../types/types';
-import { BaseThunkType, InferActionsTypes } from './redux-store';
+import { BaseThunkType, InferActionsTypes, RootState } from './redux-store';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
 const FOLLOW = 'userReducer/FOLLOW';
 const UNFOLLOW = 'userReducer/UNFOLLOW';
@@ -30,7 +31,7 @@ const initialState = {
 type InitialStateType = typeof initialState;
 export type FilterType = typeof initialState.filter;
 type UsersActionsTypes = InferActionsTypes<typeof usersActions>;
-type ThunkType = BaseThunkType<UsersActionsTypes>;
+type ThunkType = BaseThunkType<UsersActionsTypes | FormAction>;
 
 const usersReducer = (
     state = initialState,
@@ -123,6 +124,18 @@ export const getUsersThunk =
         dispatch(usersActions.setTotalUsersCount(data.totalCount));
     };
 
+    // export const getUsersThunk =
+    // (currentPage: number, pageSize: number, filter: FilterType): ThunkAction<void, InitialStateType, null, AnyAction> =>
+    // async (dispatch) => {
+    //     dispatch(usersActions.toggleIsFetching(true));
+    //     dispatch(usersActions.setFilter(filter));
+
+    //     const data = await usersAPI.getUsers(currentPage, pageSize, filter);
+    //     dispatch(usersActions.toggleIsFetching(false));
+    //     dispatch(usersActions.setUsers(data.items));
+    //     dispatch(usersActions.setTotalUsersCount(data.totalCount));
+    // };
+
 const followUnfollowFlow = async (
     dispatch: Dispatch<UsersActionsTypes>,
     userId: number,
@@ -160,5 +173,16 @@ export const unFollowThunk =
             usersActions.unFollowSuccess
         );
     };
+
+    // export const unFollowThunk2 =
+    // (userId: number): ThunkAction<void, RootState, unknown, unknown> =>
+    // async (dispatch: any) => {
+    //     await followUnfollowFlow(
+    //         dispatch,
+    //         userId,
+    //         usersAPI.unFollow.bind(usersAPI),
+    //         usersActions.unFollowSuccess
+    //     );
+    // };
 
 export default usersReducer;

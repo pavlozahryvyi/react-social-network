@@ -1,7 +1,11 @@
-import React, {Suspense} from 'react';
+import React, {ReactNode, Suspense} from 'react';
 import Preloader from "../components/common/Preloader/Preloader";
 
-const SuspenseComponent: React.FC = (props) => (
+type SuspenseComponentPropsTypes = {
+    children: ReactNode
+}
+
+const SuspenseComponent: React.FC<SuspenseComponentPropsTypes> = (props) => (
     <Suspense fallback={<Preloader />}>
         {props.children}
     </Suspense>

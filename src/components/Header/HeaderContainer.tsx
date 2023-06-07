@@ -2,9 +2,9 @@ import React, {Component} from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import {logoutThunk} from "../../redux/authReducer";
-import {AppStateType} from "../../redux/redux-store";
+import {RootState} from "../../redux/redux-store";
 
-const mapStateToProps = (state: AppStateType) => (
+const mapStateToProps = (state: RootState) => (
     {
         isAuth: state.auth.isAuth,
         login: state.auth.login
