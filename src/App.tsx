@@ -2,19 +2,16 @@ import React, { Component, ComponentType } from 'react';
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import UsersContainer from './components/Users/UsersContainer';
-import { ProfilePage } from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Login from './components/Login/Login';
 import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { initializeApp } from './redux/appReducer';
 import Preloader from './components/common/Preloader/Preloader';
 // import WithSuspense from './hoc/WithSuspense';
 import store, { RootState } from './redux/redux-store';
-import { Chat } from './components/Chat/Chat';
 import { withRouter } from './utils/withRouter';
 import { pages } from './components/utils/pages';
+import { mapPages } from './utils';
 
 //lazy loading
 const Dialogs = React.lazy(
@@ -54,6 +51,9 @@ class App extends Component<PropsType> {
 
     render() {
         const { initialized } = this.props;
+
+        const routePages = mapPages(pages);
+
         return initialized ? (
             <div className="app-wrapper">
                 <HeaderContainer />
@@ -61,13 +61,15 @@ class App extends Component<PropsType> {
                 <div className="app-wrapper-block">
                     <div className="app-wrapper-content">
                         <Routes>
-                            {pages.map(({ link, component }) => (
-                                <Route
-                                    key={link}
-                                    path={link}
-                                    element={component}
-                                />
-                            ))}
+                            {routePages.map(
+                                ({ component, path }: any, idx: any) => (
+                                    <Route
+                                        key={idx}
+                                        path={path}
+                                        element={component}
+                                    />
+                                )
+                            )}
                         </Routes>
                     </div>
                 </div>

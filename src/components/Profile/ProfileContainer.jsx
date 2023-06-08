@@ -77,8 +77,6 @@ class ProfileContainer extends Component {
                 saveProfileData={this.props.saveProfileData}
             />
         );
-
-        return 123;
     }
 }
 

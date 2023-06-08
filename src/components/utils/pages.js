@@ -1,16 +1,19 @@
 import { Chat } from '../Chat/Chat';
+import Login from '../Login/Login';
 import { ProfilePage } from '../Profile/ProfileContainer';
 import UsersContainer from '../Users/UsersContainer';
 
 export const pages = [
     {
         name: 'Profile',
-        link: '/profile/:userId?',
+        link: '/',
+        path: ['/', '/profile/:userId?'],
         component: <ProfilePage />
     },
     {
         name: 'Chat',
         link: '/chat',
+        path: '/chat',
         component: <Chat />
     },
     // {
@@ -21,6 +24,7 @@ export const pages = [
     {
         name: 'Users',
         link: '/users',
+        path: '/users',
         component: <UsersContainer />
     },
     // {
@@ -34,8 +38,16 @@ export const pages = [
     //     component:
     // },
     {
+        name: 'Login',
+        link: '/login',
+        path: '/login',
+        notDisplay: true,
+        component: <Login />
+    },
+    {
         name: 'NOT FOUND',
         link: '*',
+        path: '*',
         notDisplay: true,
         component: <div>ERROR, PAGE NOT FOUND, 404</div>
     }
