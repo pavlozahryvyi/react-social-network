@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmy_app=self.webpackChunkmy_app||[]).push([[953],{8953:function(u,c,s){s.r(c),s.d(c,{default:function(){return i}});s(2791);var n="Music_musicBlock__zSisX",e=s(184),i=function(){return(0,e.jsx)("div",{className:n,children:"Music"})}}}]);
-//# sourceMappingURL=953.8b6fe22a.chunk.js.map
