@@ -1,4 +1,4 @@
-import React, { Component, ComponentType } from 'react';
+import React, { Component, ComponentType, FC, useEffect } from 'react';
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -12,6 +12,9 @@ import store, { RootState } from './redux/redux-store';
 import { withRouter } from './utils/withRouter';
 import { pages } from './components/utils/pages';
 import { mapPages } from './utils';
+import { useSelector } from 'react-redux';
+import { getInitialized } from './redux/selectors/appSelectors';
+import { useAppDispatch } from './hooks';
 
 //lazy loading
 const Dialogs = React.lazy(
@@ -24,81 +27,38 @@ const Settings = React.lazy(() => import('./components/Settings/Settings'));
 /*returning type*/
 //type MapPropsType = ReturnType<typeof mapStateToProps>
 
-type PropsType = {
-    initializeApp: () => void;
-    initialized: boolean;
-};
+export const App: FC = () => {
+    const dispatch = useAppDispatch();
 
-class App extends Component<PropsType> {
-    catchAllUnhandledErrors = (error: PromiseRejectionEvent): void => {
-        alert(`---some error, ${error}`);
-    };
+    useEffect(() => {
+        dispatch(initializeApp());
+    }, []);
 
-    componentDidMount() {
-        this.props.initializeApp();
-        window.addEventListener(
-            'unhandledrejection',
-            this.catchAllUnhandledErrors
-        );
-    }
+    const isInitialized = useSelector(getInitialized);
 
-    componentWillUnmount() {
-        window.removeEventListener(
-            'unhandledrejection',
-            this.catchAllUnhandledErrors
-        );
-    }
+    const routePages = mapPages(pages);
 
-    render() {
-        const { initialized } = this.props;
+    if (!isInitialized) return null;
 
-        const routePages = mapPages(pages);
-
-        return initialized ? (
-            <div className="app-wrapper">
-                <HeaderContainer />
-                <Navbar />
-                <div className="app-wrapper-block">
-                    <div className="app-wrapper-content">
-                        <Routes>
-                            {routePages.map(
-                                ({ component, path }: any, idx: any) => (
-                                    <Route
-                                        key={idx}
-                                        path={path}
-                                        element={component}
-                                    />
-                                )
-                            )}
-                        </Routes>
-                    </div>
+    return (
+        <div className="app-wrapper">
+            <HeaderContainer />
+            <Navbar />
+            <div className="app-wrapper-block">
+                <div className="app-wrapper-content">
+                    <Routes>
+                        {routePages.map(
+                            ({ component, path }: any, idx: any) => (
+                                <Route
+                                    key={idx}
+                                    path={path}
+                                    element={component}
+                                />
+                            )
+                        )}
+                    </Routes>
                 </div>
             </div>
-        ) : (
-            <Preloader />
-        );
-    }
-}
-
-const mapStateToProps = (state: RootState) => {
-    return {
-        initialized: state.app.initialized
-    };
-};
-
-const AppContainer = compose<ComponentType>(
-    withRouter,
-    connect(mapStateToProps, { initializeApp })
-)(App);
-
-const SamuraiNetwork: React.FC = () => {
-    return (
-        <BrowserRouter>
-            <Provider store={store}>
-                <AppContainer />
-            </Provider>
-        </BrowserRouter>
+        </div>
     );
 };
-
-export default SamuraiNetwork;
