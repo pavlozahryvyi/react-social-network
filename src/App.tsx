@@ -36,7 +36,7 @@ export const App: FC = () => {
 
     const isInitialized = useSelector(getInitialized);
 
-    if (!isInitialized) return <>123</>;
+    // if (!isInitialized) return <>123</>;
 
     const routePages = mapPages(pages);
 
