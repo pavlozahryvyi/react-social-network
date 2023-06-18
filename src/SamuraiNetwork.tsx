@@ -1,15 +1,15 @@
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { App } from './App';
 import store from './redux/redux-store';
 
 const SamuraiNetwork: React.FC = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <App />
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     );
 };
 
