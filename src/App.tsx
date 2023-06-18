@@ -31,14 +31,14 @@ export const App: FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(initializeApp());
+        // dispatch(initializeApp());
     }, []);
 
     const isInitialized = useSelector(getInitialized);
 
-    const routePages = mapPages(pages);
+    if (!isInitialized) return <>123</>;
 
-    if (!isInitialized) return null;
+    const routePages = mapPages(pages);
 
     return (
         <div className="app-wrapper">
