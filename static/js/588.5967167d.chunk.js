@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmy_app=self.webpackChunkmy_app||[]).push([[588],{1588:function(n,t,e){e.r(t),e.d(t,{default:function(){return c}});e(2791);var s="Settings_settingsBlock__kd-2O",u=e(184),c=function(){return(0,u.jsx)("div",{className:s,children:"Settings"})}}}]);
+//# sourceMappingURL=588.5967167d.chunk.js.map
