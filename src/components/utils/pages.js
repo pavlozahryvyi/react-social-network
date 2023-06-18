@@ -7,7 +7,7 @@ export const pages = [
     {
         name: 'Profile',
         link: '/',
-        path: ['/', '/profile/:userId?'],
+        path: ['/', '/profile/:userId?', 'react-social-network'],
         component: <ProfilePage />
     },
     {

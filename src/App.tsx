@@ -48,7 +48,7 @@ export const App: FC = () => {
                 <div className="app-wrapper-content">
                     <Routes>
                         {routePages.map(
-                            ({ component, path }: any, idx: any) => (
+                            ({ component, path }: any, idx: number) => (
                                 <Route
                                     key={idx}
                                     path={path}

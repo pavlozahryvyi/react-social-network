@@ -1,5 +1,5 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import type { RootState, AppDispatch, rootReducer } from '../redux/redux-store'
+import { useDispatch } from 'react-redux';
+import type { rootReducer } from '../redux/redux-store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
