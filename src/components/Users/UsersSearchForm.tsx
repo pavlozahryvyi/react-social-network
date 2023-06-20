@@ -1,6 +1,6 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
-import { FilterType } from "../../redux/usersReducer";
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
+import { FilterType } from '../../redux/usersReducer';
 
 const formValidate = (values: FormValues) => {
   const errors = {};
@@ -15,15 +15,15 @@ type PropsTypes = {
   onSubmitFilter: (filter: FilterType) => void;
 };
 
-type FriendType = "true" | "false" | "null";
+type FriendType = 'true' | 'false' | 'null';
 
 type FormType = {
-  term: "" | string;
+  term: '' | string;
   friend: any;
 };
 
 const convertFriendsValuesToBool = (value: FriendType) =>
-  value === "true" ? true : value === "false" ? false : null;
+  value === 'true' ? true : value === 'false' ? false : null;
 
 type FormikSubmitHandlerType<V> = (value: V, actions: FormikHelpers<V>) => void;
 
@@ -42,7 +42,7 @@ export const UsersSearchForm: React.FC<PropsTypes> = ({ onSubmitFilter }) => {
   return (
     <div>
       <Formik
-        initialValues={{ term: "", friend: "null" }}
+        initialValues={{ term: '', friend: 'null' }}
         validate={formValidate}
         onSubmit={handleSubmit}
       >

@@ -8,47 +8,43 @@ import { UserType } from '../../types/types';
 
 //types from state
 type MapStateToPropsTypes = {
-    currentPage: number;
-    pageSize: number;
-    totalUsersCount: number;
-    isFetching: boolean;
-    followingInProgress: Array<number>;
-    users: Array<UserType>;
+  currentPage: number;
+  pageSize: number;
+  totalUsersCount: number;
+  isFetching: boolean;
+  followingInProgress: Array<number>;
+  users: Array<UserType>;
 };
 
 //types from reducers
 type MapDispatchToPropsTypes = {
-    setCurrentPage: (currentPage: number) => void;
-    getUsersThunk: (
-        currentPage: number,
-        pageSize: number,
-        term: string
-    ) => void;
-    followThunk: (userId: number) => void;
-    unFollowThunk: (userId: number) => void;
+  setCurrentPage: (currentPage: number) => void;
+  getUsersThunk: (currentPage: number, pageSize: number, term: string) => void;
+  followThunk: (userId: number) => void;
+  unFollowThunk: (userId: number) => void;
 };
 
 //passed to the component type
 type OwnTypes = {
-    pageTitle: string;
+  pageTitle: string;
 };
 
 //all common types
 type PropsTypes = MapStateToPropsTypes & MapDispatchToPropsTypes & OwnTypes;
 
 type PropsPageTypes = {
-    pageTitle: string;
+  pageTitle: string;
 };
 
 const UsersPage: React.FC<PropsPageTypes> = (props) => {
-    // const isFetching = useSelector(getIsFetching);
+  // const isFetching = useSelector(getIsFetching);
 
-    return (
-        <div className={styles.usersBlock}>
-            <h2>{props.pageTitle}</h2>
-            <Users />
-        </div>
-    );
+  return (
+    <div className={styles.usersBlock}>
+      <h2>{props.pageTitle}</h2>
+      <Users />
+    </div>
+  );
 };
 
 export default UsersPage;

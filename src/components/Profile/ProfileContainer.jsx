@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Profile } from './Profile';
 import { connect } from 'react-redux';
 import {
-    getProfileThunk,
-    getUserStatus,
-    updateStatus,
-    savePhoto,
-    saveProfileData
+  getProfileThunk,
+  getUserStatus,
+  updateStatus,
+  savePhoto,
+  saveProfileData
 } from '../../redux/profileReducer';
 // import { RouteComponentProps } from "react-router-dom";
 import { compose } from 'redux';
@@ -39,61 +39,59 @@ import { withRouter } from '../../utils/withRouter';
 //   MapStateType;
 
 class ProfileContainer extends Component {
-    refreshProfile = () => {
-        console.log(this.props);
-        let userId = this.props.router.params?.userId;
-        if (!userId) {
-            userId = this.props.myId;
-            if (!userId) {
-                this.props.history.push('/login');
-            }
-        }
-        this.props.getProfileThunk(userId);
-        this.props.getUserStatus(userId);
-    };
-
-    componentDidMount() {
-        this.refreshProfile();
+  refreshProfile = () => {
+    console.log(this.props);
+    let userId = this.props.router.params?.userId;
+    if (!userId) {
+      userId = this.props.myId;
+      if (!userId) {
+        this.props.history.push('/login');
+      }
     }
+    this.props.getProfileThunk(userId);
+    this.props.getUserStatus(userId);
+  };
 
-    componentDidUpdate(prevProps) {
-        if (
-            prevProps.router.params.userId !== this.props.router.params.userId
-        ) {
-            this.refreshProfile();
-        }
-    }
+  componentDidMount() {
+    this.refreshProfile();
+  }
 
-    render() {
-        console.log('---profile contaainer');
-        console.log(this.props);
-        return (
-            <Profile
-                isOwner={!this.props.router.params.userId}
-                status={this.props.status}
-                updateStatus={this.props.updateStatus}
-                savePhoto={this.props.savePhoto}
-                profile={this.props.profile}
-                saveProfileData={this.props.saveProfileData}
-            />
-        );
+  componentDidUpdate(prevProps) {
+    if (prevProps.router.params.userId !== this.props.router.params.userId) {
+      this.refreshProfile();
     }
+  }
+
+  render() {
+    console.log('---profile contaainer');
+    console.log(this.props);
+    return (
+      <Profile
+        isOwner={!this.props.router.params.userId}
+        status={this.props.status}
+        updateStatus={this.props.updateStatus}
+        savePhoto={this.props.savePhoto}
+        profile={this.props.profile}
+        saveProfileData={this.props.saveProfileData}
+      />
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
-    myId: state.auth.id,
-    profile: state.profilePage.profile,
-    status: state.profilePage.status
+  myId: state.auth.id,
+  profile: state.profilePage.profile,
+  status: state.profilePage.status
 });
 
 export const ProfilePage = compose(
-    withRouter,
-    WithAuthRedirect,
-    connect(mapStateToProps, {
-        getProfileThunk,
-        getUserStatus,
-        updateStatus,
-        savePhoto,
-        saveProfileData
-    })
+  withRouter,
+  WithAuthRedirect,
+  connect(mapStateToProps, {
+    getProfileThunk,
+    getUserStatus,
+    updateStatus,
+    savePhoto,
+    saveProfileData
+  })
 )(ProfileContainer);

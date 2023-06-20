@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import style from "./ProfileInfo.module.css";
-import Preloader from "../../common/Preloader/Preloader";
-import userPhoto from "../../../assets/img/usr.png";
-import ProfileStatusHooks from "./ProfileStatus/ProfileStatusHooks";
-import { ProfileDataForm } from "./ProfileDataForm";
-import { ProfileType } from "../../../types/types";
+import React, { useState } from 'react';
+import style from './ProfileInfo.module.css';
+import Preloader from '../../common/Preloader/Preloader';
+import userPhoto from '../../../assets/img/usr.png';
+import ProfileStatusHooks from './ProfileStatus/ProfileStatusHooks';
+import { ProfileDataForm } from './ProfileDataForm';
+import { ProfileType } from '../../../types/types';
 import {
   FormSubmitHandler,
   InjectedFormProps,
-  SubmitHandler,
-} from "redux-form";
+  SubmitHandler
+} from 'redux-form';
 
 type PropTypes = {
   savePhoto: (photo: File) => void;
@@ -21,14 +21,8 @@ type PropTypes = {
 };
 
 const ProfileInfo: React.FC<PropTypes> = (props) => {
-  const {
-    savePhoto,
-    saveProfileData,
-    profile,
-    isOwner,
-    status,
-    updateStatus,
-  } = props;
+  const { savePhoto, saveProfileData, profile, isOwner, status, updateStatus } =
+    props;
   const [editMode, setEditMode] = useState(false);
 
   function onMainPhotoSelected(event: React.ChangeEvent<HTMLInputElement>) {
@@ -80,16 +74,16 @@ const ProfileInfo: React.FC<PropTypes> = (props) => {
 
               <div>
                 <h3>Contacts:</h3>
-                <Contact title={"Facebook"} data={profile.contacts.facebook} />
-                <Contact title={"GitHub"} data={profile.contacts.github} />
+                <Contact title={'Facebook'} data={profile.contacts.facebook} />
+                <Contact title={'GitHub'} data={profile.contacts.github} />
                 <Contact
-                  title={"Instagram"}
+                  title={'Instagram'}
                   data={profile.contacts.instagram}
                 />
-                <Contact title={"Website"} data={profile.contacts.website} />
-                <Contact title={"Main link"} data={profile.contacts.mainLink} />
-                <Contact title={"YouTube"} data={profile.contacts.youtube} />
-                <Contact title={"VK"} data={profile.contacts.vk} />
+                <Contact title={'Website'} data={profile.contacts.website} />
+                <Contact title={'Main link'} data={profile.contacts.mainLink} />
+                <Contact title={'YouTube'} data={profile.contacts.youtube} />
+                <Contact title={'VK'} data={profile.contacts.vk} />
               </div>
             </>
           )}
@@ -116,14 +110,14 @@ const ProfileData: React.FC<ProfileDataType> = ({
   profile,
   status,
   isOwner,
-  enableEditMode,
+  enableEditMode
 }) => {
   return (
     <div>
       {isOwner && <button onClick={enableEditMode}>EDIT</button>}
       <p>Name: {profile.fullName}</p>
       <p>Status: {status}</p>
-      <p>Looking for a job: {profile.lookingForAJob ? "yes" : "no"}</p>
+      <p>Looking for a job: {profile.lookingForAJob ? 'yes' : 'no'}</p>
       {profile.lookingForAJob && profile.lookingForAJobDescription ? (
         <p>Job description: {profile.lookingForAJobDescription}</p>
       ) : null}

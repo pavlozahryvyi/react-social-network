@@ -18,7 +18,7 @@ import { useAppDispatch } from './hooks';
 
 //lazy loading
 const Dialogs = React.lazy(
-    () => import('./components/Dialogs/DialogsContainer')
+  () => import('./components/Dialogs/DialogsContainer')
 );
 const News = React.lazy(() => import('./components/News/News'));
 const Music = React.lazy(() => import('./components/Music/Music'));
@@ -28,37 +28,31 @@ const Settings = React.lazy(() => import('./components/Settings/Settings'));
 //type MapPropsType = ReturnType<typeof mapStateToProps>
 
 export const App: FC = () => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(initializeApp());
-    }, []);
+  useEffect(() => {
+    dispatch(initializeApp());
+  }, []);
 
-    const isInitialized = useSelector(getInitialized);
+  const isInitialized = useSelector(getInitialized);
 
-    if (!isInitialized) return null;
+  if (!isInitialized) return null;
 
-    const routePages = mapPages(pages);
+  const routePages = mapPages(pages);
 
-    return (
-        <div className="app-wrapper">
-            <HeaderContainer />
-            <Navbar />
-            <div className="app-wrapper-block">
-                <div className="app-wrapper-content">
-                    <Routes>
-                        {routePages.map(
-                            ({ component, path }: any, idx: number) => (
-                                <Route
-                                    key={idx}
-                                    path={path}
-                                    element={component}
-                                />
-                            )
-                        )}
-                    </Routes>
-                </div>
-            </div>
+  return (
+    <div className="app-wrapper">
+      <HeaderContainer />
+      <Navbar />
+      <div className="app-wrapper-block">
+        <div className="app-wrapper-content">
+          <Routes>
+            {routePages.map(({ component, path }: any, idx: number) => (
+              <Route key={idx} path={path} element={component} />
+            ))}
+          </Routes>
         </div>
-    );
+      </div>
+    </div>
+  );
 };

@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master  # Change this to your desired branch
+      - master # Change this to your desired branch
 
 jobs:
   deploy:
@@ -22,10 +22,12 @@ jobs:
         run: npm i --legacy-peer-deps
 
       - name: Build
-        run: npm run build  # Replace with your build command
+        run: npm run build # Replace with your build command
+        env:
+          NODE_ENV: production
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build  # Replace with your build output directory
+          publish_dir: ./build # Replace with your build output directory

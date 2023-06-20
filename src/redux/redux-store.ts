@@ -10,14 +10,14 @@ import { reducer as formReducer } from 'redux-form';
 import chatReducer from './chatReducer';
 
 export const rootReducer = combineReducers({
-    profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
-    usersPage: usersReducer,
-    sidebar: sidebarReducer,
-    auth: authReducer,
-    app: appReducer,
-    form: formReducer,
-    chat: chatReducer
+  profilePage: profileReducer,
+  dialogsPage: dialogsReducer,
+  usersPage: usersReducer,
+  sidebar: sidebarReducer,
+  auth: authReducer,
+  app: appReducer,
+  form: formReducer,
+  chat: chatReducer
 });
 
 /*define type U and return it or return nothing*/
@@ -27,16 +27,16 @@ export const rootReducer = combineReducers({
 // export type InferActionsTypes<T extends {[key: string]:  (...args: any[])=> any}> = ReturnType<PropertiesType<T>>
 
 export type InferActionsTypes<T> = T extends {
-    [key: string]: (...args: any[]) => infer U;
+  [key: string]: (...args: any[]) => infer U;
 }
-    ? U
-    : never;
+  ? U
+  : never;
 
 export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<
-    R,
-    RootState,
-    unknown,
-    A
+  R,
+  RootState,
+  unknown,
+  A
 >;
 
 type RootReducerType = typeof rootReducer;
@@ -45,7 +45,7 @@ export type RootState = ReturnType<RootReducerType>;
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
 
 // @ts-ignore
 window.store = store;

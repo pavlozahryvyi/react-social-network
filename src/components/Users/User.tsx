@@ -3,59 +3,50 @@ import styles from './Users.module.css';
 import userPhoto from '../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
 import { UserType } from '../../types/types';
+import { useAppDispatch } from '../../hooks';
+import { followThunkHadler } from '../../redux/usersReducer';
 
 type PropsTypes = {
-    user: UserType;
-    followingInProgress: Array<number>; //users id's
-    followThunk: (userId: number) => void;
-    unFollowThunk: (userId: number) => void;
+  user: UserType;
+  followingInProgress: Array<number>;
 };
 
 const Users: FC<PropsTypes> = (props) => {
-    const { user, followingInProgress, followThunk, unFollowThunk } = props;
+  const { user, followingInProgress } = props;
+  const { id, followed, photos, name } = user;
 
-    const followHandler = (userId: number, cb: (userId: number) => void) => {
-        console.log(userId);
-        return cb(userId);
-    };
+  const dispatch = useAppDispatch();
 
-    return (
-        <div key={user.id}>
-            <div>
-                <NavLink to={`/profile/${user.id}`}>
-                    <img
-                        src={
-                            user.photos.small !== null
-                                ? user.photos.small
-                                : userPhoto
-                        }
-                        alt=""
-                        className={styles.userPhoto}
-                    />
-                </NavLink>
-            </div>
-            <div>Name: {user.name}</div>
-            {user.followed ? (
-                <button
-                    disabled={followingInProgress.some(
-                        (id: number) => id === user.id
-                    )}
-                    onClick={() => followHandler(user.id, unFollowThunk)}
-                >
-                    Unfollow
-                </button>
-            ) : (
-                <button
-                    disabled={followingInProgress.some(
-                        (id: number) => id === user.id
-                    )}
-                    onClick={() => followHandler(user.id, followThunk)}
-                >
-                    Follow
-                </button>
-            )}
-        </div>
-    );
+  const handleClick = () => dispatch(followThunkHadler(id, followed));
+
+  console.log('---followingInProgress', followingInProgress);
+
+  const disabled = followingInProgress.some(
+    (followUserId: number) => followUserId === id
+  );
+
+  return (
+    <div>
+      <div>
+        <NavLink to={`/profile/${id}`}>
+          <img
+            src={photos.small || userPhoto}
+            alt=""
+            className={styles.userPhoto}
+          />
+        </NavLink>
+      </div>
+      <div>Name: {name}</div>
+      <button
+        disabled={followingInProgress.some(
+          (followUserId: number) => followUserId === id
+        )}
+        onClick={handleClick}
+      >
+        {followed ? 'Unfollow' : 'Follow'}
+      </button>
+    </div>
+  );
 };
 
 export default Users;
