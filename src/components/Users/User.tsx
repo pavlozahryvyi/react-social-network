@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styles from './Users.module.css';
 import userPhoto from '../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
@@ -18,8 +18,6 @@ const Users: FC<PropsTypes> = (props) => {
   const dispatch = useAppDispatch();
 
   const handleClick = () => dispatch(followThunkHadler(id, followed));
-
-  console.log('---followingInProgress', followingInProgress);
 
   const disabled = followingInProgress.some(
     (followUserId: number) => followUserId === id

@@ -72,6 +72,7 @@ const usersReducer = (
     case SET_FILTER: {
       return { ...state, filter: action.payload };
     }
+
     case TOGGLE_IS_FOLLOWING_PROGRESS: {
       return {
         ...state,
@@ -118,18 +119,6 @@ export const getUsersThunk =
     dispatch(usersActions.setUsers(data.items));
     dispatch(usersActions.setTotalUsersCount(data.totalCount));
   };
-
-// export const getUsersThunk =
-// (currentPage: number, pageSize: number, filter: FilterType): ThunkAction<void, InitialStateType, null, AnyAction> =>
-// async (dispatch) => {
-//     dispatch(usersActions.toggleIsFetching(true));
-//     dispatch(usersActions.setFilter(filter));
-
-//     const data = await usersAPI.getUsers(currentPage, pageSize, filter);
-//     dispatch(usersActions.toggleIsFetching(false));
-//     dispatch(usersActions.setUsers(data.items));
-//     dispatch(usersActions.setTotalUsersCount(data.totalCount));
-// };
 
 const followUnfollowFlow = async (
   dispatch: Dispatch<UsersActionsTypes>,
