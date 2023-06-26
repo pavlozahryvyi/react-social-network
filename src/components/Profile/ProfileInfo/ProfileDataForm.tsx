@@ -66,24 +66,9 @@ const ProfileForm: React.FC<
         name={'contacts.instagram'}
       />
       <ContactForm
-        title={'Website'}
-        data={profile.contacts.website}
-        name={'contacts.website'}
-      />
-      <ContactForm
-        title={'Main link'}
-        data={profile.contacts.mainLink}
-        name={'contacts.mainLink'}
-      />
-      <ContactForm
         title={'YouTube'}
         data={profile.contacts.youtube}
         name={'contacts.youtube'}
-      />
-      <ContactForm
-        title={'VK'}
-        data={profile.contacts.vk}
-        name={'contacts.vk'}
       />
     </form>
   );

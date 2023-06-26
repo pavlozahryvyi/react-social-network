@@ -25,8 +25,6 @@ type FormType = {
 const convertFriendsValuesToBool = (value: FriendType) =>
   value === 'true' ? true : value === 'false' ? false : null;
 
-type FormikSubmitHandlerType<V> = (value: V, actions: FormikHelpers<V>) => void;
-
 export const UsersSearchForm: React.FC<PropsTypes> = ({ onSubmitFilter }) => {
   const handleSubmit = (values: FormType, actions: FormikHelpers<FormType>) => {
     const { setSubmitting } = actions;
@@ -34,7 +32,7 @@ export const UsersSearchForm: React.FC<PropsTypes> = ({ onSubmitFilter }) => {
     setTimeout(() => {
       setSubmitting(false);
     }, 3000);
-    const { term, friend } = values;
+    const { term } = values;
     const nextFriendValue = convertFriendsValuesToBool(values.friend);
     onSubmitFilter({ term, friend: nextFriendValue });
   };
@@ -51,8 +49,8 @@ export const UsersSearchForm: React.FC<PropsTypes> = ({ onSubmitFilter }) => {
             <Field type="text" name="term" />
             <Field as="select" name="friend">
               <option value="null">All</option>
-              <option value="true">Followed</option>
-              <option value="false">Unfolllowed</option>
+              <option value="true">Subscribed</option>
+              <option value="false">Unsubscribed</option>
             </Field>
             <ErrorMessage name="term" component="div" />
             <button type="submit" disabled={isSubmitting}>

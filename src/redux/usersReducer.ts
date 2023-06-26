@@ -1,10 +1,5 @@
-import { AnyAction, Dispatch } from 'redux';
-import { ActionTypes, FormAction } from 'redux-form';
-
-import { usersAPI } from '../api/users-api';
 import { UserType } from '../types/types';
-import { BaseThunkType, InferActionsTypes, RootState } from './redux-store';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { InferActionsTypes } from './redux-store';
 
 const FOLLOW = 'userReducer/FOLLOW';
 const UNFOLLOW = 'userReducer/UNFOLLOW';
@@ -30,8 +25,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState;
 export type FilterType = typeof initialState.filter;
-type UsersActionsTypes = InferActionsTypes<typeof usersActions>;
-type ThunkType = BaseThunkType<UsersActionsTypes | FormAction>;
+export type UsersActionsTypes = InferActionsTypes<typeof usersActions>;
 
 const usersReducer = (
   state = initialState,
@@ -107,49 +101,5 @@ export const usersActions = {
       userId
     } as const)
 };
-
-export const getUsersThunk =
-  (currentPage: number, pageSize: number, filter: FilterType): ThunkType =>
-  async (dispatch) => {
-    dispatch(usersActions.toggleIsFetching(true));
-    dispatch(usersActions.setFilter(filter));
-
-    const data = await usersAPI.getUsers(currentPage, pageSize, filter);
-    dispatch(usersActions.toggleIsFetching(false));
-    dispatch(usersActions.setUsers(data.items));
-    dispatch(usersActions.setTotalUsersCount(data.totalCount));
-  };
-
-const followUnfollowFlow = async (
-  dispatch: Dispatch<UsersActionsTypes>,
-  userId: number,
-  apiMethod: Function,
-  actionCreator: Function
-) => {
-  dispatch(usersActions.toggleFollowingProgress(true, userId));
-  const response = await apiMethod(userId);
-
-  if (response.resultCode === 0) {
-    dispatch(actionCreator(userId));
-  }
-
-  dispatch(usersActions.toggleFollowingProgress(false, userId));
-};
-export const followThunkHadler =
-  (userId: number, isFollowed: boolean): ThunkType =>
-  async (dispatch) => {
-    const { follow, unFollow } = usersAPI;
-    const { followSuccess, unFollowSuccess } = usersActions;
-
-    const followApiHandler = isFollowed ? unFollow : follow;
-    const actionHandler = isFollowed ? unFollowSuccess : followSuccess;
-
-    return followUnfollowFlow(
-      dispatch,
-      userId,
-      followApiHandler,
-      actionHandler
-    );
-  };
 
 export default usersReducer;

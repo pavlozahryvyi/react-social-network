@@ -13,7 +13,7 @@ import { withRouter } from './utils/withRouter';
 import { pages } from './components/utils/pages';
 import { mapPages } from './utils';
 import { useSelector } from 'react-redux';
-import { getInitialized } from './redux/selectors/appSelectors';
+import { getInitialized } from './selectors/appSelectors';
 import { useAppDispatch } from './hooks';
 
 //lazy loading

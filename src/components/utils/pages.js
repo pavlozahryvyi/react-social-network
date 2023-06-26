@@ -1,14 +1,14 @@
 import { Chat } from '../Chat/Chat';
 import Login from '../Login/Login';
-import { ProfilePage } from '../Profile/ProfileContainer';
-import UsersContainer from '../Users/UsersContainer';
+import { Profile } from '../Profile';
+import { Users } from '../Users';
 
 export const pages = [
   {
     name: 'Profile',
     link: '/',
     path: ['/', '/profile/:userId?', 'react-social-network'],
-    component: <ProfilePage />
+    component: <Profile />
   },
   {
     name: 'Chat',
@@ -25,7 +25,7 @@ export const pages = [
     name: 'Users',
     link: '/users',
     path: '/users',
-    component: <UsersContainer />
+    component: <Users />
   },
   // {
   //     name: 'News',

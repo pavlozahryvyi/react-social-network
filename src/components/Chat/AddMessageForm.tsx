@@ -4,12 +4,12 @@ export const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({
   wsChannel
 }) => {
   const [message, setMessage] = useState('');
-  const [readyStatus, setReaadyStatus] = useState<'pending' | 'ready'>(
+  const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>(
     'pending'
   );
 
   useEffect(() => {
-    wsChannel?.addEventListener('open', () => setReaadyStatus('ready'));
+    wsChannel?.addEventListener('open', () => setReadyStatus('ready'));
   }, [wsChannel]);
 
   const sendMessage = () => {
