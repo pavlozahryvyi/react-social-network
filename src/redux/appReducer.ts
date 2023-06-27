@@ -1,4 +1,4 @@
-import { getAuthUserDataThunk } from './authReducer';
+import { getAuthUserDataThunk } from '../thunks/loginThunk';
 import { InferActionsTypes } from './redux-store';
 
 const SET_INITIALIZED = 'sn/appReducer/SET_INITIALIZED';

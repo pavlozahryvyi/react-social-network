@@ -2,7 +2,6 @@ import React, { Component, ComponentType, FC, useEffect } from 'react';
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import HeaderContainer from './components/Header/HeaderContainer';
 import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { initializeApp } from './redux/appReducer';
@@ -15,6 +14,7 @@ import { mapPages } from './utils';
 import { useSelector } from 'react-redux';
 import { getInitialized } from './selectors/appSelectors';
 import { useAppDispatch } from './hooks';
+import { Header } from './components/Header';
 
 //lazy loading
 const Dialogs = React.lazy(
@@ -42,7 +42,7 @@ export const App: FC = () => {
 
   return (
     <div className="app-wrapper">
-      <HeaderContainer />
+      <Header />
       <Navbar />
       <div className="app-wrapper-block">
         <div className="app-wrapper-content">

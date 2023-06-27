@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { AddMessageForm } from './AddMessageForm';
 import styles from './Chat.module.css';
 import { Messages } from './Messages';
 
-export const Chat: React.FC = () => {
+export const Chat: FC = () => {
   const [wsChannel, setWsChannel] = useState<WebSocket | null>(null);
 
   useEffect(() => {
