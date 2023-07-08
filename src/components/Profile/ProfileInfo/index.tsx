@@ -9,7 +9,7 @@ import {
   InjectedFormProps,
   SubmitHandler
 } from 'redux-form';
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { getProfile, getStatus } from '../../../selectors/profileSelector';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';

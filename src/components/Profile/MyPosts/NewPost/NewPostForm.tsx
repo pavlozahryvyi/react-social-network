@@ -7,6 +7,8 @@ import {
   requiredField
 } from '../../../../utils/validators/validators';
 import { Textarea } from '../../../common/FormsControls/FormsControls';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { postAdded } from '../../../../features/profileSlice';
 
 const NEW_POST = 'newPost';
 
@@ -46,9 +48,12 @@ type NewPostType = {
   addPost: (text: string) => void;
 };
 const NewPost: React.FC<NewPostType> = ({ addPost }) => {
+  const dispatch = useAppDispatch();
+
   const onSubmit = (data: FormDataType) => {
     console.log(data);
-    addPost(data[NEW_POST]);
+    // addPost(data[NEW_POST]);
+    dispatch(postAdded(data[NEW_POST]));
   };
 
   return (

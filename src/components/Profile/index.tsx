@@ -1,7 +1,7 @@
 import { useEffect, FC } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUserId } from '../../selectors/profileSelector';
+import { getCurrentUserId as getAuthUserId } from '../../selectors/profileSelector';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import ProfileInfo from './ProfileInfo';
@@ -13,7 +13,7 @@ export const Profile: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const currentUserId = useSelector(getCurrentUserId);
+  const authUserId = useSelector(getAuthUserId);
 
   const { userId } = useParams();
 
@@ -22,7 +22,7 @@ export const Profile: FC = () => {
     dispatch(getUserStatusThunk(userId));
 
   const refreshProfile = () => {
-    const id = userId || currentUserId;
+    const id = userId || authUserId;
     if (!id) {
       navigate('/login');
     } else {

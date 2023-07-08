@@ -1,15 +1,12 @@
 import { Provider } from 'react-redux';
 import { HashRouter, BrowserRouter } from 'react-router-dom';
 import { App } from './App';
-import store from './redux/redux-store';
+// import store from './redux/redux-store';
+import { store } from './redux/redux-store-rtk';
 
-console.log('NODE_ENV', process.env.NODE_ENV);
+const isDevEnv = process.env.NODE_ENV === 'development';
 
-let RouterWrapper = HashRouter;
-
-if (process.env.NODE_ENV === 'development') {
-  RouterWrapper = BrowserRouter;
-}
+const RouterWrapper = isDevEnv ? BrowserRouter : HashRouter;
 
 const SamuraiNetwork: React.FC = () => {
   return (

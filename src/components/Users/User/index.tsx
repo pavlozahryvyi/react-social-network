@@ -3,7 +3,7 @@ import styles from '../styles.module.css';
 import userPhoto from '../../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
 import { UserType } from '../../../types/types';
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { followThunkHandler } from '../../../thunks/usersThunk';
 
 type PropsTypes = {

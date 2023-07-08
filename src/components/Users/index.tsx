@@ -14,7 +14,7 @@ import {
 import { FilterType, usersActions } from '../../redux/usersReducer';
 import { UsersSearchForm } from './UsersSearchForm';
 import { AppDispatch } from '../../redux/redux-store';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getUsersThunk } from '../../thunks/usersThunk';
 import styles from './styles.module.css';
 import Preloader from '../common/Preloader/Preloader';
