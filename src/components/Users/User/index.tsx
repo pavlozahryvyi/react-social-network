@@ -52,6 +52,12 @@ export const User: FC<PropsTypes> = (props) => {
     startChatting(id);
   };
 
+  const upperCaseNameWithPhoto = useMemo(() => {
+    // console.log('useMemo');
+    const nextName = name;
+    return small ? nextName.toUpperCase() : name;
+  }, [small, name]);
+
   return (
     <UserWrapper>
       <NavLink to={`/profile/${id}`}>

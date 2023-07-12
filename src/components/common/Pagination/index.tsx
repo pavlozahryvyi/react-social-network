@@ -37,6 +37,8 @@ export const ArrowIcon = styled(IconButton)`
   cursor: pointer;
 `;
 
+const a = 5;
+
 type PropsType = {
   totalItemsCount: number;
   pageSize: number;

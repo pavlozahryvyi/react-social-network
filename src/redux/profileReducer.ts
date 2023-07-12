@@ -31,8 +31,8 @@ const profileReducer = (
   action: ProfileActionsType
 ): InitialStateType => {
   switch (action.type) {
-    case ADD_POST:
-      let newPost = {
+    case ADD_POST: {
+      const newPost = {
         id: 5,
         message: action.newPostText,
         likesCount: 0
@@ -41,6 +41,7 @@ const profileReducer = (
       return {
         ...state
       };
+    }
     case SET_USER_PROFILE:
       return {
         ...state,
@@ -57,7 +58,6 @@ const profileReducer = (
         postData: state.postData.filter((post) => post.id !== action.id)
       };
     case SAVE_PHOTO_SUCCESS:
-      debugger;
       return {
         ...state,
         profile: {

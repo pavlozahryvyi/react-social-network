@@ -67,7 +67,7 @@ export const saveProfileDataThunk =
     if (response.data.resultCode === 0 && userId !== null) {
       dispatch(getProfileThunk(userId));
     } else {
-      let err = 'Some error';
+      const err = 'Some error';
       let errorsObj: ErrorsObjType = {
         _error: err
       };
