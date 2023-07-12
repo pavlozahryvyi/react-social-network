@@ -1,6 +1,8 @@
 import styles from './styles.module.css';
 import React, { useState } from 'react';
 
+const a = 5;
+
 type PropsType = {
   totalItemsCount: number;
   pageSize: number;

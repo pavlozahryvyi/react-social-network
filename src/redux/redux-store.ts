@@ -47,7 +47,6 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export type AppDispatch = typeof store.dispatch;
 
-// @ts-ignore
-window.store = store;
+// window.store = store;
 
 export default store;

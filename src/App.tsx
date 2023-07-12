@@ -16,6 +16,8 @@ import { getInitialized } from './selectors/appSelectors';
 import { useAppDispatch } from './hooks';
 import { Header } from './components/Header';
 
+const a = 2;
+
 //lazy loading
 const Dialogs = React.lazy(
   () => import('./components/Dialogs/DialogsContainer')

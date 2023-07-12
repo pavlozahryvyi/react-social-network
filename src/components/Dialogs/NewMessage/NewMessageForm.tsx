@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './NewMessage.module.css';
 import sendImg from './../../../img/paper-plane-1.png';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
@@ -7,10 +7,10 @@ import { Textarea } from '../../common/FormsControls/FormsControls';
 
 const NEW_MESSAGE = 'newMessage';
 
-type PropTypes = {};
+//object = some props for the component
 
 const NewMessageForm: React.FC<
-  InjectedFormProps<FormDataType, PropTypes> & PropTypes
+  InjectedFormProps<FormDataType, object> & object
 > = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className={styles.createNewMessageBlock}>

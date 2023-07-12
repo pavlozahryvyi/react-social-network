@@ -33,7 +33,7 @@ const appActions = {
 export const initializeApp =
   (): any =>
   (dispatch: any): void => {
-    let promise = dispatch(getAuthUserDataThunk());
+    const promise = dispatch(getAuthUserDataThunk());
 
     Promise.all([promise]).then(() => {
       dispatch(appActions.initialisedSuccess());

@@ -1,5 +1,5 @@
 import { Chat } from '../Chat/Chat';
-import Login from '../Login/Login';
+import { Login } from '../Login';
 import { Profile } from '../Profile';
 import { Users } from '../Users';
 

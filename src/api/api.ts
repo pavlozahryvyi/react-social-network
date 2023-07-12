@@ -23,8 +23,9 @@ export type GetItemsType = {
   totalCount: number;
   error: string | null;
 };
+
 export type APIResponseType<
-  D = {},
+  D = object,
   RC = ResultCodesEnum | ResultCodeForCaptchaEnum
 > = {
   data: D;

@@ -16,7 +16,7 @@ export const loginThunk =
   (
     email: string,
     password: string,
-    rememberMe: boolean = false,
+    rememberMe = false,
     captcha: string
   ): ThunkType =>
   async (dispatch) => {

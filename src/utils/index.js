@@ -13,3 +13,5 @@ export const mapPages = (pages) => {
 
   return nextPages;
 };
+
+const d = 3;
