@@ -1,4 +1,3 @@
-import { UserType } from '../types/types';
 import { InferActionsTypes } from './redux-store';
 
 const FOLLOW = 'userReducer/FOLLOW';
@@ -32,22 +31,22 @@ const usersReducer = (
   action: UsersActionsTypes
 ): InitialStateType => {
   switch (action.type) {
-    case FOLLOW: {
-      return {
-        ...state,
-        users: state.users.map((user) =>
-          user.id === action.userId ? { ...user, followed: true } : user
-        )
-      };
-    }
-    case UNFOLLOW: {
-      return {
-        ...state,
-        users: state.users.map((user) =>
-          user.id === action.userId ? { ...user, followed: false } : user
-        )
-      };
-    }
+    // case FOLLOW: {
+    //   return {
+    //     ...state,
+    //     users: state.users.map((user) =>
+    //       user.id === action.userId ? { ...user, followed: true } : user
+    //     )
+    //   };
+    // }
+    // case UNFOLLOW: {
+    //   return {
+    //     ...state,
+    //     users: state.users.map((user) =>
+    //       user.id === action.userId ? { ...user, followed: false } : user
+    //     )
+    //   };
+    // }
     case SET_USERS: {
       return {
         ...state,

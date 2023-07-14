@@ -1,10 +1,10 @@
-import { RootState } from '../redux/redux-store';
+import { RootState } from '../types/reduxTypes';
 
 export const getCurrentUserId = (state: RootState) => state.auth.id;
 
-export const getProfile = (state: RootState) => state.profilePage.profile;
+export const selectProfile = (state: RootState) => state.profilePage.profile;
 
 export const getProfileContacts = (state: RootState) =>
   state.profilePage.profile?.contacts;
 
-export const getStatus = (state: RootState) => state.profilePage.status;
+export const selectStatus = (state: RootState) => state.profilePage.status;

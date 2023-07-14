@@ -16,8 +16,6 @@ export const Contacts: FC = () => {
 
   if (!contacts) return null;
 
-  console.log('---contacts', contacts);
-
   const contactsArray = [];
 
   for (const key in socialNetworks) {

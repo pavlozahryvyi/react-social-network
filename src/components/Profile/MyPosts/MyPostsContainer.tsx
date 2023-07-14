@@ -4,7 +4,7 @@ import MyPosts from './MyPosts';
 import { profileActions } from '../../../redux/profileReducer';
 import { RootState } from '../../../redux/redux-store';
 
-let mapStateToProps = (state: RootState) => ({
+let mapStateToProps = (state: any) => ({
   postData: state.profilePage.postData
 });
 

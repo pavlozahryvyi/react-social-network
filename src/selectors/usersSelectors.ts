@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
-import { RootState } from '../redux/redux-store';
+import { RootState } from '../types/reduxTypes';
 
-export const getUsers = (state: RootState) => {
+export const getUsers = (state: any) => {
   return state.usersPage.users;
 };
 
@@ -15,26 +15,26 @@ export const getUserSelector = createSelector(getUsers, (users) => {
   return users;
 });
 
-export const getPageSize = (state: RootState) => {
+export const getPageSize = (state: any) => {
   return state.usersPage.pageSize;
 };
 
-export const getTotalUsersCount = (state: RootState) => {
+export const getTotalUsersCount = (state: any) => {
   return state.usersPage.totalUsersCount;
 };
 
-export const getCurrentPage = (state: RootState) => {
+export const getCurrentPage = (state: any) => {
   return state.usersPage.currentPage;
 };
 
-export const getIsFetching = (state: RootState) => {
+export const getIsFetching = (state: any) => {
   return state.usersPage.isFetching;
 };
 
-export const getFollowingInProgress = (state: RootState) => {
+export const getFollowingInProgress = (state: any) => {
   return state.usersPage.followingInProgress;
 };
 
-export const getFilter = (state: RootState) => {
+export const getFilter = (state: any) => {
   return state.usersPage.filter;
 };

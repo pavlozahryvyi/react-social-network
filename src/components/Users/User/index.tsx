@@ -2,26 +2,26 @@ import { FC } from 'react';
 import styles from '../styles.module.css';
 import userPhoto from '../../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
-import { UserType } from '../../../types/types';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { followThunkHandler } from '../../../thunks/usersThunk';
+// import { useAppDispatch } from '../../../hooks/useAppDispatch';
+// import { followThunkHandler } from '../../../thunks/usersThunk';
+import { useDispatch } from 'react-redux';
+import { TypeUser } from '../../../types/usersTypes';
 
 type PropsTypes = {
-  user: UserType;
-  followingInProgress: Array<number>;
+  user: TypeUser;
 };
 
 const Users: FC<PropsTypes> = (props) => {
-  const { user, followingInProgress } = props;
+  const { user } = props;
   const { id, followed, photos, name } = user;
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
-  const handleClick = () => dispatch(followThunkHandler(id, followed));
+  const handleClick = () => {}; //dispatch(followThunkHandler(id, followed));
 
-  const disabled = followingInProgress.some(
-    (followUserId: number) => followUserId === id
-  );
+  // const disabled = followingInProgress.some(
+  //   (followUserId: number) => followUserId === id
+  // );
 
   return (
     <div>
@@ -35,7 +35,7 @@ const Users: FC<PropsTypes> = (props) => {
         </NavLink>
       </div>
       <div>Name: {name}</div>
-      <button disabled={disabled} onClick={handleClick}>
+      <button disabled={false} onClick={handleClick}>
         {followed ? 'Unsubscribe' : 'Subscribe'}
       </button>
     </div>

@@ -1,8 +1,9 @@
 import { FormAction, stopSubmit } from 'redux-form';
 import { handleError } from '../utils/errorHandlers';
-import { PhotosType, PostElementType, ProfileType } from '../types/types';
+import { PostElementType, TypeProfile } from '../types/profileTypes';
 import { profileAPI } from '../api/profile-api';
 import { BaseThunkType, InferActionsTypes } from './redux-store';
+import { TypePhotos } from '../types/profileTypes';
 
 const ADD_POST = 'profileReducer/ADD_POST';
 const DELETE_POST = 'profileReducer/DELETE_POST';
@@ -13,12 +14,12 @@ const UPDATE_DATA_SUCCESS = 'profileReducer/UPDATE_DATA_SUCCESS';
 
 const initialState = {
   postData: [
-    { id: 1, message: 'My first react app!', likesCount: 32 },
-    { id: 2, message: 'I need more CSS', likesCount: 15 },
-    { id: 3, message: 'COOOOOOOOOOOOOOL!!!', likesCount: 15 },
-    { id: 4, message: 'React is cool!', likesCount: 45 }
+    { id: 1, text: 'My first react app!', likesCount: 32 },
+    { id: 2, text: 'I need more CSS', likesCount: 15 },
+    { id: 3, text: 'COOOOOOOOOOOOOOL!!!', likesCount: 15 },
+    { id: 4, text: 'React is cool!', likesCount: 45 }
   ] as Array<PostElementType>,
-  profile: null as ProfileType | null,
+  profile: null as TypeProfile | null,
   status: ''
 };
 type InitialStateType = typeof initialState;
@@ -38,8 +39,7 @@ const profileReducer = (
       };
 
       return {
-        ...state,
-        postData: [...state.postData, newPost]
+        ...state
       };
     case SET_USER_PROFILE:
       return {
@@ -63,7 +63,7 @@ const profileReducer = (
         profile: {
           ...state.profile,
           photos: { ...action.photos }
-        } as ProfileType
+        } as TypeProfile
       };
 
     default:
@@ -72,13 +72,13 @@ const profileReducer = (
 };
 
 export const profileActions = {
-  setUserProfile: (profile: ProfileType) =>
+  setUserProfile: (profile: TypeProfile) =>
     ({ type: SET_USER_PROFILE, profile } as const),
   setUserStatus: (status: string) =>
     ({ type: SET_USER_STATUS, status } as const),
   addPost: (newPostText: string) => ({ type: ADD_POST, newPostText } as const),
   deletePost: (id: number) => ({ type: DELETE_POST, id } as const),
-  savePhotosSuccess: (photos: PhotosType) =>
+  savePhotosSuccess: (photos: TypePhotos) =>
     ({ type: SAVE_PHOTO_SUCCESS, photos } as const),
   updateProfileDataSuccess: () => ({ type: UPDATE_DATA_SUCCESS } as const)
 };

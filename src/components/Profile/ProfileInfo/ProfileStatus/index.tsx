@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
-type ProfileStatusHooksType = {
+type TypePropsProfileStatus = {
   propStatus: string;
   updateStatus: (status: string) => void;
 };
 
-const ProfileStatusHooks: React.FC<ProfileStatusHooksType> = ({
+const ProfileStatus: React.FC<TypePropsProfileStatus> = ({
   propStatus,
   updateStatus
 }) => {
@@ -50,4 +50,4 @@ const ProfileStatusHooks: React.FC<ProfileStatusHooksType> = ({
   );
 };
 
-export default ProfileStatusHooks;
+export default ProfileStatus;

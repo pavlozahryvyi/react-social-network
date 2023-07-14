@@ -2,7 +2,7 @@ import React from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
 import NewPost from './NewPost/NewPostForm';
-import { PostElementType } from '../../../types/types';
+import { PostElementType } from '../../../types/profileTypes';
 
 type PropsType = {
   postData: Array<PostElementType>;
@@ -13,7 +13,7 @@ const MyPosts: React.FC<PropsType> = ({ postData, addPost }) => {
   const postElements = [...postData]
     .reverse()
     .map((post) => (
-      <Post key={post.id} message={post.message} likes={post.likesCount} />
+      <Post key={post.id} message={post.text} likes={post.likesCount} />
     ));
 
   return (

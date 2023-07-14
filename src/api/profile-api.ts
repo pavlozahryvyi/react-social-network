@@ -1,10 +1,11 @@
-import { PhotosType, ProfileType } from '../types/types';
-import { instance, APIResponseType } from './api';
+import { APIResponseType } from '../types/apiTypes';
+import { TypePhotos, TypeProfile } from '../types/profileTypes';
+import { instance } from './api';
 
 export const profileAPI = {
   getProfile(userId: number) {
     return instance
-      .get<ProfileType>(`profile/${userId}`)
+      .get<TypeProfile>(`profile/${userId}`)
       .then((resp) => resp.data);
   },
 
@@ -22,7 +23,7 @@ export const profileAPI = {
     const formData = new FormData();
     formData.append('image', photo);
     return instance
-      .put<APIResponseType<PhotosType>>(`profile/photo`, formData, {
+      .put<APIResponseType<TypePhotos>>(`profile/photo`, formData, {
         headers: {
           'content-type': 'multipart/form-data'
         }
@@ -30,7 +31,7 @@ export const profileAPI = {
       .then((resp) => resp.data);
   },
 
-  updateProfileData(data: ProfileType) {
+  updateProfileData(data: TypeProfile) {
     return instance.put<APIResponseType>(`profile`, data);
   }
 };

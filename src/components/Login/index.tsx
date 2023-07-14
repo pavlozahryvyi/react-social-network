@@ -1,59 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { loginThunk } from '../../thunks/loginThunk';
+import { FC } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { RootState } from '../../redux/redux-store';
-import { LoginReduxForm } from './LoginForm';
+import { LoginForm } from './LoginForm';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { selectAuthData } from '../../selectors/authSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
-export type FormDataType = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-  captcha: string;
+export const Login: FC = () => {
+  const { isAuth } = useAppSelector(selectAuthData);
+
+  return isAuth ? (
+    <Navigate to={'/'} />
+  ) : (
+    <div>
+      <h1>Login</h1>
+      <LoginForm captchaUrl={null} />
+    </div>
+  );
 };
-
-type MapStatePropsType = {
-  isAuth: boolean;
-  captchaUrl: string | null;
-};
-
-type MapDispatchPropsType = {
-  loginThunk: (
-    email: string,
-    password: string,
-    rememberMe: boolean,
-    captcha: string
-  ) => void;
-};
-
-class Login extends Component<MapStatePropsType & MapDispatchPropsType> {
-  onSubmit = (formData: FormDataType) => {
-    this.props.loginThunk(
-      formData.email,
-      formData.password,
-      formData.rememberMe,
-      formData.captcha
-    );
-  };
-
-  render() {
-    const { isAuth, captchaUrl } = this.props;
-
-    return isAuth ? (
-      <Navigate to={'/'} />
-    ) : (
-      <div>
-        <h1>Login</h1>
-        <LoginReduxForm captchaUrl={captchaUrl} onSubmit={this.onSubmit} />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state: RootState): MapStatePropsType => ({
-  isAuth: state.auth.isAuth,
-  captchaUrl: state.auth.captchaUrl
-});
-
-export default connect(mapStateToProps, { loginThunk })(Login);

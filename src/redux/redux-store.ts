@@ -1,23 +1,23 @@
 import { Action, applyMiddleware, combineReducers, createStore } from 'redux';
-import profileReducer from './profileReducer';
-import dialogsReducer from './dialogsReducer';
-import sidebarReducer from './sidebarReducer';
-import usersReducer from './usersReducer';
-import authReducer from './authReducer';
-import appReducer from './appReducer';
+// import profileReducer from './profileReducer';
+// import dialogsReducer from './dialogsReducer';
+// import sidebarReducer from './sidebarReducer';
+// import usersReducer from './usersReducer';
+// import authReducer from './authReducer';
+// import appReducer from './appReducer';
 import thunkMiddleware, { ThunkAction } from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
-import chatReducer from './chatReducer';
+// import chatReducer from './chatReducer';
 
 export const rootReducer = combineReducers({
-  profilePage: profileReducer,
-  dialogsPage: dialogsReducer,
-  usersPage: usersReducer,
-  sidebar: sidebarReducer,
-  auth: authReducer,
-  app: appReducer,
-  form: formReducer,
-  chat: chatReducer
+  //   profilePage: profileReducer,
+  //   dialogsPage: dialogsReducer,
+  //   usersPage: usersReducer,
+  //   sidebar: sidebarReducer,
+  //   auth: authReducer,
+  //   app: appReducer,
+  //   form: formReducer,
+  //   chat: chatReducer
 });
 
 /*define type U and return it or return nothing*/

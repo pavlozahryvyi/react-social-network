@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import style from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import { pages } from '../utils/pages';
 
-const Navbar: React.FC = () => {
+export const Navbar: FC = () => {
   return (
     <nav className={style.nav}>
       {pages.map(({ name, link, notDisplay }) => {
@@ -18,5 +18,3 @@ const Navbar: React.FC = () => {
     </nav>
   );
 };
-
-export default Navbar;

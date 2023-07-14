@@ -2,7 +2,7 @@ import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../api/profile-api';
 import { ThunkType, profileActions } from '../redux/profileReducer';
 import { handleError } from '../utils/errorHandlers';
-import { ProfileType } from '../types/types';
+import { TypeProfile } from '../types/profileTypes';
 
 export const getProfileThunk = (userId: number) => async (dispatch: any) => {
   const response = await profileAPI.getProfile(userId);
@@ -12,14 +12,14 @@ export const getProfileThunk = (userId: number) => async (dispatch: any) => {
 
 export const getUserStatusThunk =
   (userId: number): ThunkType =>
-  async (dispatch) => {
+  async (dispatch: any) => {
     const response = await profileAPI.getStatus(userId);
     dispatch(profileActions.setUserStatus(response));
   };
 
 export const updateStatusThunk =
   (status: string): ThunkType =>
-  async (dispatch) => {
+  async (dispatch: any) => {
     try {
       const response = await profileAPI.updateStatus(status);
 
@@ -35,7 +35,7 @@ export const updateStatusThunk =
 
 export const savePhotoThunk =
   (photo: File): ThunkType =>
-  async (dispatch) => {
+  async (dispatch: any) => {
     const response = await profileAPI.updatePhoto(photo);
 
     if (response.resultCode === 0) {
@@ -60,8 +60,8 @@ type ErrorsObjType = {
 };
 
 export const saveProfileDataThunk =
-  (data: ProfileType): ThunkType =>
-  async (dispatch, getState) => {
+  (data: TypeProfile): ThunkType =>
+  async (dispatch: any, getState: any) => {
     const userId = getState().auth.id;
     const response = await profileAPI.updateProfileData(data);
     if (response.data.resultCode === 0 && userId !== null) {

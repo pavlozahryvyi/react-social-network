@@ -1,29 +1,25 @@
 import { FilterType } from '../redux/usersReducer';
-import { GetItemsType, instance, APIResponseType } from './api';
+import { APIResponseType } from '../types/apiTypes';
+import { TypeUserItems } from '../types/usersTypes';
+import { instance } from './api';
 
 export const usersAPI = {
-  getUsers(currentPage = 1, pageSize = 10, filter: FilterType) {
+  getUsers: async (currentPage = 1, pageSize = 10, filter: FilterType) => {
     const { term, friend } = filter;
 
-    return instance
-      .get<GetItemsType>(
-        `users?page=${currentPage}&count=${pageSize}&term=${term}&friend=${friend}`,
-        {
-          withCredentials: true
-        }
-      )
-      .then((resp) => resp.data);
+    const resp = await instance.get<TypeUserItems>(
+      `users?page=${currentPage}&count=${pageSize}&term=${term}&friend=${friend}`
+    );
+    return resp.data;
   },
 
-  unFollow: (userId: number) => {
-    return instance
-      .delete<APIResponseType>(`follow/${userId}`)
-      .then((resp) => resp.data);
+  unFollow: async (userId: number) => {
+    const resp = await instance.delete<APIResponseType>(`follow/${userId}`);
+    return resp.data;
   },
 
-  follow: (userId: number) => {
-    return instance
-      .post<APIResponseType>(`follow/${userId}`)
-      .then((resp) => resp.data);
+  follow: async (userId: number) => {
+    const resp = await instance.post<APIResponseType>(`follow/${userId}`);
+    return resp.data;
   }
 };

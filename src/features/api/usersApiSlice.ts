@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const api = createApi({
-  reducerPath: 'appApi',
+export const usersApi = createApi({
+  reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://social-network.samuraijs.com/api/1.0',
     headers: {
@@ -10,13 +10,10 @@ export const api = createApi({
     credentials: 'include'
   }),
   endpoints: (build) => ({
-    getAuthUserData: build.query<any, void>({
-      query: () => {
-        console.log('---query');
-        return '/auth/me';
-      }
+    getUsersData: build.query<any, void>({
+      query: () => '/users'
     })
   })
 });
 
-export const { useGetAuthUserDataQuery } = api;
+export const { useGetUsersDataQuery } = usersApi;

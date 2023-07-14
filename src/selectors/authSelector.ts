@@ -1,3 +1,3 @@
-import { RootState } from '../redux/redux-store';
+import { RootState } from '../types/reduxTypes';
 
-export const getAuthData = (state: RootState) => state.auth;
+export const selectAuthData = (state: RootState) => state.auth;

@@ -1,44 +1,40 @@
 import { useEffect, FC } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUserId as getAuthUserId } from '../../selectors/profileSelector';
 import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
 import ProfileInfo from './ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
-import { getProfileThunk, getUserStatusThunk } from '../../thunks/profileThunk';
+// import { getProfileThunk, getUserStatusThunk } from '../../thunks/profileThunk';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { selectAuthData } from '../../selectors/authSelector';
+import { useCustomDispatch } from '../../hooks/useCustomDispatch';
+import { getProfile as asyncGetProfile } from '../../features/profileSlice';
 
 export const Profile: FC = () => {
   const navigate = useNavigate();
 
-  const dispatch = useAppDispatch();
+  const [getProfile] = useCustomDispatch([asyncGetProfile]);
 
-  const authUserId = useSelector(getAuthUserId);
+  const { id: currentUserId } = useAppSelector(selectAuthData);
 
   const { userId } = useParams();
 
-  const getProfile = (userId: number) => dispatch(getProfileThunk(userId));
-  const getUserStatus = (userId: number) =>
-    dispatch(getUserStatusThunk(userId));
+  // const getUserStatus = (userId: number) =>
+  // dispatch(getUserStatusThunk(userId));
 
-  const refreshProfile = () => {
-    const id = userId || authUserId;
+  useEffect(() => {
+    const id = userId || currentUserId;
     if (!id) {
       navigate('/login');
     } else {
       getProfile(Number(id));
-      getUserStatus(Number(id));
     }
-  };
-
-  useEffect(() => {
-    refreshProfile();
   }, [userId]);
 
   return (
     <>
       <ProfileInfo />
-      <MyPostsContainer />
+      {/* <MyPostsContainer /> */}
     </>
   );
 };

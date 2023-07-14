@@ -1,62 +1,48 @@
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
-import { Input } from '../common/FormsControls/FormsControls';
-import { requiredField } from '../../utils/validators/validators';
-import styles from '../common/FormsControls/FormsControls.module.css';
-import { FormDataType } from '.';
+import { login as asyncLogin } from '../../features/authSlice';
+import { useCustomDispatch } from '../../hooks/useCustomDispatch';
+import { TypeLoginFormData } from '../../types/authTypes';
+import { Formik, Field, Form, FormikHelpers } from 'formik';
 
-type LoginFormOwnProps = {
+type TypePropsLoginForm = {
   captchaUrl: string | null;
 };
 
-const LoginForm: React.FC<
-  InjectedFormProps<FormDataType, LoginFormOwnProps> & LoginFormOwnProps
-> = ({ handleSubmit, captchaUrl, error }) => {
+//initialValues={{email: '', password: '', rememberMe: false, captcha: null}}
+
+export const LoginForm: React.FC<TypePropsLoginForm> = (props) => {
+  const { captchaUrl } = props;
+
+  const [login] = useCustomDispatch([asyncLogin]);
+
+  const handleSubmit = (values: TypeLoginFormData) => login(values);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <Field
-          component={Input}
-          name={'email'}
-          type={'email'}
-          placeholder={'Login'}
-          validate={requiredField}
-        />
-      </div>
-      <div>
-        <Field
-          component={Input}
-          name={'password'}
-          type={'password'}
-          placeholder={'Password'}
-          validate={requiredField}
-        />
-      </div>
-      <div>
-        <Field component={'input'} name={'rememberMe'} type={'checkbox'} />{' '}
-        remember me
-      </div>
-      {captchaUrl && (
-        <>
-          <img src={captchaUrl} alt="captcha" />
-          <div>
-            <Field
-              component={'input'}
-              validate={requiredField}
-              name={'captcha'}
-              type={'text'}
-              placeholder={'Enter symbols from the image'}
-            />
-          </div>
-        </>
-      )}
-      <div>
-        <button>Login</button>
-      </div>
-      {error && <div className={styles.formSummaryError}>{error}</div>}
-    </form>
+    <div>
+      <h1>SignUp</h1>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+          rememberMe: false,
+          captcha: ''
+        }}
+        onSubmit={handleSubmit}
+      >
+        <Form>
+          <label htmlFor="email">Email</label>
+          <Field id="email" name="email" placeholder="Email" />
+
+          <label htmlFor="password">Password</label>
+          <Field
+            id="password"
+            name="password"
+            placeholder="Password"
+            type="password"
+          />
+
+          <button type="submit">Submit</button>
+        </Form>
+      </Formik>
+    </div>
   );
 };
-
-export const LoginReduxForm = reduxForm<FormDataType, LoginFormOwnProps>({
-  form: 'login'
-})(LoginForm);

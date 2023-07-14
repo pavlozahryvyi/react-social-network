@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import styles from './styles.module.css';
 import Preloader from '../../common/Preloader/Preloader';
 import userPhoto from '../../../assets/img/usr.png';
-import ProfileStatusHooks from './ProfileStatus/ProfileStatusHooks';
-import { ProfileDataForm } from './ProfileDataForm';
-import {
-  FormSubmitHandler,
-  InjectedFormProps,
-  SubmitHandler
-} from 'redux-form';
+import ProfileStatus from './ProfileStatus';
+import { ProfileForm } from './ProfileForm';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { getProfile, getStatus } from '../../../selectors/profileSelector';
+import {
+  selectProfile,
+  selectStatus
+} from '../../../selectors/profileSelector';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Contacts } from './Contacts';
-import { ProfileType } from '../../../types/types';
+import { TypeProfile } from '../../../types/profileTypes';
 import {
   savePhotoThunk,
   saveProfileDataThunk,
   updateStatusThunk
 } from '../../../thunks/profileThunk';
+import { Avatar } from '../../common/Avatar';
+import { ProfileData } from './ProfileData';
 
 const ProfileInfo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -29,31 +29,29 @@ const ProfileInfo: React.FC = () => {
   const isOwner = !userId;
 
   const savePhoto = (file: File) => dispatch(savePhotoThunk(file));
-  const saveProfileData = (data: ProfileType) =>
+  const saveProfileData = (data: TypeProfile) =>
     dispatch(saveProfileDataThunk(data));
   const updateStatus = (data: string) => dispatch(updateStatusThunk(data));
 
-  const profile = useSelector(getProfile);
-  const status = useSelector(getStatus);
+  const profile = useSelector(selectProfile);
+  const status = useSelector(selectStatus);
 
   const [editMode, setEditMode] = useState(false);
 
-  function onMainPhotoSelected(event: React.ChangeEvent<HTMLInputElement>) {
+  function onMainPhotoSelected(event: ChangeEvent<HTMLInputElement>) {
     const input = event.target as HTMLInputElement;
     if (input.files?.length) savePhoto(input.files[0]);
   }
 
-  const onSubmit = (formData: ProfileType) => {
+  const onSubmit = (formData: TypeProfile) => {
     saveProfileData(formData);
-    //const promise = saveProfileData(formData);
-    // promise.then(
-    //     () => {
-    //         setEditMode(false);
-    //     }
-    // );
   };
 
   if (!profile) return <Preloader />;
+
+  const handleEditMode = () => setEditMode((prev) => !prev);
+
+  const ProfileDataComponent = editMode ? ProfileForm : ProfileData;
 
   return (
     <div className="profileInfo">
@@ -65,67 +63,29 @@ const ProfileInfo: React.FC = () => {
       </div>
       <div className={styles.descriptionBlock}>
         <div>
-          <img src={profile.photos.large || userPhoto} alt="" />
-          {isOwner ? (
-            <input type="file" onChange={onMainPhotoSelected} />
-          ) : null}
+          <Avatar src={profile.photos.large || userPhoto} alt="" />
+          {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
         </div>
         <div>
-          {editMode ? (
-            <ProfileDataForm
-              profile={profile}
-              initialValues={profile}
-              status={status}
-              onSubmit={onSubmit}
-            />
-          ) : (
-            <>
-              <ProfileData
-                profile={profile}
-                status={status}
-                isOwner={isOwner}
-                enableEditMode={() => setEditMode(true)}
-              />
-
-              <div>
-                <h3>Contacts:</h3>
-                <Contacts />
-              </div>
-            </>
+          {isOwner && (
+            <button onClick={handleEditMode}>
+              {editMode ? 'CLOSE EDITING' : 'EDIT'}
+            </button>
           )}
+        </div>
+        <div>
+          <ProfileDataComponent profile={profile} status={status} />
+        </div>
+        <div>
+          <h3>Contacts:</h3>
+          <Contacts />
         </div>
       </div>
       {isOwner ? (
         <div>
-          <ProfileStatusHooks updateStatus={updateStatus} propStatus={status} />
+          <ProfileStatus updateStatus={updateStatus} propStatus={status} />
         </div>
       ) : null}
-    </div>
-  );
-};
-
-type ProfileDataType = {
-  profile: ProfileType;
-  status: string;
-  isOwner: boolean;
-  enableEditMode: () => void;
-};
-const ProfileData: React.FC<ProfileDataType> = ({
-  profile,
-  status,
-  isOwner,
-  enableEditMode
-}) => {
-  return (
-    <div>
-      {isOwner && <button onClick={enableEditMode}>EDIT</button>}
-      <p>Name: {profile.fullName}</p>
-      <p>Status: {status}</p>
-      <p>Looking for a job: {profile.lookingForAJob ? 'yes' : 'no'}</p>
-      {profile.lookingForAJob && profile.lookingForAJobDescription ? (
-        <p>Job description: {profile.lookingForAJobDescription}</p>
-      ) : null}
-      <p>About me: {profile.aboutMe}</p>
     </div>
   );
 };

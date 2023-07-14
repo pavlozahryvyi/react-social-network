@@ -11,13 +11,13 @@ type ThunkType = BaseThunkType<UsersActionsTypes | FormAction>;
 
 export const getUsersThunk =
   (currentPage: number, pageSize: number, filter: FilterType): ThunkType =>
-  async (dispatch) => {
+  async (dispatch: any) => {
     dispatch(usersActions.toggleIsFetching(true));
     dispatch(usersActions.setFilter(filter));
 
     const data = await usersAPI.getUsers(currentPage, pageSize, filter);
     dispatch(usersActions.toggleIsFetching(false));
-    dispatch(usersActions.setUsers(data.items));
+    // dispatch(usersActions.setUsers(data.items));
     dispatch(usersActions.setTotalUsersCount(data.totalCount));
   };
 
@@ -38,7 +38,7 @@ const followUnfollowFlow = async (
 };
 export const followThunkHandler =
   (userId: number, isFollowed: boolean): ThunkType =>
-  async (dispatch) => {
+  async (dispatch: any) => {
     const { follow, unFollow } = usersAPI;
     const { followSuccess, unFollowSuccess } = usersActions;
 
