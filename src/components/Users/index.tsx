@@ -1,71 +1,50 @@
-import { FC, useEffect } from 'react';
-import User from './User';
+import { FC, useEffect, useState } from 'react';
+import { User } from './User';
 import Pagination from '../common/Pagination';
 import { useSelector } from 'react-redux';
-import {
-  getCurrentPage,
-  getFilter,
-  getFollowingInProgress,
-  getIsFetching,
-  getPageSize,
-  getTotalUsersCount,
-  getUsers
-} from '../../selectors/usersSelectors';
-import { FilterType, usersActions } from '../../redux/usersReducer';
 import { UsersSearchForm } from './UsersSearchForm';
-import { AppDispatch } from '../../redux/redux-store';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getUsersThunk } from '../../thunks/usersThunk';
-import styles from './styles.module.css';
 import Preloader from '../common/Preloader/Preloader';
 import { useGetUsersDataQuery } from '../../features/api/usersApiSlice';
 import { TypeUser } from '../../types/usersTypes';
+import { getFilter } from '../../selectors/filtersSelector';
+import { getPage } from '../../selectors/pagesSelector';
+import { useCustomDispatch } from '../../hooks/useCustomDispatch';
+import { pageSet as reducerPageSet } from '../../features/pagesSlice';
 
 export const Users: FC = () => {
-  // const users = useSelector(getUsers);
-  // const totalUsersCount = useSelector(getTotalUsersCount);
-  // const currentPage = useSelector(getCurrentPage);
-  // const pageSize = useSelector(getPageSize);
-  // const filter = useSelector(getFilter);
-  // const followingInProgress = useSelector(getFollowingInProgress);
-  // const isFetching = useSelector(getIsFetching);
+  const [pageSet] = useCustomDispatch([reducerPageSet]);
 
-  const { data, isFetching } = useGetUsersDataQuery();
+  const page = useSelector((state) => getPage(state, 'users'));
+  const filters = useSelector((state) => getFilter(state, 'users'));
 
-  console.log(useGetUsersDataQuery());
+  const { data, isFetching } = useGetUsersDataQuery({
+    ...filters,
+    page
+  });
 
-  // const dispatch = useAppDispatch();
+  const handleFollowing = (handler: any, id: number) => {
+    handler({ id, filters, page });
+  };
 
-  // useEffect(() => {
-  //   dispatch(getUsersThunk(currentPage, pageSize, filter));
-  // }, []);
-
-  // const setPage = (currentPage: number) => {
-  //   dispatch(usersActions.setCurrentPage(currentPage));
-  //   dispatch(getUsersThunk(currentPage, pageSize, filter));
-  // };
-
-  // const onSubmitFilter = (filter: FilterType) => {
-  //   dispatch(getUsersThunk(1, pageSize, filter));
-  // };
-
-  // return <>123</>;
-
-  const handleSubmitFilter = () => {};
+  const setPage = (page: number) => {
+    pageSet({ page, pageType: 'users' });
+  };
 
   if (isFetching) return <Preloader />;
 
+  const { items, totalCount } = data;
+
   return (
     <>
-      {/* <Pagination
-        totalItemsCount={totalUsersCount}
-        pageSize={pageSize}
-        currentPage={currentPage}
+      <Pagination
+        totalItemsCount={totalCount}
+        pageSize={items.length}
+        currentPage={page}
         setCurrentPage={setPage}
-  />  */}
-      <UsersSearchForm onSubmitFilter={handleSubmitFilter} />
-      {data.items.map((user: TypeUser) => (
-        <User key={user.id} user={user} />
+      />
+      <UsersSearchForm initialValues={filters} disabled={isFetching} />
+      {items.map((user: TypeUser) => (
+        <User key={user.id} user={user} onClick={handleFollowing} />
       ))}
     </>
   );

@@ -2,26 +2,29 @@ import { FC } from 'react';
 import styles from '../styles.module.css';
 import userPhoto from '../../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
-// import { useAppDispatch } from '../../../hooks/useAppDispatch';
-// import { followThunkHandler } from '../../../thunks/usersThunk';
-import { useDispatch } from 'react-redux';
 import { TypeUser } from '../../../types/usersTypes';
+import {
+  useSubscribeMutation,
+  useUnSubscribeMutation
+} from '../../../features/api/usersApiSlice';
 
 type PropsTypes = {
   user: TypeUser;
+  onClick: (handler: any, userId: number) => void;
 };
 
-const Users: FC<PropsTypes> = (props) => {
-  const { user } = props;
+export const User: FC<PropsTypes> = (props) => {
+  const { user, onClick } = props;
   const { id, followed, photos, name } = user;
 
-  const dispatch = useDispatch();
+  const [subscribe, { isLoading: isSubscribing }] = useSubscribeMutation();
 
-  const handleClick = () => {}; //dispatch(followThunkHandler(id, followed));
+  const [unSubscribe, { isLoading: isUnSubscribing }] =
+    useUnSubscribeMutation();
 
-  // const disabled = followingInProgress.some(
-  //   (followUserId: number) => followUserId === id
-  // );
+  const handleClick = () => {
+    onClick(followed ? unSubscribe : subscribe, id);
+  };
 
   return (
     <div>
@@ -35,11 +38,9 @@ const Users: FC<PropsTypes> = (props) => {
         </NavLink>
       </div>
       <div>Name: {name}</div>
-      <button disabled={false} onClick={handleClick}>
+      <button disabled={isSubscribing || isUnSubscribing} onClick={handleClick}>
         {followed ? 'Unsubscribe' : 'Subscribe'}
       </button>
     </div>
   );
 };
-
-export default Users;

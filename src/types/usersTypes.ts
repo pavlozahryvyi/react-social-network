@@ -14,3 +14,8 @@ export type TypeUserItems = {
   totalCount: number;
   error: string | null;
 };
+
+export type TypeUsersFilter = {
+  term: string;
+  friend: boolean | null;
+};
