@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { Avatar } from '../../../common/Avatar';
 
 type ChatMessageType = {
   userId: number;
@@ -13,7 +14,7 @@ export const Message: React.FC<ChatMessageType> = (props) => {
   return (
     <div>
       <NavLink to={`/profile/${userId}`}>
-        <img src={photo} alt="User" />
+        <Avatar src={photo} alt="User" />
       </NavLink>
       <div>
         <div>{userName}</div>

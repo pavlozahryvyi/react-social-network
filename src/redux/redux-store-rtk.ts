@@ -1,14 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-
 import profileReducer from '../features/profileSlice';
 import authReducer from '../features/authSlice';
 import { usersApi } from '../features/api/usersApiSlice';
 import filtersReducer from '../features/filtersSlice';
 import pagesReducer from '../features/pagesSlice';
 
-// Automatically adds the thunk middleware and the Redux DevTools extension
 export const store = configureStore({
-  // Automatically calls `combineReducers`
   reducer: {
     profilePage: profileReducer,
     auth: authReducer,

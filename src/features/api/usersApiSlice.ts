@@ -1,5 +1,6 @@
 import { TypeUser, TypeUsersFilter } from './../../types/usersTypes';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import baseQuery from './baseQuery';
 
 const mapQueryParams = (obj: object): string => {
   const paramsArr = Object.entries(obj)
@@ -14,13 +15,7 @@ type TypePage = {
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://social-network.samuraijs.com/api/1.0',
-    headers: {
-      'API-KEY': '506264c7-e08d-447a-ae53-bbc91bc9de7d'
-    },
-    credentials: 'include'
-  }),
+  baseQuery,
   endpoints: (build) => {
     return {
       getUsersData: build.query<any, TypeUsersFilter & TypePage>({
