@@ -6,7 +6,7 @@ import { TypeUser } from '../../../types/usersTypes';
 import {
   useSubscribeMutation,
   useUnSubscribeMutation
-} from '../../../features/api/usersApiSlice';
+} from '../../../features/api/subscribeApiSlice';
 
 type PropsTypes = {
   user: TypeUser;
