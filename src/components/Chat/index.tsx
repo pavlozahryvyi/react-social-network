@@ -2,40 +2,49 @@ import { FC, useEffect, useState } from 'react';
 import { AddMessageForm } from './AddMessageForm';
 import styles from './Chat.module.css';
 import { Messages } from './Messages';
+import { useGetChatDataQuery } from '../../features/api/chatApiSlice';
+import { Message } from './Messages/Message';
 
 export const Chat: FC = () => {
-  const [wsChannel, setWsChannel] = useState<WebSocket | null>(null);
+  const { data } = useGetChatDataQuery();
 
-  useEffect(() => {
-    let ws: WebSocket;
+  console.log('---data', data);
 
-    const closeHandler = () => {
-      setTimeout(createChannel, 3000);
-    };
+  // const [wsChannel, setWsChannel] = useState<WebSocket | null>(null);
 
-    const createChannel = () => {
-      ws?.removeEventListener('close', closeHandler);
-      ws?.close();
-      ws = new WebSocket(
-        'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
-      );
-      ws.addEventListener('close', closeHandler);
-      setWsChannel(ws);
-    };
+  // useEffect(() => {
+  //   let ws: WebSocket;
 
-    createChannel();
+  //   const closeHandler = () => {
+  //     setTimeout(createChannel, 3000);
+  //   };
 
-    return () => {
-      ws.removeEventListener('close', closeHandler);
-      ws.close();
-    };
-  }, []);
+  //   const createChannel = () => {
+  //     ws?.removeEventListener('close', closeHandler);
+  //     ws?.close();
+  //     ws = new WebSocket(
+  //       'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
+  //     );
+  //     ws.addEventListener('close', closeHandler);
+  //     setWsChannel(ws);
+  //   };
+
+  //   createChannel();
+
+  //   return () => {
+  //     ws.removeEventListener('close', closeHandler);
+  //     ws.close();
+  //   };
+  // }, []);
 
   return (
     <div className={styles.chatWrapper}>
       Chat:
-      <Messages wsChannel={wsChannel} />
-      <AddMessageForm wsChannel={wsChannel} />
+      {data?.map((message) => (
+        <Message key={message.userId} {...message} />
+      ))}
+      {/* <Messages wsChannel={wsChannel} /> */}
+      <AddMessageForm />
     </div>
   );
 };

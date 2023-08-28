@@ -1,6 +1,7 @@
-import { TypeUser, TypeUsersFilter } from './../../types/usersTypes';
+import { TypeUsersFilter } from './../../types/usersTypes';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
+import { TypePage } from '../../types/commonTypes';
 
 const mapQueryParams = (obj: TypeUsersFilter & TypePage): string => {
   const paramsArr = Object.entries(obj)
@@ -9,22 +10,18 @@ const mapQueryParams = (obj: TypeUsersFilter & TypePage): string => {
   return paramsArr.length ? `?${paramsArr.join('&')}` : '';
 };
 
-type TypePage = {
-  page: number;
-};
-
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery,
-  endpoints: (build) => {
-    return {
-      getUsersData: build.query<any, TypeUsersFilter & TypePage>({
-        query: (params) => {
-          return `/users${mapQueryParams(params)}`;
-        }
-      })
-    };
-  }
+  endpoints: (build) => ({
+    getUsersData: build.query<any, TypeUsersFilter & TypePage>({
+      query: (params) => {
+        return `/users${mapQueryParams(params)}`;
+      }
+    })
+  })
 });
+
+console.log('---usersApi', usersApi);
 
 export const { useGetUsersDataQuery } = usersApi;

@@ -5,11 +5,20 @@ import { useSelector } from 'react-redux';
 import { UsersSearchForm } from './UsersSearchForm';
 import Preloader from '../common/Preloader/Preloader';
 import { useGetUsersDataQuery } from '../../features/api/usersApiSlice';
-import { TypeUser } from '../../types/usersTypes';
+import { TypeUser, TypeUsersFilter } from '../../types/usersTypes';
 import { getFilter } from '../../selectors/filtersSelector';
 import { getPage } from '../../selectors/pagesSelector';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { pageSet as reducerPageSet } from '../../features/pagesSlice';
+import { TypePage } from '../../types/commonTypes';
+
+type TypeParams = {
+  id: number;
+  filters: TypeUsersFilter;
+  page: TypePage;
+};
+
+type TypeHandler = ({ id, filters, page }: TypeParams) => any;
 
 export const Users: FC = () => {
   const [pageSet] = useCustomDispatch([reducerPageSet]);
@@ -22,7 +31,7 @@ export const Users: FC = () => {
     page
   });
 
-  const handleFollowing = (handler: any, id: number) => {
+  const handleFollowing = (handler: TypeHandler, id: number) => {
     handler({ id, filters, page });
   };
 

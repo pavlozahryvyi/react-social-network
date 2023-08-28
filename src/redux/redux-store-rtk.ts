@@ -4,15 +4,19 @@ import authReducer from '../features/authSlice';
 import { usersApi } from '../features/api/usersApiSlice';
 import filtersReducer from '../features/filtersSlice';
 import pagesReducer from '../features/pagesSlice';
+import { chatApi } from '../features/api/chatApiSlice';
 
 export const store = configureStore({
   reducer: {
     profilePage: profileReducer,
     auth: authReducer,
     [usersApi.reducerPath]: usersApi.reducer,
+    [chatApi.reducerPath]: chatApi.reducer,
     filters: filtersReducer,
     page: pagesReducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(usersApi.middleware)
+    getDefaultMiddleware()
+      .concat(usersApi.middleware)
+      .concat(chatApi.middleware)
 });
