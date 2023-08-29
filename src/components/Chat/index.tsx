@@ -6,9 +6,14 @@ import { useGetChatDataQuery } from '../../features/api/chatApiSlice';
 import { Message } from './Messages/Message';
 
 export const Chat: FC = () => {
-  const { data } = useGetChatDataQuery();
+  const [message, setMessage] = useState('');
 
-  console.log('---data', data);
+  const { data } = useGetChatDataQuery(message);
+
+  console.log('render');
+
+  // console.log('---data', data);
+  // console.log('---useGetChatDataQuery()', useGetChatDataQuery());
 
   // const [wsChannel, setWsChannel] = useState<WebSocket | null>(null);
 
@@ -40,11 +45,10 @@ export const Chat: FC = () => {
   return (
     <div className={styles.chatWrapper}>
       Chat:
-      {data?.map((message) => (
-        <Message key={message.userId} {...message} />
+      {data?.map((message: any, idx: number) => (
+        <Message key={message.userId + idx} {...message} />
       ))}
-      {/* <Messages wsChannel={wsChannel} /> */}
-      <AddMessageForm />
+      <AddMessageForm sendMessage={setMessage} />
     </div>
   );
 };

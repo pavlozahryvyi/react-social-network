@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-export const AddMessageForm: React.FC = () => {
+type TypeProps = {
+  sendMessage: any;
+};
+
+export const AddMessageForm: React.FC<TypeProps> = (props) => {
+  const { sendMessage } = props;
+
   const [message, setMessage] = useState('');
-  // const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>(
-  //   'pending'
-  // );
 
-  // useEffect(() => {
-  // wsChannel?.addEventListener('open', () => setReadyStatus('ready'));
-  // }, [wsChannel]);
-
-  const sendMessage = () => {
-    // wsChannel?.send(message);
-    // setMessage('');
+  const handleClick = () => {
+    sendMessage(message);
   };
 
   const handleChange = (e: any) => {
@@ -25,7 +23,7 @@ export const AddMessageForm: React.FC = () => {
       <div>
         <textarea onChange={handleChange} value={message} />
         <button
-          onClick={sendMessage}
+          onClick={handleClick}
           // disabled={!wsChannel || readyStatus === 'pending'}
         >
           SEND

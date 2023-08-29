@@ -22,6 +22,4 @@ export const usersApi = createApi({
   })
 });
 
-console.log('---usersApi', usersApi);
-
 export const { useGetUsersDataQuery } = usersApi;
