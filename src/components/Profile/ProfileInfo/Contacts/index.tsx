@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { getProfileContacts } from '../../../../selectors/profileSelector';
+import { selectProfileContacts } from '../../../../selectors/profileSelector';
 import { useSelector } from 'react-redux';
 import { Contact } from './Contact';
 
@@ -12,7 +12,9 @@ const socialNetworks = {
 };
 
 export const Contacts: FC = () => {
-  const contacts = useSelector(getProfileContacts);
+  const contacts = useSelector(selectProfileContacts);
+
+  console.log('---contacts', contacts);
 
   if (!contacts) return null;
 
@@ -25,11 +27,14 @@ export const Contacts: FC = () => {
     });
   }
 
+  console.log('---contactsArray', contactsArray);
+
   return (
-    <>
+    <div>
+      <h3>Contacts:</h3>
       {contactsArray.map((el) => (
         <Contact key={el.title} {...el} />
       ))}
-    </>
+    </div>
   );
 };

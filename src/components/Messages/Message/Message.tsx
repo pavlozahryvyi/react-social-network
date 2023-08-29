@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Message.module.css';
-import { MessageType } from '../../../types/types';
+import { MessageType } from '../../../types/messagesTypes';
 
 const Message: React.FC<MessageType> = ({ message }) => {
   return (

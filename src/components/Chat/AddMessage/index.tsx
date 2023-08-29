@@ -4,7 +4,7 @@ type TypeProps = {
   sendMessage: any;
 };
 
-export const AddMessageForm: React.FC<TypeProps> = (props) => {
+export const AddMessage: React.FC<TypeProps> = (props) => {
   const { sendMessage } = props;
 
   const [message, setMessage] = useState('');

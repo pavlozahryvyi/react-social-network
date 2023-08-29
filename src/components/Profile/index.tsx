@@ -3,8 +3,6 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
 import ProfileInfo from './ProfileInfo';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
-// import { getProfileThunk, getUserStatusThunk } from '../../thunks/profileThunk';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { selectAuthData } from '../../selectors/authSelector';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
@@ -19,9 +17,6 @@ export const Profile: FC = () => {
 
   const { userId } = useParams();
 
-  // const getUserStatus = (userId: number) =>
-  // dispatch(getUserStatusThunk(userId));
-
   useEffect(() => {
     const id = userId || currentUserId;
     if (!id) {
@@ -31,10 +26,5 @@ export const Profile: FC = () => {
     }
   }, [userId]);
 
-  return (
-    <>
-      <ProfileInfo />
-      {/* <MyPostsContainer /> */}
-    </>
-  );
+  return <ProfileInfo />;
 };

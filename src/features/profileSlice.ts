@@ -13,35 +13,15 @@ export const getProfile = createAsyncThunk(
 
 export const updateProfile = createAsyncThunk(
   'profile/updateProfile',
-  async (data: TypeProfile, thunkApi) => {
-    // const userId = getState().auth.id;
-    const response = await profileAPI.updateProfileData(data);
-    // if (response.data.resultCode === 0 && userId !== null) {
-    //   dispatch(getProfileThunk(userId));
-    // } else {
-    //   let err = 'Some error';
-    //   let errorsObj: ErrorsObjType = {
-    //     _error: err
-    //   };
-    //   if (response.data.messages.length > 0) {
-    //     const errorName = handleError(response.data.messages[0]);
-    //     errorsObj = {
-    //       contacts: {
-    //         [errorName]: response.data.messages[0]
-    //       }
-    //     };
-    //   }
-    //   const action = stopSubmit('profile-edit', errorsObj);
-    //   dispatch(action);
-    //   return Promise.reject();
-    // }
+  async (data: TypeProfile) => {
+    await profileAPI.updateProfileData(data);
   }
 );
 
 export const updateProfileStatus = createAsyncThunk(
   'profile/updateStatus',
-  async (status: string, thunkApi) => {
-    const response = await profileAPI.updateStatus(status);
+  async (status: string) => {
+    await profileAPI.updateStatus(status);
   }
 );
 

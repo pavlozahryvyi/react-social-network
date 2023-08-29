@@ -1,5 +1,6 @@
 import { Chat } from '../Chat';
 import { Login } from '../Login';
+import Messages from '../Messages';
 import { Profile } from '../Profile';
 import { Users } from '../Users';
 
@@ -16,27 +17,18 @@ export const pages = [
     path: '/chat',
     component: <Chat />
   },
-  // {
-  //     name: 'Messages',
-  //     link: '/messages',
-  //     component:
-  // },
+  {
+    name: 'Messages',
+    link: '/messages',
+    path: '/messages',
+    component: <Messages />
+  },
   {
     name: 'Users',
     link: '/users',
     path: '/users',
     component: <Users />
   },
-  // {
-  //     name: 'News',
-  //     link: '/news',
-  //     component:  <>
-  // },
-  // {
-  //     name: 'Settings',
-  //     link: '/settings',
-  //     component:
-  // },
   {
     name: 'Login',
     link: '/login',

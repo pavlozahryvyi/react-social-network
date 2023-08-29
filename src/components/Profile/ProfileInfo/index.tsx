@@ -76,10 +76,7 @@ const ProfileInfo: React.FC = () => {
         <div>
           <ProfileDataComponent profile={profile} status={status} />
         </div>
-        <div>
-          <h3>Contacts:</h3>
-          <Contacts />
-        </div>
+        <Contacts />
       </div>
       {isOwner ? (
         <div>
