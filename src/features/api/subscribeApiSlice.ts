@@ -2,6 +2,7 @@ import { TypeUser } from '../../types/usersTypes';
 import { usersApi } from './usersApiSlice';
 
 const handleFollow = (draft: any, id: number, isFollowed: boolean): void => {
+  console.log('---handle follow');
   const currentUser = draft.items.find((user: TypeUser) => user.id === id);
   if (currentUser) {
     currentUser.followed = isFollowed;

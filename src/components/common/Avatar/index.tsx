@@ -1,17 +1,26 @@
 import { FC } from 'react';
 import styles from './Avatar.module.css';
+import userPhoto from '../../../../src/assets/img/usr.png';
 
 type TypeAvatar = {
-  src: string;
+  src: string | null;
   alt: string;
+  width?: number;
+  height?: number;
 };
 
 export const Avatar: FC<TypeAvatar> = (props) => {
-  const { src, alt } = props;
+  const { src, alt, width = 100, height = 100 } = props;
 
   return (
     <div>
-      <img src={src} alt={alt} className={styles.avatar} />
+      <img
+        src={src || userPhoto}
+        alt={alt}
+        className={styles.avatar}
+        width={width}
+        height={height}
+      />
     </div>
   );
 };

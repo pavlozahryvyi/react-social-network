@@ -5,6 +5,7 @@ import { usersApi } from '../features/api/usersApiSlice';
 import filtersReducer from '../features/filtersSlice';
 import pagesReducer from '../features/pagesSlice';
 import { chatApi } from '../features/api/chatApiSlice';
+import { messagesApi } from '../features/api/messagesApiSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     auth: authReducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [chatApi.reducerPath]: chatApi.reducer,
+    [messagesApi.reducerPath]: messagesApi.reducer,
     filters: filtersReducer,
     page: pagesReducer
   },
@@ -19,4 +21,5 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(usersApi.middleware)
       .concat(chatApi.middleware)
+      .concat(messagesApi.middleware)
 });
