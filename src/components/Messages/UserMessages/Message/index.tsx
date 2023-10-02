@@ -1,15 +1,14 @@
 import React from 'react';
 import styles from './Message.module.css';
 import { MessageType } from '../../../../types/messagesTypes';
+import styled from 'styled-components';
 
-const Message: React.FC<MessageType> = (props) => {
+const MessageBody = styled.div`
+  color: red;
+`;
+
+export const Message: React.FC<MessageType> = (props) => {
   const { message } = props;
-  console.log('---message', message);
-  return (
-    <div className={styles.message}>
-      <div>{message}</div>
-    </div>
-  );
-};
 
-export default Message;
+  return <MessageBody>{message}</MessageBody>;
+};

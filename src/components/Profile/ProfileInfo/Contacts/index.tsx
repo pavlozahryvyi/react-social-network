@@ -14,8 +14,6 @@ const socialNetworks = {
 export const Contacts: FC = () => {
   const contacts = useSelector(selectProfileContacts);
 
-  console.log('---contacts', contacts);
-
   if (!contacts) return null;
 
   const contactsArray = [];
@@ -26,8 +24,6 @@ export const Contacts: FC = () => {
       title: socialNetworks[key as keyof typeof socialNetworks]
     });
   }
-
-  console.log('---contactsArray', contactsArray);
 
   return (
     <div>

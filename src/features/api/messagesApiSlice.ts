@@ -3,6 +3,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
 import { TypePage } from '../../types/commonTypes';
 import { TypeMessageUser } from '../../types/messagesTypes';
+import { current } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 export const messagesApi = createApi({
   reducerPath: 'messagesApi',
@@ -21,17 +23,33 @@ export const messagesApi = createApi({
       })
     }),
     sendMessage: build.mutation<any, any>({
-      query: ({ id, body }) => ({
-        url: `dialogs/${id}/messages`,
+      query: ({ recipientId, body }) => ({
+        url: `dialogs/${recipientId}/messages`,
         method: 'POST',
         body
       }),
-      async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
-        console.log('---on query started');
+      async onQueryStarted(
+        { recipientId, body, senderId, senderName },
+        { dispatch, queryFulfilled }
+      ) {
         const patchResult = dispatch(
-          messagesApi.util.updateQueryData('getUserMessages', id, (draft) => {
-            console.log('draft');
-          })
+          messagesApi.util.updateQueryData(
+            'getUserMessages',
+            recipientId,
+            (draft) => {
+              const messageObj = {
+                addedAt: Date.now(),
+                ...body,
+                id: uuidv4(),
+                recipientId,
+                senderId,
+                senderName,
+                translatedBody: null,
+                viewed: false
+              };
+              draft.items.push(messageObj);
+            }
+          )
         );
         try {
           await queryFulfilled;

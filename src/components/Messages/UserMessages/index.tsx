@@ -2,7 +2,7 @@ import { useGetUserMessagesQuery } from '../../../features/api/messagesApiSlice'
 import { TypeMessage } from '../../../types/messagesTypes';
 import Preloader from '../../common/Preloader/Preloader';
 import { NewMessage } from '../NewMessage';
-import Message from './Message';
+import { Message } from './Message';
 
 type TypeUserMessagesProps = {
   userId: number;

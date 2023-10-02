@@ -11,7 +11,6 @@ export const getProfileContacts = (state: RootState) =>
 export const selectProfileContacts = createSelector(
   getProfileContacts,
   (item) => {
-    console.log('---item', item);
     return item;
   }
 );

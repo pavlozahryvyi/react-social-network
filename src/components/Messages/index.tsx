@@ -16,7 +16,7 @@ const Messages: React.FC = () => {
   const { data, isLoading } = useGetMessagesQuery(0);
 
   // console.log('---msgs data', data);
-  console.log('---userId', userId);
+  // console.log('---userId', userId);
 
   const handleClick = () => {
     mutate(29908);
