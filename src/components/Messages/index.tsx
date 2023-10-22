@@ -5,10 +5,11 @@ import {
 } from '../../features/api/messagesApiSlice';
 import Preloader from '../common/Preloader/Preloader';
 import { User } from './User';
-import styles from './Messages.module.css';
 import { NewMessage } from './NewMessage';
 import { UserMessages } from './UserMessages';
 import { TypePhotos } from '../../types/profileTypes';
+import { Messages as MessagesBlock, UserInfo } from './styles';
+import { BlurRadiusBackground } from '../common/BlurRadiusBackground';
 
 const Messages: React.FC = () => {
   const [user, setUser] = useState<{
@@ -27,20 +28,20 @@ const Messages: React.FC = () => {
   if (isLoading) return <Preloader />;
 
   return (
-    <div className={styles.dialogs}>
+    <BlurRadiusBackground>
       Messages
       <button onClick={handleClick}>CLICK</button>
-      <div className={styles.messages}>
-        <div className={styles.usersInfo}>
+      <MessagesBlock>
+        <UserInfo>
           Dialogs with:
           {data?.map((user) => (
             <User {...user} key={user.id} setUserId={setUser} />
           ))}
-        </div>
+        </UserInfo>
 
         {user && <UserMessages {...user} />}
-      </div>
-    </div>
+      </MessagesBlock>
+    </BlurRadiusBackground>
   );
 };
 

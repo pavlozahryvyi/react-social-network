@@ -1,20 +1,42 @@
 import { FC } from 'react';
-import style from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import { pages } from '../utils/pages';
+import { useCustomDispatch } from '../../hooks/useCustomDispatch';
+import { logout as asyncLogout } from '../../features/authSlice';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { selectAuthData } from '../../selectors/authSelector';
+import logo from '../../img/logo.png';
+import { LinkBlock, Nav, Link } from './styles';
 
 export const Navbar: FC = () => {
+  const [logout] = useCustomDispatch([asyncLogout]);
+
+  const { isAuth, login } = useAppSelector(selectAuthData);
+
+  const handleClick = () => logout();
+
   return (
-    <nav className={style.nav}>
+    <Nav>
+      <img src={logo} height={30} />
       {pages.map(({ name, link, notDisplay }) => {
         if (notDisplay) return null;
 
         return (
-          <div key={link} className={style.item}>
-            <NavLink to={link}>{name}</NavLink>
-          </div>
+          <LinkBlock key={link} className="item">
+            <Link to={link} key={link}>
+              {name}
+            </Link>
+          </LinkBlock>
         );
       })}
-    </nav>
+      {isAuth ? (
+        <>
+          {login}
+          <button onClick={handleClick}>LogOut</button>
+        </>
+      ) : (
+        <NavLink to={'/login'}>Login</NavLink>
+      )}
+    </Nav>
   );
 };
