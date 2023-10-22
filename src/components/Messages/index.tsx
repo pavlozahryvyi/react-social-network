@@ -8,15 +8,17 @@ import { User } from './User';
 import styles from './Messages.module.css';
 import { NewMessage } from './NewMessage';
 import { UserMessages } from './UserMessages';
+import { TypePhotos } from '../../types/profileTypes';
 
 const Messages: React.FC = () => {
-  const [userId, setUserId] = useState<number | null>(null);
+  const [user, setUser] = useState<{
+    id: number;
+    photos: TypePhotos;
+    userName: string;
+  } | null>(null);
   const [mutate] = useStartChattingMutation();
 
   const { data, isLoading } = useGetMessagesQuery(0);
-
-  // console.log('---msgs data', data);
-  // console.log('---userId', userId);
 
   const handleClick = () => {
     mutate(29908);
@@ -32,11 +34,11 @@ const Messages: React.FC = () => {
         <div className={styles.usersInfo}>
           Dialogs with:
           {data?.map((user) => (
-            <User {...user} key={user.id} setUserId={setUserId} />
+            <User {...user} key={user.id} setUserId={setUser} />
           ))}
         </div>
 
-        {userId && <UserMessages userId={userId} />}
+        {user && <UserMessages {...user} />}
       </div>
     </div>
   );

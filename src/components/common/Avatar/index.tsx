@@ -10,7 +10,7 @@ type TypeAvatar = {
 };
 
 export const Avatar: FC<TypeAvatar> = (props) => {
-  const { src, alt, width = 100, height = 100 } = props;
+  const { src, alt, width = 100 } = props;
 
   return (
     <div>
@@ -19,7 +19,7 @@ export const Avatar: FC<TypeAvatar> = (props) => {
         alt={alt}
         className={styles.avatar}
         width={width}
-        height={height}
+        height={width}
       />
     </div>
   );

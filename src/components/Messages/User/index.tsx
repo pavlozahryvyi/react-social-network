@@ -25,7 +25,7 @@ export const User: React.FC<TypeUserProps> = (props) => {
   } = props;
 
   const handleClick = () => {
-    setUserId(id);
+    setUserId({ id, photos, userName });
   };
 
   return (

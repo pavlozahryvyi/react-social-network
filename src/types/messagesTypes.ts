@@ -8,6 +8,7 @@ export type DialogType = {
 export type MessageType = {
   id?: number;
   message: string;
+  isCurrentUserSender?: boolean;
 };
 
 export type DialogPageType = {
