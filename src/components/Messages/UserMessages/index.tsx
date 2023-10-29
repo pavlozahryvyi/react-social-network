@@ -8,6 +8,7 @@ import { selectAuthData } from '../../../selectors/authSelector';
 import { TypePhotos } from '../../../types/profileTypes';
 import { Avatar } from '../../common/Avatar';
 import styled from 'styled-components';
+import { UserMessagesBlock } from './style';
 
 const UserMessageBlock = styled.div<{ $isCurrentUserSender: boolean }>`
   display: flex;
@@ -35,7 +36,7 @@ export const UserMessages: React.FC<TypeUserMessagesProps> = (props) => {
   console.log('---data.items', data.items);
 
   return (
-    <div>
+    <UserMessagesBlock>
       Messages
       {data.items.map((msgItem: TypeMessage) => (
         <UserMessageBlock
@@ -50,6 +51,6 @@ export const UserMessages: React.FC<TypeUserMessagesProps> = (props) => {
         </UserMessageBlock>
       ))}
       <NewMessage userId={id} />
-    </div>
+    </UserMessagesBlock>
   );
 };

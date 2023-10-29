@@ -3,6 +3,7 @@ import styles from './Chat.module.css';
 import { useGetChatDataQuery } from '../../features/api/chatApiSlice';
 import { Message } from './ChatMessage';
 import { AddMessage } from './AddMessage';
+import { PageHeader } from '../common/ContentHeader';
 
 export const Chat: FC = () => {
   const [message, setMessage] = useState('');
@@ -17,12 +18,12 @@ export const Chat: FC = () => {
   }, [data]);
 
   return (
-    <div className={styles.chatWrapper}>
-      Chat:
+    <>
+      <PageHeader pageTitle="Chat" />
       {messages.map((message, idx) => (
         <Message key={message.userId + idx} {...message} />
       ))}
       <AddMessage sendMessage={setMessage} />
-    </div>
+    </>
   );
 };

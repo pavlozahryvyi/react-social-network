@@ -1,5 +1,6 @@
 import { TypePhotos } from '../../../types/profileTypes';
 import { Avatar } from '../../common/Avatar';
+import { MessageUser } from './style';
 
 type TypeUserProps = {
   hasNewMessages: boolean;
@@ -14,11 +15,11 @@ type TypeUserProps = {
 
 export const User: React.FC<TypeUserProps> = (props) => {
   const {
-    hasNewMessages,
+    // hasNewMessages,
     id,
-    lastDialogActivityDate,
-    lastUserActivityDate,
-    newMessagesCount,
+    // lastDialogActivityDate,
+    // lastUserActivityDate,
+    // newMessagesCount,
     photos,
     userName,
     setUserId
@@ -29,9 +30,9 @@ export const User: React.FC<TypeUserProps> = (props) => {
   };
 
   return (
-    <div>
+    <MessageUser onClick={handleClick}>
       <Avatar src={photos.small} alt="message user" width={50} height={50} />
-      <p onClick={handleClick}>{userName}</p>
-    </div>
+      <p>{userName}</p>
+    </MessageUser>
   );
 };

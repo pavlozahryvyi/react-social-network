@@ -8,8 +8,9 @@ import { User } from './User';
 import { NewMessage } from './NewMessage';
 import { UserMessages } from './UserMessages';
 import { TypePhotos } from '../../types/profileTypes';
-import { Messages as MessagesBlock, UserInfo } from './styles';
-import { BlurRadiusBackground } from '../common/BlurRadiusBackground';
+import { Messages as MessagesBlock, UsersInfo } from './styles';
+import { PageHeader } from '../common/ContentHeader';
+import { NoMessages } from './NoMessages';
 
 const Messages: React.FC = () => {
   const [user, setUser] = useState<{
@@ -17,31 +18,24 @@ const Messages: React.FC = () => {
     photos: TypePhotos;
     userName: string;
   } | null>(null);
-  const [mutate] = useStartChattingMutation();
 
-  const { data, isLoading } = useGetMessagesQuery(0);
-
-  const handleClick = () => {
-    mutate(29908);
-  };
+  const { data, isLoading } = useGetMessagesQuery();
 
   if (isLoading) return <Preloader />;
 
   return (
-    <BlurRadiusBackground>
-      Messages
-      <button onClick={handleClick}>CLICK</button>
-      <MessagesBlock>
-        <UserInfo>
-          Dialogs with:
+    <>
+      <PageHeader pageTitle="Messages">
+        <UsersInfo>
           {data?.map((user) => (
             <User {...user} key={user.id} setUserId={setUser} />
           ))}
-        </UserInfo>
-
-        {user && <UserMessages {...user} />}
+        </UsersInfo>
+      </PageHeader>
+      <MessagesBlock>
+        {user ? <UserMessages {...user} /> : <NoMessages />}
       </MessagesBlock>
-    </BlurRadiusBackground>
+    </>
   );
 };
 

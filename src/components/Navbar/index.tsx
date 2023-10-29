@@ -6,7 +6,7 @@ import { logout as asyncLogout } from '../../features/authSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { selectAuthData } from '../../selectors/authSelector';
 import logo from '../../img/logo.png';
-import { LinkBlock, Nav, Link } from './styles';
+import { LinkBlock, Link } from './styles';
 
 export const Navbar: FC = () => {
   const [logout] = useCustomDispatch([asyncLogout]);
@@ -16,7 +16,7 @@ export const Navbar: FC = () => {
   const handleClick = () => logout();
 
   return (
-    <Nav>
+    <nav>
       <img src={logo} height={30} />
       {pages.map(({ name, link, notDisplay }) => {
         if (notDisplay) return null;
@@ -37,6 +37,6 @@ export const Navbar: FC = () => {
       ) : (
         <NavLink to={'/login'}>Login</NavLink>
       )}
-    </Nav>
+    </nav>
   );
 };

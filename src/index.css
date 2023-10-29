@@ -20,6 +20,11 @@ body {
   height: 100vh;
   display: grid;
   place-items: center;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 code {

@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 export const Messages = styled.div`
   display: flex;
-  padding: 20px;
 `;
 
-export const UserInfo = styled.div`
-  flex-basis: 30%;
+export const UsersInfo = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 15px;
 `;
 
-export const UserMessages = styled.div`
-  flex-basis: 70%;
-`;
+export const UserMessages = styled.div``;

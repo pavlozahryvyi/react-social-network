@@ -24,7 +24,7 @@ export const pages = [
     component: <Messages />
   },
   {
-    name: 'Users',
+    name: 'People',
     link: '/users',
     path: '/users',
     component: <Users />

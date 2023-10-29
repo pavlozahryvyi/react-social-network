@@ -10,7 +10,7 @@ export const messagesApi = createApi({
   reducerPath: 'messagesApi',
   baseQuery,
   endpoints: (build) => ({
-    getMessages: build.query<TypeMessageUser[], any>({
+    getMessages: build.query<TypeMessageUser[], void>({
       query: () => 'dialogs'
     }),
     getUserMessages: build.query<any, any>({

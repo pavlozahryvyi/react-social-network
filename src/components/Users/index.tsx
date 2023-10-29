@@ -1,4 +1,3 @@
-import { FC, useEffect, useState } from 'react';
 import { User } from './User';
 import Pagination from '../common/Pagination';
 import { useSelector } from 'react-redux';
@@ -11,6 +10,12 @@ import { getPage } from '../../selectors/pagesSelector';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { pageSet as reducerPageSet } from '../../features/pagesSlice';
 import { TypePage } from '../../types/commonTypes';
+import { PageHeader } from '../common/ContentHeader';
+import styled from 'styled-components';
+
+const HeaderOptions = styled.div`
+  display: flex;
+`;
 
 type TypeParams = {
   id: number;
@@ -20,7 +25,7 @@ type TypeParams = {
 
 type TypeHandler = ({ id, filters, page }: TypeParams) => any;
 
-export const Users: FC = () => {
+export const Users: React.FC = () => {
   const [pageSet] = useCustomDispatch([reducerPageSet]);
 
   const page = useSelector((state) => getPage(state, 'users'));
@@ -45,13 +50,18 @@ export const Users: FC = () => {
 
   return (
     <>
-      <Pagination
-        totalItemsCount={totalCount}
-        pageSize={items.length}
-        currentPage={page}
-        setCurrentPage={setPage}
-      />
-      <UsersSearchForm initialValues={filters} disabled={isFetching} />
+      <PageHeader pageTitle="People">
+        <HeaderOptions>
+          <Pagination
+            totalItemsCount={totalCount}
+            pageSize={items.length}
+            currentPage={page}
+            setCurrentPage={setPage}
+          />
+          <UsersSearchForm initialValues={filters} disabled={isFetching} />
+        </HeaderOptions>
+      </PageHeader>
+
       {items.map((user: TypeUser) => (
         <User key={user.id} user={user} onClick={handleFollowing} />
       ))}

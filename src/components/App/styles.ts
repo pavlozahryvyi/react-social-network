@@ -13,7 +13,7 @@ export const AppWrapper = styled.div`
   grid-template-areas: 'n c';
 `;
 
-export const DynamicBlock = styled(BlurRadiusBackground)`
+export const ContentWrapper = styled(BlurRadiusBackground)`
   grid-area: c;
   overflow: hidden;
   height: 100%;
@@ -23,6 +23,12 @@ export const DynamicBlock = styled(BlurRadiusBackground)`
   &::-webkit-scrollbar {
     display: none;
   }
+  padding: 20px;
+`;
+
+export const NavWrapper = styled(BlurRadiusBackground)`
+  grid-area: n;
+  padding: 20px;
 `;
 
 // 3445cd

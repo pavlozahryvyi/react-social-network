@@ -20,6 +20,7 @@ import {
 } from '../../../thunks/profileThunk';
 import { Avatar } from '../../common/Avatar';
 import { ProfileData } from './ProfileData';
+import { PageHeader } from '../../common/ContentHeader';
 
 const ProfileInfo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -54,13 +55,8 @@ const ProfileInfo: React.FC = () => {
   const ProfileDataComponent = editMode ? ProfileForm : ProfileData;
 
   return (
-    <div className="profileInfo">
-      <div className={styles.profileImage}>
-        <img
-          src="https://image.winudf.com/v2/image/Y29tLmJlYWNoLmJhbGliZWFjaHdhbGxwYXBlcl9zY3JlZW5fMF8xNTMyOTc5NTE3XzA0NQ/screen-0.jpg?fakeurl=1&type=.jpg"
-          alt=""
-        />
-      </div>
+    <>
+      <PageHeader pageTitle="Profile" />
       <div className={styles.descriptionBlock}>
         <div>
           <Avatar src={profile.photos.large || userPhoto} alt="" />
@@ -83,7 +79,7 @@ const ProfileInfo: React.FC = () => {
           <ProfileStatus updateStatus={updateStatus} propStatus={status} />
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 

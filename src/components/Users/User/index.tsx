@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import styles from '../styles.module.css';
 import userPhoto from '../../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
 import { TypeUser } from '../../../types/usersTypes';
@@ -7,6 +6,8 @@ import {
   useSubscribeMutation,
   useUnSubscribeMutation
 } from '../../../features/api/subscribeApiSlice';
+import { Avatar } from '../../common/Avatar';
+import { useStartChattingMutation } from '../../../features/api/messagesApiSlice';
 
 type PropsTypes = {
   user: TypeUser;
@@ -22,25 +23,28 @@ export const User: FC<PropsTypes> = (props) => {
   const [unSubscribe, { isLoading: isUnSubscribing }] =
     useUnSubscribeMutation();
 
+  const [startChatting] = useStartChattingMutation();
+
   const handleClick = () => {
     onClick(followed ? unSubscribe : subscribe, id);
+  };
+
+  const handleSendMessageClick = () => {
+    startChatting(id);
   };
 
   return (
     <div>
       <div>
         <NavLink to={`/profile/${id}`}>
-          <img
-            src={photos.small || userPhoto}
-            alt=""
-            className={styles.userPhoto}
-          />
+          <Avatar src={photos.small || userPhoto} alt="User avatar" />
         </NavLink>
       </div>
       <div>Name: {name}</div>
       <button disabled={isSubscribing || isUnSubscribing} onClick={handleClick}>
         {followed ? 'Unsubscribe' : 'Subscribe'}
       </button>
+      <button onClick={handleSendMessageClick}>Send message</button>
     </div>
   );
 };
