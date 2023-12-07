@@ -8,6 +8,25 @@ import {
 } from '../../../features/api/subscribeApiSlice';
 import { Avatar } from '../../common/Avatar';
 import { useStartChattingMutation } from '../../../features/api/messagesApiSlice';
+import { LuUserPlus2, LuUserMinus2, LuMessageCircle } from 'react-icons/lu';
+import { IconButton } from '../../common/IconButton';
+import styled from 'styled-components';
+
+const UserWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+`;
+
+const UserAction = styled.div`
+  display: flex;
+`;
+
+const UserIconButton = styled(IconButton)`
+  cursor: pointer;
+`;
 
 type PropsTypes = {
   user: TypeUser;
@@ -34,17 +53,22 @@ export const User: FC<PropsTypes> = (props) => {
   };
 
   return (
-    <div>
-      <div>
-        <NavLink to={`/profile/${id}`}>
-          <Avatar src={photos.small || userPhoto} alt="User avatar" />
-        </NavLink>
-      </div>
-      <div>Name: {name}</div>
-      <button disabled={isSubscribing || isUnSubscribing} onClick={handleClick}>
-        {followed ? 'Unsubscribe' : 'Subscribe'}
-      </button>
-      <button onClick={handleSendMessageClick}>Send message</button>
-    </div>
+    <UserWrapper>
+      <NavLink to={`/profile/${id}`}>
+        <Avatar src={photos.small || userPhoto} alt="User avatar" />
+      </NavLink>
+      <p>{name}</p>
+      <UserAction>
+        <UserIconButton
+          disabled={isSubscribing || isUnSubscribing}
+          onClick={handleClick}
+          Icon={followed ? LuUserMinus2 : LuUserPlus2}
+        />
+        <UserIconButton
+          onClick={handleSendMessageClick}
+          Icon={LuMessageCircle}
+        />
+      </UserAction>
+    </UserWrapper>
   );
 };

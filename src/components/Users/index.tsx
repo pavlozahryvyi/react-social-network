@@ -17,6 +17,18 @@ const HeaderOptions = styled.div`
   display: flex;
 `;
 
+const UsersWrapper = styled.div`
+  height: calc(100% - 50px - 20px);
+  overflow: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+`;
+
 type TypeParams = {
   id: number;
   filters: TypeUsersFilter;
@@ -33,7 +45,8 @@ export const Users: React.FC = () => {
 
   const { data, isFetching } = useGetUsersDataQuery({
     ...filters,
-    page
+    page,
+    count: 15
   });
 
   const handleFollowing = (handler: TypeHandler, id: number) => {
@@ -61,10 +74,11 @@ export const Users: React.FC = () => {
           <UsersSearchForm initialValues={filters} disabled={isFetching} />
         </HeaderOptions>
       </PageHeader>
-
-      {items.map((user: TypeUser) => (
-        <User key={user.id} user={user} onClick={handleFollowing} />
-      ))}
+      <UsersWrapper>
+        {items.map((user: TypeUser) => (
+          <User key={user.id} user={user} onClick={handleFollowing} />
+        ))}
+      </UsersWrapper>
     </>
   );
 };

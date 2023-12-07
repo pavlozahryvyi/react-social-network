@@ -5,12 +5,13 @@ const HeaderBlock = styled.div`
   align-items: center;
   margin-bottom: 20px;
   justify-content: space-between;
+  height: 50px;
 `;
 
 const Header = styled.h3`
   color: white;
   font-weight: bold;
-  margin: 0;
+  margin: 0 20px 0 0;
 `;
 
 type ContentHeaderProps = {

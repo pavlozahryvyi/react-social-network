@@ -1,5 +1,41 @@
-import styles from './styles.module.css';
+import styled from 'styled-components';
+import { gatNumberArray } from '../../../utils';
 import React, { useState } from 'react';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
+import { IconButton } from '../IconButton';
+
+const PaginationBlock = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const PageNumber = styled.div<{ $isCurrent: boolean }>`
+  cursor: pointer;
+  font-weight: ${({ $isCurrent }) => ($isCurrent ? 'bold' : 'normal')};
+  border: 3px solid ${({ $isCurrent }) => ($isCurrent ? 'white' : 'none')};
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+`;
+
+export const ArrowIcon = styled(IconButton)`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  &:hover {
+    border: 3px solid white;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
 
 type PropsType = {
   totalItemsCount: number;
@@ -15,10 +51,7 @@ const Pagination: React.FC<PropsType> = ({
   setCurrentPage
 }) => {
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
-  const pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
+  const pages = gatNumberArray(pagesCount);
 
   const portionSize = 10;
 
@@ -29,44 +62,40 @@ const Pagination: React.FC<PropsType> = ({
   const rightPortionPageNumber = portionNumber * portionSize;
 
   return (
-    <div>
+    <PaginationBlock>
       {portionNumber > 1 && (
-        <button
+        <ArrowIcon
           onClick={() => {
             setPortionNumber(portionNumber - 1);
           }}
-        >
-          PREV
-        </button>
+          Icon={LuChevronLeft}
+        />
       )}
       {pages
         .filter(
           (p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber
         )
         .map((page) => (
-          <span
+          <PageNumber
+            $isCurrent={currentPage === page}
             key={page}
-            className={`${currentPage === page && styles.selectedPage} ${
-              styles.page
-            }`}
             onClick={(e) => {
               setCurrentPage(page);
             }}
           >
-            {page}
-          </span>
+            <span>{page}</span>
+          </PageNumber>
         ))}
 
       {portionCount > portionNumber && (
-        <button
+        <ArrowIcon
           onClick={() => {
             setPortionNumber(portionNumber + 1);
           }}
-        >
-          NEXT
-        </button>
+          Icon={LuChevronRight}
+        />
       )}
-    </div>
+    </PaginationBlock>
   );
 };
 

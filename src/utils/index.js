@@ -13,3 +13,5 @@ export const mapPages = (pages) => {
 
   return nextPages;
 };
+
+export const gatNumberArray = (n) => Array.from(Array(n).keys());

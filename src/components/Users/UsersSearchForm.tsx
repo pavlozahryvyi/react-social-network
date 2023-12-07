@@ -3,6 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { filtersAdded as reducerFiltersAdded } from '../../features/filtersSlice';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { TypeUsersFilter } from '../../types/usersTypes';
+import { LuSearch } from 'react-icons/lu';
+import { IconButton } from '../common/IconButton';
+import { InputField } from '../common/form/InputField';
 
 const formValidate = (values: FormValues) => {
   const errors = {};
@@ -47,16 +50,14 @@ export const UsersSearchForm: FC<PropsTypes> = (props) => {
         onSubmit={handleSubmit}
       >
         <Form>
-          <Field type="text" name="term" />
+          <InputField name="term" placeholder="Name..." />
           <Field as="select" name="friend">
             <option value="null">All</option>
             <option value="true">Subscribed</option>
             <option value="false">Unsubscribed</option>
           </Field>
           <ErrorMessage name="term" component="div" />
-          <button type="submit" disabled={disabled}>
-            Submit
-          </button>
+          <IconButton type="submit" Icon={LuSearch} disabled={disabled} />
         </Form>
       </Formik>
     </div>
