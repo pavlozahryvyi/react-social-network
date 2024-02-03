@@ -10,7 +10,7 @@ type TypeUserProps = {
   newMessagesCount: number;
   photos: TypePhotos;
   userName: string;
-  setUserId: Function;
+  setUserId: any;
 };
 
 export const User: React.FC<TypeUserProps> = (props) => {

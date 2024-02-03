@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import userPhoto from '../../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
 import { TypeUser } from '../../../types/usersTypes';
@@ -51,12 +51,6 @@ export const User: FC<PropsTypes> = (props) => {
   const handleSendMessageClick = () => {
     startChatting(id);
   };
-
-  const upperCaseNameWithPhoto = useMemo(() => {
-    // console.log('useMemo');
-    const nextName = name;
-    return small ? nextName.toUpperCase() : name;
-  }, [small, name]);
 
   return (
     <UserWrapper>

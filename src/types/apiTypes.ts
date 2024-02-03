@@ -8,7 +8,7 @@ export enum EnumCaptchaResultCode {
 }
 
 export type APIResponseType<
-  D = {},
+  D = object,
   RC = EnumResultCodes | EnumCaptchaResultCode
 > = {
   data: D;
