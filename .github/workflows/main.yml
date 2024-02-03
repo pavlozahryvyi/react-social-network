@@ -24,7 +24,7 @@ jobs:
       - name: Build
         run: npm run build # Replace with your build command
         env:
-          NODE_ENV: production
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
