@@ -30,9 +30,3 @@ export const NavWrapper = styled(BlurRadiusBackground)`
   grid-area: n;
   padding: 20px;
 `;
-
-// 3445cd
-// 334fa9
-// 605ab0
-// 9867b6
-// b56c70
