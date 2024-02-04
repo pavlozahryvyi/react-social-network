@@ -1,4 +1,3 @@
-import { FC, useMemo } from 'react';
 import userPhoto from '../../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
 import { TypeUser } from '../../../types/usersTypes';
@@ -33,7 +32,7 @@ type PropsTypes = {
   onClick: (handler: any, userId: number) => void;
 };
 
-export const User: FC<PropsTypes> = (props) => {
+export const User: React.FC<PropsTypes> = (props) => {
   const { user, onClick } = props;
   const { id, followed, photos, name } = user;
 

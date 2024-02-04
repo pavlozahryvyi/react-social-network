@@ -9,7 +9,7 @@ const pagesSlice = createSlice({
   initialState,
   reducers: {
     pageSet(state, action) {
-      const { pageType, page } = action.payload;
+      const { page } = action.payload;
       state.users = page;
     }
   }

@@ -4,7 +4,6 @@ import { Navigate } from 'react-router-dom';
 import { LoginForm } from './LoginForm';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { selectAuthData } from '../../selectors/authSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 export const Login: FC = () => {
   const { isAuth } = useAppSelector(selectAuthData);

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import { TypeProfile, TypeStatus } from '../../../types/profileTypes';
 import { useCustomDispatch } from '../../../hooks/useCustomDispatch';
 import {

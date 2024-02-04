@@ -12,7 +12,7 @@ export const App: FC = () => {
 
   useEffect(() => {
     getAuthData();
-  }, []);
+  }, [getAuthData]);
 
   const routePages = mapPages(pages);
 

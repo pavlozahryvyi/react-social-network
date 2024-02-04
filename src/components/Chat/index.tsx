@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import styles from './Chat.module.css';
 import { useGetChatDataQuery } from '../../features/api/chatApiSlice';
 import { Message } from './ChatMessage';
 import { AddMessage } from './AddMessage';

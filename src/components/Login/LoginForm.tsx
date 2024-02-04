@@ -1,7 +1,7 @@
 import { login as asyncLogin } from '../../features/authSlice';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { TypeLoginFormData } from '../../types/authTypes';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { Formik, Field, Form } from 'formik';
 
 type TypePropsLoginForm = {
   captchaUrl: string | null;
@@ -9,9 +9,7 @@ type TypePropsLoginForm = {
 
 //initialValues={{email: '', password: '', rememberMe: false, captcha: null}}
 
-export const LoginForm: React.FC<TypePropsLoginForm> = (props) => {
-  const { captchaUrl } = props;
-
+export const LoginForm: React.FC<TypePropsLoginForm> = () => {
   const [login] = useCustomDispatch([asyncLogin]);
 
   const handleSubmit = (values: TypeLoginFormData) => login(values);

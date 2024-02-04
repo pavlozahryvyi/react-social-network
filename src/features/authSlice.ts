@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authAPI } from '../api/auth-api';
 import { TypeLoginParams } from '../types/authTypes';
-import { EnumCaptchaResultCode, EnumResultCodes } from '../types/apiTypes';
+import { EnumResultCodes } from '../types/apiTypes';
 
 export const getAuthData = createAsyncThunk('auth/me', async () => {
   const { data } = await authAPI.me();

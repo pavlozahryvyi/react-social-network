@@ -1,7 +1,7 @@
 import loader from '../../../assets/img/loader.gif';
 import React from 'react';
 
-const Preloader = (props) => {
+const Preloader = () => {
   return <img src={loader} alt="" />;
 };
 

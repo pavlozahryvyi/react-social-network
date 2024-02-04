@@ -1,9 +1,6 @@
-import { TypeUsersFilter } from './../../types/usersTypes';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
-import { TypePage } from '../../types/commonTypes';
 import { TypeMessageUser } from '../../types/messagesTypes';
-import { current } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
 export const messagesApi = createApi({

@@ -14,14 +14,14 @@ export const profileAPI = {
   },
 
   updateStatus(status: string) {
-    return instance.put<APIResponseType>(`profile/status`, { status });
+    return instance.put<APIResponseType>('profile/status', { status });
   },
 
   async updatePhoto(photo: File) {
     const formData = new FormData();
     formData.append('image', photo);
     const resp = await instance.put<APIResponseType<TypePhotos>>(
-      `profile/photo`,
+      'profile/photo',
       formData,
       {
         headers: {
@@ -33,6 +33,6 @@ export const profileAPI = {
   },
 
   updateProfileData(data: TypeProfile) {
-    return instance.put<APIResponseType>(`profile`, data);
+    return instance.put<APIResponseType>('profile', data);
   }
 };

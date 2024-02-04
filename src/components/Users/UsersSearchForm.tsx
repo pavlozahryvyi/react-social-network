@@ -7,14 +7,7 @@ import { LuSearch } from 'react-icons/lu';
 import { IconButton } from '../common/IconButton';
 import { InputField } from '../common/form/InputField';
 
-const formValidate = (values: FormValues) => {
-  const errors = {};
-  return errors;
-};
-
-type FormValues = {
-  term: string;
-};
+const formValidate = () => ({});
 
 type PropsTypes = {
   initialValues: TypeUsersFilter;

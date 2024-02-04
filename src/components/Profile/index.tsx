@@ -1,5 +1,4 @@
 import { useEffect, FC } from 'react';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
 import ProfileInfo from './ProfileInfo';
@@ -24,7 +23,7 @@ export const Profile: FC = () => {
     } else {
       getProfile(Number(id));
     }
-  }, [userId]);
+  }, [currentUserId, getProfile, navigate, userId]);
 
   return <ProfileInfo />;
 };

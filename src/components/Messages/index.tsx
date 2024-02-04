@@ -1,11 +1,7 @@
 import { useState } from 'react';
-import {
-  useGetMessagesQuery,
-  useStartChattingMutation
-} from '../../features/api/messagesApiSlice';
+import { useGetMessagesQuery } from '../../features/api/messagesApiSlice';
 import Preloader from '../common/Preloader/Preloader';
 import { User } from './User';
-import { NewMessage } from './NewMessage';
 import { UserMessages } from './UserMessages';
 import { TypePhotos } from '../../types/profileTypes';
 import { Messages as MessagesBlock, UsersInfo } from './styles';

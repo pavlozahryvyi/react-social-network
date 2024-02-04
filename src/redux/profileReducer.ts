@@ -1,7 +1,5 @@
-import { FormAction, stopSubmit } from 'redux-form';
-import { handleError } from '../utils/errorHandlers';
+import { FormAction } from 'redux-form';
 import { PostElementType, TypeProfile } from '../types/profileTypes';
-import { profileAPI } from '../api/profile-api';
 import { BaseThunkType, InferActionsTypes } from './redux-store';
 import { TypePhotos } from '../types/profileTypes';
 
@@ -32,12 +30,6 @@ const profileReducer = (
 ): InitialStateType => {
   switch (action.type) {
     case ADD_POST: {
-      const newPost = {
-        id: 5,
-        message: action.newPostText,
-        likesCount: 0
-      };
-
       return {
         ...state
       };

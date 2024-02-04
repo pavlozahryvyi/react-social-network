@@ -12,10 +12,8 @@ import {
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Contacts } from './Contacts';
-import { TypeProfile } from '../../../types/profileTypes';
 import {
   savePhotoThunk,
-  saveProfileDataThunk,
   updateStatusThunk
 } from '../../../thunks/profileThunk';
 import { Avatar } from '../../common/Avatar';
@@ -30,8 +28,8 @@ const ProfileInfo: React.FC = () => {
   const isOwner = !userId;
 
   const savePhoto = (file: File) => dispatch(savePhotoThunk(file));
-  const saveProfileData = (data: TypeProfile) =>
-    dispatch(saveProfileDataThunk(data));
+  // const saveProfileData = (data: TypeProfile) =>
+  //   dispatch(saveProfileDataThunk(data));
   const updateStatus = (data: string) => dispatch(updateStatusThunk(data));
 
   const profile = useSelector(selectProfile);
@@ -43,10 +41,6 @@ const ProfileInfo: React.FC = () => {
     const input = event.target as HTMLInputElement;
     if (input.files?.length) savePhoto(input.files[0]);
   }
-
-  const onSubmit = (formData: TypeProfile) => {
-    saveProfileData(formData);
-  };
 
   if (!profile) return <Preloader />;
 

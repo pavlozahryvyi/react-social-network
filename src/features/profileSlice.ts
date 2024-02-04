@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   PostElementType as TypePost,
-  TypeProfile as TypeProfile,
-  TypeStatus
+  TypeProfile as TypeProfile
 } from '../types/profileTypes';
 import { profileAPI } from '../api/profile-api';
 

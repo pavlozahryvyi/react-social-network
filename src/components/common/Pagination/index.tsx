@@ -37,8 +37,6 @@ export const ArrowIcon = styled(IconButton)`
   cursor: pointer;
 `;
 
-const a = 5;
-
 type PropsType = {
   totalItemsCount: number;
   pageSize: number;
@@ -81,7 +79,7 @@ const Pagination: React.FC<PropsType> = ({
           <PageNumber
             $isCurrent={currentPage === page}
             key={page}
-            onClick={(e) => {
+            onClick={() => {
               setCurrentPage(page);
             }}
           >

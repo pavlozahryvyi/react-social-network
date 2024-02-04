@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { TypeProfile } from '../../../types/profileTypes';
 import {
   selectProfile as selectProfile,
   selectStatus

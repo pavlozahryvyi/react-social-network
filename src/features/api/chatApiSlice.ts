@@ -2,10 +2,6 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
 import { current } from '@reduxjs/toolkit';
 
-const handleAddingMessage = (draft: any, message: string): void => {
-  console.log('---message', message);
-};
-
 let ws: WebSocket | null = null;
 
 export const chatApi = createApi({
@@ -13,7 +9,7 @@ export const chatApi = createApi({
   baseQuery,
   endpoints: (build) => ({
     getChatData: build.query<any, any>({
-      queryFn: (message) => {
+      queryFn: () => {
         return { data: [] };
       },
       async onCacheEntryAdded(msg, args2) {

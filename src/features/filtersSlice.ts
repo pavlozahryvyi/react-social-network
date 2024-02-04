@@ -12,8 +12,7 @@ const filtersSlice = createSlice({
   initialState,
   reducers: {
     filtersAdded(state, action) {
-      const { filterType, ...rest } = action.payload;
-      state.users = rest;
+      state.users = action.payload;
     }
   }
 });

@@ -16,12 +16,14 @@ module.exports = {
   },
   plugins: ['react', 'react-hooks', '@typescript-eslint'],
   rules: {
-    'no-unused-vars': 'warn',
     'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'warn',
-    'react/no-unescaped-entities': 'warn',
-    quotes: ['warn', 'single'],
-    '@typescript-eslint/consistent-type-imports': 'off'
+    'react/prop-types': 'error',
+    'react/no-unescaped-entities': 'error',
+    quotes: ['error', 'single'],
+    '@typescript-eslint/consistent-type-imports': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
+    'react/prop-types': 'off'
   },
   settings: {
     react: {

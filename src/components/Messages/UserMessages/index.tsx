@@ -25,15 +25,13 @@ type TypeUserMessagesProps = {
 };
 
 export const UserMessages: React.FC<TypeUserMessagesProps> = (props) => {
-  const { userName, id, photos } = props;
+  const { id, photos } = props;
 
   const { data, isLoading } = useGetUserMessagesQuery(id);
 
-  const { id: senderId, login: senderName } = useSelector(selectAuthData);
+  const { id: senderId } = useSelector(selectAuthData);
 
   if (isLoading) return <Preloader />;
-
-  console.log('---data.items', data.items);
 
   return (
     <UserMessagesBlock>
