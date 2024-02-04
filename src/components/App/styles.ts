@@ -3,7 +3,7 @@ import { BlurRadiusBackground } from '../common/BlurRadiusBackground';
 
 export const AppWrapper = styled.div`
   display: grid;
-  width: 1000px;
+  max-width: 1000px;
   height: 700px;
   margin: 0 auto;
   grid-template-columns: 2fr 10fr;

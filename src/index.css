@@ -44,7 +44,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-y: scroll;
 
   background: rgb(52, 69, 205);
   background: linear-gradient(
@@ -55,6 +54,7 @@ body {
     rgba(152, 103, 182, 1) 75%,
     rgba(181, 108, 112, 1) 100%
   );
+  background-image: url('https://images.unsplash.com/photo-1490642914619-7955a3fd483c?q=80&w=2093&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 
   height: 100vh;
   display: grid;
