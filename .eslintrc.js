@@ -23,7 +23,8 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   settings: {
     react: {
