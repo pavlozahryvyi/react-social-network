@@ -1,13 +1,30 @@
 import { login as asyncLogin } from '../../features/authSlice';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { TypeLoginFormData } from '../../types/authTypes';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
+import { SimpleButton } from '../common/SimpleButton';
+import { InputField } from '../common/form/FormikInput';
+import styled from 'styled-components';
+
+const FormWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledFormik = styled(Formik)`
+  max-width: 300px;
+`;
+
+const LoginComponentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+`;
 
 type TypePropsLoginForm = {
   captchaUrl: string | null;
 };
-
-//initialValues={{email: '', password: '', rememberMe: false, captcha: null}}
 
 export const LoginForm: React.FC<TypePropsLoginForm> = () => {
   const [login] = useCustomDispatch([asyncLogin]);
@@ -15,9 +32,8 @@ export const LoginForm: React.FC<TypePropsLoginForm> = () => {
   const handleSubmit = (values: TypeLoginFormData) => login(values);
 
   return (
-    <div>
-      <h1>SignUp</h1>
-      <Formik
+    <FormWrapper>
+      <StyledFormik
         initialValues={{
           email: '',
           password: '',
@@ -27,20 +43,23 @@ export const LoginForm: React.FC<TypePropsLoginForm> = () => {
         onSubmit={handleSubmit}
       >
         <Form>
-          <label htmlFor="email">Email</label>
-          <Field id="email" name="email" placeholder="Email" />
-
-          <label htmlFor="password">Password</label>
-          <Field
-            id="password"
-            name="password"
-            placeholder="Password"
-            type="password"
-          />
-
-          <button type="submit">Submit</button>
+          <LoginComponentWrapper>
+            <label htmlFor="email">Email</label>
+            <InputField name="email" placeholder="Email" />
+          </LoginComponentWrapper>
+          <LoginComponentWrapper>
+            <label htmlFor="password">Password</label>
+            <InputField
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
+          </LoginComponentWrapper>
+          <LoginComponentWrapper>
+            <SimpleButton type="submit">Submit</SimpleButton>
+          </LoginComponentWrapper>
         </Form>
-      </Formik>
-    </div>
+      </StyledFormik>
+    </FormWrapper>
   );
 };

@@ -5,7 +5,7 @@ import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { TypeUsersFilter } from '../../types/usersTypes';
 import { LuSearch } from 'react-icons/lu';
 import { IconButton } from '../common/IconButton';
-import { InputField } from '../common/form/InputField';
+import { InputField } from '../common/form/FormikInput';
 
 const formValidate = () => ({});
 

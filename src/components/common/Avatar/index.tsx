@@ -1,11 +1,6 @@
 import { FC } from 'react';
-import styles from './Avatar.module.css';
 import userPhoto from '../../../../src/assets/img/usr.png';
-import styled from 'styled-components';
-
-const AvatarImg = styled.img`
-  border-radius: 50%;
-`;
+import { AvatarImg } from './styles';
 
 type TypeAvatar = {
   src: string | null;
@@ -18,12 +13,6 @@ export const Avatar: FC<TypeAvatar> = (props) => {
   const { src, alt, width = 100 } = props;
 
   return (
-    <AvatarImg
-      src={src || userPhoto}
-      alt={alt}
-      className={styles.avatar}
-      width={width}
-      height={width}
-    />
+    <AvatarImg src={src || userPhoto} alt={alt} width={width} height={width} />
   );
 };

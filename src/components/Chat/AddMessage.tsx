@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { SimpleButton } from '../common/SimpleButton';
+import { ControlledTextarea } from '../common/form/ControlledTextarea';
 
 type TypeProps = {
   sendMessage: any;
@@ -19,15 +21,14 @@ export const AddMessage: React.FC<TypeProps> = (props) => {
 
   return (
     <div>
-      Add Message:{' '}
+      Add Message
       <div>
-        <textarea onChange={handleChange} value={message} />
-        <button
-          onClick={handleClick}
-          // disabled={!wsChannel || readyStatus === 'pending'}
-        >
-          SEND
-        </button>
+        <ControlledTextarea
+          onChange={handleChange}
+          value={message}
+          placeholder="send msg"
+        />
+        <SimpleButton onClick={handleClick}>SEND</SimpleButton>
       </div>
     </div>
   );

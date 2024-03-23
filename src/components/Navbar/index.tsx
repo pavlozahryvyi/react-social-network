@@ -1,12 +1,13 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
 import { pages } from '../utils/pages';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { logout as asyncLogout } from '../../features/authSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { selectAuthData } from '../../selectors/authSelector';
 import logo from '../../img/logo.png';
-import { LinkBlock, Link } from './styles';
+import { LinkBlock, Link, Nav, NavLogo } from './styles';
+import { IconButton } from '../common/IconButton';
+import { BiLogOutCircle, BiLogInCircle } from 'react-icons/bi';
 
 export const Navbar: FC = () => {
   const [logout] = useCustomDispatch([asyncLogout]);
@@ -16,27 +17,34 @@ export const Navbar: FC = () => {
   const handleClick = () => logout();
 
   return (
-    <nav>
-      <img src={logo} height={30} />
-      {pages.map(({ name, link, notDisplay }) => {
-        if (notDisplay) return null;
-
-        return (
-          <LinkBlock key={link} className="item">
-            <Link to={link} key={link}>
-              {name}
-            </Link>
-          </LinkBlock>
-        );
-      })}
+    <Nav>
+      <NavLogo>
+        <img src={logo} height={30} />
+      </NavLogo>
       {isAuth ? (
         <>
-          {login}
-          <button onClick={handleClick}>LogOut</button>
+          {pages
+            .filter(({ notDisplay }) => !notDisplay)
+            .map(({ name, link, icon }) => {
+              return (
+                <LinkBlock key={link}>
+                  <Link to={link} key={link}>
+                    {icon}
+                    {name === 'Profile' ? login : name}
+                  </Link>
+                </LinkBlock>
+              );
+            })}
+          <IconButton onClick={handleClick} Icon={BiLogOutCircle} />
         </>
       ) : (
-        <NavLink to={'/login'}>Login</NavLink>
+        <LinkBlock>
+          <Link to={'/login'}>
+            <BiLogInCircle />
+            Login
+          </Link>
+        </LinkBlock>
       )}
-    </nav>
+    </Nav>
   );
 };

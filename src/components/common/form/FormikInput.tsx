@@ -14,8 +14,13 @@ const StyledInput = styled(Field)`
 interface IProps {
   name: string;
   placeholder?: string;
+  type?: string;
 }
 
-export const InputField: React.FC<IProps> = ({ name, placeholder }) => {
-  return <StyledInput type="text" name={name} placeholder={placeholder} />;
+export const InputField: React.FC<IProps> = ({
+  name,
+  placeholder,
+  type = 'text'
+}) => {
+  return <StyledInput type={type} name={name} placeholder={placeholder} />;
 };
