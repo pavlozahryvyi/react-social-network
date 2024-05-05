@@ -2,26 +2,28 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
 import { TypeMessageUser } from '../../types/messagesTypes';
 import { v4 as uuidv4 } from 'uuid';
+import { MESSAGES_API } from '../../spec/reducersPaths';
+import { messagesApi as messagesEndpoints } from '../../spec/endpoints';
 
 export const messagesApi = createApi({
-  reducerPath: 'messagesApi',
+  reducerPath: MESSAGES_API,
   baseQuery,
   endpoints: (build) => ({
     getMessages: build.query<TypeMessageUser[], void>({
-      query: () => 'dialogs'
+      query: () => messagesEndpoints.getMessages()
     }),
     getUserMessages: build.query<any, any>({
-      query: (id) => `dialogs/${id}/messages`
+      query: (id) => messagesEndpoints.getUserMessages(id)
     }),
     startChatting: build.mutation<any, any>({
       query: (id) => ({
-        url: `dialogs/${id}`,
+        url: messagesEndpoints.startChatting(id),
         method: 'PUT'
       })
     }),
     sendMessage: build.mutation<any, any>({
       query: ({ recipientId, body }) => ({
-        url: `dialogs/${recipientId}/messages`,
+        url: messagesEndpoints.sendMessage(recipientId),
         method: 'POST',
         body
       }),

@@ -16,6 +16,7 @@ export const AppWrapper = styled.div`
 export const ContentWrapper = styled(BlurRadiusBackground)`
   grid-area: c;
   overflow: hidden;
+  max-width: 680px;
   height: 100%;
   border-top-left-radius: 20px;
   overflow: scroll;

@@ -1,14 +1,14 @@
-import userPhoto from '../../../../src/assets/img/usr.png';
+import userPhoto from '../../../src/assets/img/usr.png';
 import { NavLink } from 'react-router-dom';
-import { TypeUser } from '../../../types/usersTypes';
+import { TypeUser } from '../../types/usersTypes';
 import {
   useSubscribeMutation,
   useUnSubscribeMutation
-} from '../../../features/api/subscribeApiSlice';
-import { Avatar } from '../../common/Avatar';
-import { useStartChattingMutation } from '../../../features/api/messagesApiSlice';
+} from '../../features/api/subscribeApiSlice';
+import { Avatar } from '../common/Avatar';
+import { useStartChattingMutation } from '../../features/api/messagesApiSlice';
 import { LuUserPlus2, LuUserMinus2, LuMessageCircle } from 'react-icons/lu';
-import { IconButton } from '../../common/IconButton';
+import { IconButton } from '../common/IconButton';
 import styled from 'styled-components';
 
 const UserWrapper = styled.div`

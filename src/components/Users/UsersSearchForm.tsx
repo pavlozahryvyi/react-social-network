@@ -14,7 +14,7 @@ type PropsTypes = {
   disabled: boolean;
 };
 
-type FriendType = 'true' | 'false' | 'null';
+type FriendType = 'subscribed' | 'unsubscribed' | 'all';
 
 type FormType = {
   term: '' | string;
@@ -22,7 +22,7 @@ type FormType = {
 };
 
 const convertFriendsValuesToBool = (value: FriendType) =>
-  value === 'true' ? true : value === 'false' ? false : null;
+  value === 'subscribed' || value === 'unsubscribed' ? false : null;
 
 export const UsersSearchForm: FC<PropsTypes> = (props) => {
   const { initialValues, disabled } = props;
@@ -45,9 +45,9 @@ export const UsersSearchForm: FC<PropsTypes> = (props) => {
         <Form>
           <InputField name="term" placeholder="Name..." />
           <Field as="select" name="friend">
-            <option value="null">All</option>
-            <option value="true">Subscribed</option>
-            <option value="false">Unsubscribed</option>
+            <option value="all">All</option>
+            <option value="subscribed">Subscribed</option>
+            <option value="unsubscribed">Unsubscribed</option>
           </Field>
           <ErrorMessage name="term" component="div" />
           <IconButton type="submit" Icon={LuSearch} disabled={disabled} />

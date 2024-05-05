@@ -1,4 +1,4 @@
-import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
+import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 
 export default fetchBaseQuery({
   baseUrl: 'https://social-network.samuraijs.com/api/1.0',
