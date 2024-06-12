@@ -22,8 +22,9 @@ jobs:
         run: npm i --legacy-peer-deps
 
       - name: Build
-        run: npm run build # Replace with your build command
+        run: npm run build
         env:
+          CI: ""
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
 
       - name: Deploy to GitHub Pages
