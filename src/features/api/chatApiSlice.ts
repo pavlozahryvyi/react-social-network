@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
 import { current } from '@reduxjs/toolkit';
+import { chatEndpoints } from '../../spec/endpoints';
 
 let ws: WebSocket | null = null;
 
@@ -17,9 +18,7 @@ export const chatApi = createApi({
         if (ws) {
           ws.send(msg);
         } else {
-          ws = new WebSocket(
-            'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
-          );
+          ws = new WebSocket(chatEndpoints.wsChatChannel());
         }
 
         ws.addEventListener('message', (event) => {

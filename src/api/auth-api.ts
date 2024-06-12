@@ -1,3 +1,4 @@
+import { authEndpoints as authEndpoints } from '../spec/endpoints';
 import { APIResponseType } from '../types/apiTypes';
 import { TypeLoginParams } from '../types/authTypes';
 import { instance } from './api';
@@ -15,13 +16,17 @@ type LoginResponseDataType = {
 export const authAPI = {
   me: () =>
     instance
-      .get<APIResponseType<MeResponseDataType>>('auth/me')
+      .get<APIResponseType<MeResponseDataType>>(authEndpoints.authMe())
       .then((resp) => resp.data),
 
   login: (params: TypeLoginParams) =>
     instance
-      .post<APIResponseType<LoginResponseDataType>>('/auth/login', params)
+      .post<APIResponseType<LoginResponseDataType>>(
+        authEndpoints.logIn(),
+        params
+      )
       .then((resp) => resp.data),
 
-  logOut: () => instance.delete('/auth/login').then((resp) => resp.data)
+  logOut: () =>
+    instance.delete(authEndpoints.logOut()).then((resp) => resp.data)
 };
