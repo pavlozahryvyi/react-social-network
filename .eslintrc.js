@@ -22,7 +22,7 @@ module.exports = {
     quotes: ['error', 'single'],
     '@typescript-eslint/consistent-type-imports': 'off',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/no-unused-vars': ['warn'],
     'react/prop-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off'
   },

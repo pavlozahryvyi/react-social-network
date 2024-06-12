@@ -1,6 +1,6 @@
 import { TypeUser } from '../../types/usersTypes';
 import { usersApi } from './usersApiSlice';
-import { followApi as followEndpoints } from '../../const/endpoints';
+import { followEndpoints as followEndpoints } from '../../spec/endpoints';
 
 const handleFollow = (draft: any, id: number, isFollowed: boolean): void => {
   const currentUser = draft.items.find((user: TypeUser) => user.id === id);

@@ -1,3 +1,4 @@
+import { securityEndpoints } from '../spec/endpoints';
 import { instance } from './api';
 
 type GetCaptchaUrlResponseType = {
@@ -7,7 +8,7 @@ type GetCaptchaUrlResponseType = {
 export const securityAPI = {
   getCaptcha() {
     return instance
-      .get<GetCaptchaUrlResponseType>('/security/get-captcha-url')
+      .get<GetCaptchaUrlResponseType>(securityEndpoints.getCaptcha())
       .then((resp) => resp.data);
   }
 };

@@ -2,7 +2,7 @@ import { TypeUsersFilter } from './../../types/usersTypes';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
 import { TypePage } from '../../types/commonTypes';
-import { usersApi as usersEndpoints } from '../../const/endpoints';
+import { usersEndpoints as usersEndpoints } from '../../spec/endpoints';
 
 const mapQueryParams = (obj: TypeUsersFilter & TypePage): string => {
   const paramsArr = Object.entries(obj)

@@ -2,8 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
 import { TypeMessageUser } from '../../types/messagesTypes';
 import { v4 as uuidv4 } from 'uuid';
-import { MESSAGES_API } from '../../const/reducersPaths';
-import { messagesApi as messagesEndpoints } from '../../const/endpoints';
+import { MESSAGES_API } from '../../spec/reducersPaths';
+import { messagesEndpoints as messagesEndpoints } from '../../spec/endpoints';
 
 export const messagesApi = createApi({
   reducerPath: MESSAGES_API,

@@ -1,7 +1,6 @@
 import { login as asyncLogin } from '../../features/authSlice';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
-import { TypeLoginFormData } from '../../types/authTypes';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikValues } from 'formik';
 import { SimpleButton } from '../common/SimpleButton';
 import { InputField } from '../common/form/FormikInput';
 import styled from 'styled-components';
@@ -29,7 +28,9 @@ type TypePropsLoginForm = {
 export const LoginForm: React.FC<TypePropsLoginForm> = () => {
   const [login] = useCustomDispatch([asyncLogin]);
 
-  const handleSubmit = (values: TypeLoginFormData) => login(values);
+  const handleSubmit = (values: FormikValues) => {
+    login(values);
+  };
 
   return (
     <FormWrapper>

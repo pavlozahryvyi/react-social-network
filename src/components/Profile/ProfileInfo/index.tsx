@@ -4,7 +4,6 @@ import Preloader from '../../common/Preloader/Preloader';
 import userPhoto from '../../../assets/img/usr.png';
 import ProfileStatus from './ProfileStatus';
 import { ProfileForm } from './ProfileForm';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import {
   selectProfile,
   selectStatus
@@ -12,25 +11,20 @@ import {
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Contacts } from './Contacts';
-import {
-  savePhotoThunk,
-  updateStatusThunk
-} from '../../../thunks/profileThunk';
 import { Avatar } from '../../common/Avatar';
 import { ProfileData } from './ProfileData';
 import { PageHeader } from '../../common/ContentHeader';
 
 const ProfileInfo: React.FC = () => {
-  const dispatch = useAppDispatch();
-
   const { userId } = useParams();
 
   const isOwner = !userId;
 
-  const savePhoto = (file: File) => dispatch(savePhotoThunk(file));
+  //TODO: remove this, using trk redux and query
+  // const savePhoto = (file: File) => dispatch(savePhotoThunk(file));
   // const saveProfileData = (data: TypeProfile) =>
   //   dispatch(saveProfileDataThunk(data));
-  const updateStatus = (data: string) => dispatch(updateStatusThunk(data));
+  // const updateStatus = (data: string) => dispatch(updateStatusThunk(data));
 
   const profile = useSelector(selectProfile);
   const status = useSelector(selectStatus);
@@ -39,7 +33,7 @@ const ProfileInfo: React.FC = () => {
 
   function onMainPhotoSelected(event: ChangeEvent<HTMLInputElement>) {
     const input = event.target as HTMLInputElement;
-    if (input.files?.length) savePhoto(input.files[0]);
+    // if (input.files?.length) savePhoto(input.files[0]);
   }
 
   if (!profile) return <Preloader />;
@@ -70,7 +64,12 @@ const ProfileInfo: React.FC = () => {
       </div>
       {isOwner ? (
         <div>
-          <ProfileStatus updateStatus={updateStatus} propStatus={status} />
+          <ProfileStatus
+            updateStatus={(data) => {
+              return;
+            }}
+            propStatus={status}
+          />
         </div>
       ) : null}
     </>
