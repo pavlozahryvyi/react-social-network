@@ -14,12 +14,10 @@ import { Contacts } from './Contacts';
 import { Avatar } from '../../common/Avatar';
 import { ProfileData } from './ProfileData';
 import { PageHeader } from '../../common/ContentHeader';
+import { selectProfileData } from '../../../features/api/profileApiSlice';
+import { useGetUserId } from '../../../hooks/useGetUserId';
 
 const ProfileInfo: React.FC = () => {
-  const { userId } = useParams();
-
-  const isOwner = !userId;
-
   //TODO: remove this, using trk redux and query
   // const savePhoto = (file: File) => dispatch(savePhotoThunk(file));
   // const saveProfileData = (data: TypeProfile) =>
@@ -36,7 +34,13 @@ const ProfileInfo: React.FC = () => {
     // if (input.files?.length) savePhoto(input.files[0]);
   }
 
-  if (!profile) return <Preloader />;
+  const userId = useGetUserId();
+
+  // if (!profile) return <Preloader />;
+
+  const profileData = selectProfileData(userId);
+
+  console.log('---profileData', profileData);
 
   const handleEditMode = () => setEditMode((prev) => !prev);
 
@@ -44,7 +48,7 @@ const ProfileInfo: React.FC = () => {
 
   return (
     <>
-      <PageHeader pageTitle="Profile" />
+      {/* <PageHeader pageTitle="Profile" />
       <div className={styles.descriptionBlock}>
         <div>
           <Avatar src={profile.photos.large || userPhoto} alt="" />
@@ -71,7 +75,7 @@ const ProfileInfo: React.FC = () => {
             propStatus={status}
           />
         </div>
-      ) : null}
+      ) : null} */}
     </>
   );
 };
