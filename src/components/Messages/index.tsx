@@ -5,7 +5,7 @@ import { User } from './User';
 import { UserMessages } from './UserMessages';
 import { TypePhotos } from '../../types/profileTypes';
 import { Messages as MessagesBlock, UsersInfo } from './styles';
-import { PageHeader } from '../common/ContentHeader';
+import { PageHeader } from '../common/layout/PageHeader';
 import { NoMessages } from './NoMessages';
 
 const Messages: React.FC = () => {

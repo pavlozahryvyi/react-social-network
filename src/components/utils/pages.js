@@ -10,6 +10,7 @@ import {
   PiPersonSimpleBikeBold
 } from 'react-icons/pi';
 import { BiLogOutCircle } from 'react-icons/bi';
+import { AsyncTest } from '../AsyncTest/AsyncTest';
 
 export const pages = [
   {
@@ -46,6 +47,13 @@ export const pages = [
     path: '/login',
     notDisplay: true,
     component: <Login />,
+    icon: <BiLogOutCircle />
+  },
+  {
+    name: 'Test Page',
+    link: '/test',
+    path: '/test',
+    component: <AsyncTest />,
     icon: <BiLogOutCircle />
   },
   {
