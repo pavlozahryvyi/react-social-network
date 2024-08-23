@@ -2,21 +2,24 @@ import styled from 'styled-components';
 import { BlurRadiusBackground } from '../common/BlurRadiusBackground';
 
 export const AppWrapper = styled.div`
-  display: grid;
   max-width: 1000px;
-  height: 700px;
+  max-height: 1000px;
+  height: 100vh;
+  width: 100vw;
   margin: 0 auto;
-  grid-template-columns: 2fr 10fr;
-  /*header - is 2 columns*/
-  /*nav и content - are by 1 column*/
+
+  display: grid;
+  grid-template-rows: [content] 92% [nav] 8%;
+  grid-template-columns: auto;
   gap: 10px;
-  grid-template-areas: 'n c';
+  grid-template-areas:
+    'content'
+    'nav';
 `;
 
 export const ContentWrapper = styled(BlurRadiusBackground)`
-  grid-area: c;
+  grid-area: content;
   overflow: hidden;
-  max-width: 680px;
   height: 100%;
   border-top-left-radius: 20px;
   overflow: scroll;
@@ -28,6 +31,6 @@ export const ContentWrapper = styled(BlurRadiusBackground)`
 `;
 
 export const NavWrapper = styled(BlurRadiusBackground)`
-  grid-area: n;
+  grid-area: nav;
   padding: 20px;
 `;

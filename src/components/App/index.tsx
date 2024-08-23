@@ -18,9 +18,6 @@ export const App: FC = () => {
 
   return (
     <AppWrapper>
-      <NavWrapper>
-        <Navbar />
-      </NavWrapper>
       <ContentWrapper>
         <Routes>
           {routePages.map(({ component, path }: any, idx: number) => (
@@ -28,6 +25,9 @@ export const App: FC = () => {
           ))}
         </Routes>
       </ContentWrapper>
+      <NavWrapper>
+        <Navbar />
+      </NavWrapper>
     </AppWrapper>
   );
 };

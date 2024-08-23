@@ -4,8 +4,7 @@ import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { logout as asyncLogout } from '../../features/authSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { selectAuthData } from '../../selectors/authSelector';
-import logo from '../../img/logo.png';
-import { LinkBlock, Link, Nav, NavLogo } from './styles';
+import { NavItem, Link, Nav } from './styles';
 import { IconButton } from '../common/IconButton';
 import { BiLogOutCircle, BiLogInCircle } from 'react-icons/bi';
 
@@ -14,36 +13,36 @@ export const Navbar: FC = () => {
 
   const { isAuth, login } = useAppSelector(selectAuthData);
 
-  const handleClick = () => logout();
+  const handleSignOutClick = () => logout();
 
   return (
     <Nav>
-      <NavLogo>
-        <img src={logo} height={30} />
-      </NavLogo>
       {isAuth ? (
         <>
           {pages
             .filter(({ notDisplay }) => !notDisplay)
-            .map(({ name, link, icon }) => {
-              return (
-                <LinkBlock key={link}>
-                  <Link to={link} key={link}>
-                    {icon}
-                    {name === 'Profile' ? login : name}
-                  </Link>
-                </LinkBlock>
-              );
-            })}
-          <IconButton onClick={handleClick} Icon={BiLogOutCircle} />
+            .map(({ name, link, icon }) => (
+              <NavItem key={link}>
+                <Link to={link} key={link}>
+                  {icon}
+                  <p>{name === 'Profile' ? login : name}</p>
+                </Link>
+              </NavItem>
+            ))}
+          <NavItem onClick={handleSignOutClick}>
+            <Link to="/login">
+              <IconButton Icon={BiLogOutCircle} />
+              <p>Sign Out</p>
+            </Link>
+          </NavItem>
         </>
       ) : (
-        <LinkBlock>
-          <Link to={'/login'}>
+        <NavItem>
+          <Link to="/login">
             <BiLogInCircle />
-            Login
+            <p>Sign In</p>
           </Link>
-        </LinkBlock>
+        </NavItem>
       )}
     </Nav>
   );

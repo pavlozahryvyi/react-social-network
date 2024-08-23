@@ -1,5 +1,5 @@
-export const mapPages = (pages) => {
-  const nextPages = pages.reduce((acc, curr) => {
+export const mapPages = (pages) =>
+  pages.reduce((acc, curr) => {
     const { path } = curr;
     if (Array.isArray(path)) {
       path.forEach((el) => {
@@ -10,8 +10,5 @@ export const mapPages = (pages) => {
     }
     return acc;
   }, []);
-
-  return nextPages;
-};
 
 export const gatNumberArray = (n) => Array.from(Array(n).keys());

@@ -36,23 +36,21 @@ export const UsersSearchForm: FC<PropsTypes> = (props) => {
   };
 
   return (
-    <div>
-      <Formik
-        initialValues={initialValues}
-        validate={formValidate}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <InputField name="term" placeholder="Name..." />
-          <Field as="select" name="friend">
-            <option value="all">All</option>
-            <option value="subscribed">Subscribed</option>
-            <option value="unsubscribed">Unsubscribed</option>
-          </Field>
-          <ErrorMessage name="term" component="div" />
-          <IconButton type="submit" Icon={LuSearch} disabled={disabled} />
-        </Form>
-      </Formik>
-    </div>
+    <Formik
+      initialValues={initialValues}
+      validate={formValidate}
+      onSubmit={handleSubmit}
+    >
+      <Form>
+        <InputField name="term" placeholder="Name..." />
+        <Field as="select" name="friend">
+          <option value="all">All</option>
+          <option value="subscribed">Subscribed</option>
+          <option value="unsubscribed">Unsubscribed</option>
+        </Field>
+        <ErrorMessage name="term" component="div" />
+        <IconButton type="submit" Icon={LuSearch} disabled={disabled} />
+      </Form>
+    </Formik>
   );
 };

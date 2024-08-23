@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-export const Nav = styled.nav``;
-
-export const NavLogo = styled.div`
-  text-align: center;
+export const Nav = styled.nav`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  justify-items: center;
+  gap: 10px;
 `;
 
-export const LinkBlock = styled.div`
+export const NavItem = styled.div`
   color: white;
 `;
 
@@ -21,5 +22,11 @@ export const Link = styled(NavLink)`
   cursor: pointer;
   &.active {
     text-decoration: underline;
+  }
+
+  p {
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 `;

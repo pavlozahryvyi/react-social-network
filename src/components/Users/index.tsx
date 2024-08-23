@@ -25,8 +25,9 @@ const UsersWrapper = styled.div`
     display: none;
   }
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
 `;
 
 type TypeParams = {
@@ -46,7 +47,7 @@ export const Users: React.FC = () => {
   const { data, isFetching } = useGetUsersDataQuery({
     ...filters,
     page,
-    count: 15
+    count: 16
   });
 
   const handleFollowing = (handler: TypeHandler, id: number) => {
