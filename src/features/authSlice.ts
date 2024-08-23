@@ -31,11 +31,6 @@ export const login = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async () => await authAPI.logOut()
-);
-
 const initialState = {
   id: null as number | null,
   email: null as string | null,
@@ -48,12 +43,10 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(getAuthData.fulfilled, (_, { payload }) => ({
-        ...payload,
-        isAuth: Boolean(payload.login)
-      }))
-      .addCase(logout.fulfilled, () => initialState);
+    builder.addCase(getAuthData.fulfilled, (_, { payload }) => ({
+      ...payload,
+      isAuth: Boolean(payload.login)
+    }));
   }
 });
 export default authSlice.reducer;

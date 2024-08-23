@@ -1,19 +1,20 @@
 import { FC } from 'react';
 import { pages } from '../utils/pages';
-import { useCustomDispatch } from '../../hooks/useCustomDispatch';
-import { logout as asyncLogout } from '../../features/authSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { selectAuthData } from '../../selectors/authSelector';
 import { NavItem, Link, Nav } from './styles';
 import { IconButton } from '../common/IconButton';
 import { BiLogOutCircle, BiLogInCircle } from 'react-icons/bi';
+import { useLogoutMutation } from '../../features/api/authApiSlice';
 
 export const Navbar: FC = () => {
-  const [logout] = useCustomDispatch([asyncLogout]);
+  const [logout] = useLogoutMutation();
 
   const { isAuth, login } = useAppSelector(selectAuthData);
 
-  const handleSignOutClick = () => logout();
+  const handleSignOutClick = () => {
+    logout();
+  };
 
   return (
     <Nav>

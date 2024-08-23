@@ -6,6 +6,7 @@ import filtersReducer from '../features/filtersSlice';
 import pagesReducer from '../features/pagesSlice';
 import { chatApi } from '../features/api/chatApiSlice';
 import { messagesApi } from '../features/api/messagesApiSlice';
+import { authApi } from '../features/api/authApiSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     [usersApi.reducerPath]: usersApi.reducer,
     [chatApi.reducerPath]: chatApi.reducer,
     [messagesApi.reducerPath]: messagesApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
     filters: filtersReducer,
     page: pagesReducer
   },
@@ -22,4 +24,5 @@ export const store = configureStore({
       .concat(usersApi.middleware)
       .concat(chatApi.middleware)
       .concat(messagesApi.middleware)
+      .concat(authApi.middleware)
 });
