@@ -3,6 +3,8 @@ import { authAPI } from '../api/auth-api';
 import { TypeLoginParams } from '../types/authTypes';
 import { EnumResultCodes } from '../types/apiTypes';
 
+//TODO: Refactor to rtk
+
 export const getAuthData = createAsyncThunk('auth/me', async () => {
   const { data } = await authAPI.me();
   return data;
@@ -14,6 +16,7 @@ export const login = createAsyncThunk(
     const response = await authAPI.login(params);
 
     if (response.resultCode === EnumResultCodes.Success) {
+      localStorage.setItem('token', response.data.token);
       dispatch(getAuthData());
     } else {
       // const err =

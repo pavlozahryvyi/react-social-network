@@ -10,7 +10,8 @@ type MeResponseDataType = {
 };
 
 type LoginResponseDataType = {
-  id: number;
+  userId: number;
+  token: string;
 };
 
 export const authAPI = {
