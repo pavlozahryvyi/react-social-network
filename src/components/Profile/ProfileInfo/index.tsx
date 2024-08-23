@@ -13,7 +13,7 @@ import { useParams } from 'react-router';
 import { Contacts } from './Contacts';
 import { Avatar } from '../../common/Avatar';
 import { ProfileData } from './ProfileData';
-import { PageHeader } from '../../common/ContentHeader';
+import { PageHeader } from '../../common/layout/PageHeader';
 
 const ProfileInfo: React.FC = () => {
   const { userId } = useParams();

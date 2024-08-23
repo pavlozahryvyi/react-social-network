@@ -6,6 +6,7 @@ const StyledButton = styled.button`
   border-radius: 15px;
   text-align: center;
   padding: 10px;
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
     background: #ffffff2e;

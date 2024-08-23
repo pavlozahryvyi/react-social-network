@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useGetChatDataQuery } from '../../features/api/chatApiSlice';
 import { Message } from './ChatMessage';
 import { SendMessage } from '../common/SendMessage';
-import { PageHeader } from '../common/ContentHeader';
+import { PageHeader } from '../common/layout/PageHeader';
 import styled from 'styled-components';
 
 const ChatWrapperStyled = styled.div`

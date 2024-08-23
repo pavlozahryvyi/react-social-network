@@ -10,7 +10,7 @@ import { getPage } from '../../selectors/pagesSelector';
 import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { pageSet as reducerPageSet } from '../../features/pagesSlice';
 import { TypePage } from '../../types/commonTypes';
-import { PageHeader } from '../common/ContentHeader';
+import { PageHeader } from '../common/layout/PageHeader';
 import styled from 'styled-components';
 
 const HeaderOptions = styled.div`
