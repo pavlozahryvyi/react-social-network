@@ -7,9 +7,9 @@ import { selectAuthData } from '../../selectors/authSelector';
 import { PageHeader } from '../common/layout/PageHeader';
 
 export const Login: FC = () => {
-  const { isAuth } = useAppSelector(selectAuthData);
+  // const { isAuth } = useAppSelector(selectAuthData);
 
-  if (isAuth) return <Navigate to={'/'} />;
+  // if (isAuth) return <Navigate to={'/'} />;
 
   return (
     <>

@@ -49,7 +49,6 @@ export const UserMessages: React.FC<TypeUserMessagesProps> = (props) => {
 
   return (
     <UserMessagesBlock>
-      Messages
       {data.items.map((msgItem: TypeMessage) => (
         <UserMessageBlock
           key={msgItem.id}

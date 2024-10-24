@@ -8,6 +8,8 @@ const handleFollow = (draft: any, id: number, isFollowed: boolean): void => {
   if (currentUser) {
     currentUser.followed = isFollowed;
   }
+
+  return currentUser;
 };
 
 export const subscribeApi = usersApi.injectEndpoints({
@@ -21,8 +23,8 @@ export const subscribeApi = usersApi.injectEndpoints({
         { id, page, filters },
         { dispatch, queryFulfilled }
       ) {
-        console.log('---use subscribe mutation');
-
+        const { data } = await queryFulfilled;
+        console.log('---data', data);
         const patchResult = dispatch(
           usersApi.util.updateQueryData(
             'getUsersData',
@@ -32,6 +34,7 @@ export const subscribeApi = usersApi.injectEndpoints({
             }
           )
         );
+        console.log('---use subscribe mutation', patchResult);
         try {
           await queryFulfilled;
         } catch {
@@ -48,7 +51,8 @@ export const subscribeApi = usersApi.injectEndpoints({
         { id, page, filters },
         { dispatch, queryFulfilled }
       ) {
-        console.log('---use unsubscribe mutation');
+        const { data } = await queryFulfilled;
+        console.log('---data', data);
         const patchResult = dispatch(
           usersApi.util.updateQueryData(
             'getUsersData',
@@ -58,6 +62,7 @@ export const subscribeApi = usersApi.injectEndpoints({
             }
           )
         );
+        console.log('---use unsubscribe mutation', patchResult);
         try {
           await queryFulfilled;
         } catch {
