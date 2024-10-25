@@ -61,6 +61,6 @@ export const pages = [
     link: '*',
     path: '*',
     notDisplay: true,
-    component: <div>ERROR, PAGE NOT FOUND, 404</div>
+    component: () => <div>ERROR, PAGE NOT FOUND, 404</div>
   }
 ];
