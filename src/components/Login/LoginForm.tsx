@@ -1,9 +1,11 @@
-import { login as asyncLogin } from '../../features/authSlice';
-import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { Formik, Form, FormikValues } from 'formik';
 import { SimpleButton } from '../common/SimpleButton';
 import { InputField } from '../common/form/FormikInput';
 import styled from 'styled-components';
+import { useLoginMutation } from '../../features/api/authApiSlice';
+import { TypeLoginParams } from '../../types/authTypes';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FormWrapper = styled.div`
   display: flex;
@@ -26,10 +28,18 @@ type TypePropsLoginForm = {
 };
 
 export const LoginForm: React.FC<TypePropsLoginForm> = () => {
-  const [login] = useCustomDispatch([asyncLogin]);
+  const [loginMutation, { isSuccess }] = useLoginMutation();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/');
+    }
+  }, [isSuccess]);
 
   const handleSubmit = (values: FormikValues) => {
-    login(values);
+    loginMutation(values as TypeLoginParams);
   };
 
   return (

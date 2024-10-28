@@ -10,7 +10,9 @@ import { useLogoutMutation } from '../../features/api/authApiSlice';
 export const Navbar: FC = () => {
   const [logout] = useLogoutMutation();
 
-  const { isAuth, login } = useAppSelector(selectAuthData);
+  const { isAuth } = useAppSelector(selectAuthData);
+
+  console.log('---isAuth', isAuth);
 
   const handleSignOutClick = () => {
     logout();
@@ -26,7 +28,7 @@ export const Navbar: FC = () => {
               <NavItem key={link}>
                 <Link to={link} key={link}>
                   {icon}
-                  <p>{name === 'Profile' ? login : name}</p>
+                  <p>{name}</p>
                 </Link>
               </NavItem>
             ))}

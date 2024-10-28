@@ -1,9 +1,14 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query';
+import { JWT } from '../../spec/consts';
 
 export default fetchBaseQuery({
   baseUrl: 'https://social-network.samuraijs.com/api/1.0',
-  headers: {
-    'API-KEY': process.env.REACT_APP_API_KEY,
-    Authorization: `Bearer ${localStorage.getItem('token') as string}`
+  prepareHeaders: (headers) => {
+    const token = localStorage.getItem(JWT);
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+    headers.set('API-KEY', import.meta.env.VITE_REACT_APP_API_KEY);
+    return headers;
   }
 });

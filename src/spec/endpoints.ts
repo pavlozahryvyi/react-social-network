@@ -16,7 +16,7 @@ export const followEndpoints = {
 export const authEndpoints = {
   authMe: () => 'auth/me',
   logIn: () => '/auth/login',
-  logOut: () => '/auth/login'
+  logOut: () => '/auth/logout'
 };
 
 export const profileEndpoints = {

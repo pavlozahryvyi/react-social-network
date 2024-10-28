@@ -1,19 +1,11 @@
-import { FC, useEffect } from 'react';
-import { getAuthData as asyncGetAuthData } from '../../features/authSlice';
+import { FC } from 'react';
 import { mapPages } from '../../utils';
 import { pages } from '../utils/pages';
 import { Navbar } from '../Navbar';
 import { Route, Routes } from 'react-router-dom';
-import { useCustomDispatch } from '../../hooks/useCustomDispatch';
 import { AppWrapper, ContentWrapper, NavWrapper } from './styles';
 
 export const App: FC = () => {
-  const [getAuthData] = useCustomDispatch([asyncGetAuthData]);
-
-  useEffect(() => {
-    getAuthData();
-  }, [getAuthData]);
-
   const routePages = mapPages(pages);
 
   return (
