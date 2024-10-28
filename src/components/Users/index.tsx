@@ -62,6 +62,8 @@ export const Users: React.FC = () => {
 
   const { items, totalCount } = data;
 
+  console.log('---users', items);
+
   return (
     <>
       <PageHeader pageTitle="People">
