@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authAPI } from '../api/auth-api';
 import { TypeLoginParams } from '../types/authTypes';
 import { EnumResultCodes } from '../types/apiTypes';
+import { authApi } from './api/authApiSlice';
+import { JWT } from '../spec/consts';
 
 //TODO: Refactor to rtk
 
@@ -16,7 +18,7 @@ export const login = createAsyncThunk(
     const response = await authAPI.login(params);
 
     if (response.resultCode === EnumResultCodes.Success) {
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem(JWT, response.data.token);
       dispatch(getAuthData());
     } else {
       // const err =
@@ -43,10 +45,23 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAuthData.fulfilled, (_, { payload }) => ({
-      ...payload,
-      isAuth: Boolean(payload.login)
-    }));
+    builder
+      .addMatcher(
+        authApi.endpoints.login.matchFulfilled,
+        (state, { payload }) => {
+          const { data } = payload;
+
+          state.id = data.userId;
+          state.isAuth = true;
+          localStorage.setItem(JWT, data.token);
+        }
+      )
+      .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+        console.log('---logout mather');
+
+        state = initialState;
+        localStorage.removeItem(JWT);
+      });
   }
 });
 export default authSlice.reducer;
