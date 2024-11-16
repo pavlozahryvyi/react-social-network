@@ -19,12 +19,11 @@ jobs:
           node-version: 18.x
 
       - name: Install dependencies
-        run: npm i --legacy-peer-deps
+        run: npm ci
 
       - name: Build
         run: npm run build
         env:
-          CI: ""
           VITE_REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
 
       - name: Deploy to GitHub Pages
