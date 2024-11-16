@@ -13,7 +13,7 @@ export const meApi = createApi({
   baseQuery,
   tagTypes: [ME_INFO_TAG],
   endpoints: (build) => ({
-    getMeInfo: build.query<void, void>({
+    getMeInfo: build.query<any, void>({
       query: () => {
         return {
           url: authEndpoints.authMe(),

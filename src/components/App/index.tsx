@@ -3,23 +3,26 @@ import { mapPages } from '../../utils';
 import { pages } from '../utils/pages';
 import { Navbar } from '../Navbar';
 import { Route, Routes } from 'react-router-dom';
-import { AppWrapper, ContentWrapper, NavWrapper } from './styles';
+import { AppStyled, ContentStyled, NavStyled } from './styles';
+import { useGetMeInfoQuery } from '../../features/api/meApiSlice';
 
 export const App: FC = () => {
+  useGetMeInfoQuery();
+
   const routePages = mapPages(pages);
 
   return (
-    <AppWrapper>
-      <ContentWrapper>
+    <AppStyled>
+      <ContentStyled>
         <Routes>
           {routePages.map(({ component, path }: any, idx: number) => (
             <Route key={idx} path={path} element={component} />
           ))}
         </Routes>
-      </ContentWrapper>
-      <NavWrapper>
+      </ContentStyled>
+      <NavStyled>
         <Navbar />
-      </NavWrapper>
-    </AppWrapper>
+      </NavStyled>
+    </AppStyled>
   );
 };

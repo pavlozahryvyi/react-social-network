@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { BlurRadiusBackground } from '../common/BlurRadiusBackground';
 
-export const AppWrapper = styled.div`
+export const AppStyled = styled.div`
   max-width: 1000px;
   max-height: 1000px;
   height: 100vh;
@@ -17,7 +17,7 @@ export const AppWrapper = styled.div`
     'nav';
 `;
 
-export const ContentWrapper = styled(BlurRadiusBackground)`
+export const ContentStyled = styled(BlurRadiusBackground)`
   grid-area: content;
   overflow: hidden;
   height: 100%;
@@ -30,7 +30,7 @@ export const ContentWrapper = styled(BlurRadiusBackground)`
   padding: 20px;
 `;
 
-export const NavWrapper = styled(BlurRadiusBackground)`
+export const NavStyled = styled(BlurRadiusBackground)`
   grid-area: nav;
   padding: 20px;
 `;
