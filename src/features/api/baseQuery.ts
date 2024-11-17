@@ -8,7 +8,7 @@ export default fetchBaseQuery({
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
-    headers.set('API-KEY', import.meta.env.VITE_REACT_APP_API_KEY);
+    headers.set('API-KEY', import.meta.env.VITE_API_KEY);
     return headers;
   }
 });
