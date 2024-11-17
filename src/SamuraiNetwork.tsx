@@ -7,7 +7,7 @@ import { store } from './redux/redux-store-rtk';
 console.log('---import.meta.env.NODE_ENV', import.meta.env.VITE_NODE_ENV);
 console.log(
   '---import.meta.env.NODE_ENV',
-  import.meta.env.VITE_VITE_REACT_APP_API_KEY
+  import.meta.env.VITE_REACT_APP_API_KEY
 );
 
 const isDevEnv = import.meta.env.VITE_NODE_ENV === 'development';
