@@ -24,14 +24,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Show vars
         env:
           VITE_API_KEY: ${{ secrets.API_KEY }}
           VITE_ENV: production
-        run: |
-          echo "Secret var: ${{ secrets.API_KEY }}"
-          echo "Project var - VITE_API_KEY: $VITE_API_KEY"
-          echo "Project var - VITE_ENV: $VITE_ENV"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
