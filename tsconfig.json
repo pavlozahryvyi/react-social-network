@@ -17,5 +17,5 @@
     "jsx": "preserve",
     "typeRoots": ["./node_modules/@types/", "./src/react-app-env.d.ts"]
   },
-  "include": ["src"]
+  "include": ["src", "vite-env.d.ts"]
 }
