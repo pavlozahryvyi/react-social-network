@@ -9,6 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      VITE_API_KEY: ${{ secrets.API_KEY }}
+      TEST_VALUE: test_value
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -23,9 +27,6 @@ jobs:
 
       - name: Build
         run: npm run build
-        env:
-          VITE_API_KEY: ${{ secrets.API_KEY }}
-          TEST_VALUE: test_value
 
       - name: Show vars
         run: |
