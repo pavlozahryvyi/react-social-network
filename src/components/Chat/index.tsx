@@ -6,8 +6,13 @@ import { PageHeader } from '../common/layout/PageHeader';
 import styled from 'styled-components';
 
 const ChatWrapperStyled = styled.div`
-  height: 500px;
   overflow-y: scroll;
+`;
+
+const PageContentStyled = styled.div`
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
 `;
 
 export const Chat: FC = () => {
@@ -23,7 +28,7 @@ export const Chat: FC = () => {
   }, [data]);
 
   return (
-    <>
+    <PageContentStyled>
       <PageHeader pageTitle="Chat" />
       <ChatWrapperStyled>
         {messages.map((message, idx) => (
@@ -31,6 +36,6 @@ export const Chat: FC = () => {
         ))}
       </ChatWrapperStyled>
       <SendMessage sendMessage={setMessage} />
-    </>
+    </PageContentStyled>
   );
 };

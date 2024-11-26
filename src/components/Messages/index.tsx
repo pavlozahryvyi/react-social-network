@@ -28,9 +28,7 @@ const Messages: React.FC = () => {
           ))}
         </UsersInfo>
       </PageHeader>
-      <MessagesBlock>
-        {user ? <UserMessages {...user} /> : <NoMessages />}
-      </MessagesBlock>
+      {user ? <UserMessages {...user} /> : <NoMessages />}
     </>
   );
 };

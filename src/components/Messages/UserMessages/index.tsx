@@ -9,17 +9,8 @@ import { Message } from './Message';
 import { selectAuthData } from '../../../selectors/authSelector';
 import { TypePhotos } from '../../../types/profileTypes';
 import { Avatar } from '../../common/Avatar';
-import styled from 'styled-components';
-import { UserMessagesBlock } from './style';
+import { MessagesStyled, UserMessagesBlock, UserMessageStyled } from './style';
 import { SendMessage } from '../../common/SendMessage';
-
-const UserMessageBlock = styled.div<{ $isCurrentUserSender: boolean }>`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  flex-direction: ${(props) =>
-    props.$isCurrentUserSender ? 'row-reverse' : 'row'};
-`;
 
 type TypeUserMessagesProps = {
   id: number;
@@ -49,18 +40,20 @@ export const UserMessages: React.FC<TypeUserMessagesProps> = (props) => {
 
   return (
     <UserMessagesBlock>
-      {data.items.map((msgItem: TypeMessage) => (
-        <UserMessageBlock
-          key={msgItem.id}
-          $isCurrentUserSender={msgItem.senderId === senderId}
-        >
-          <Avatar src={photos.large} width={20} alt="Message avatar" />
-          <Message
-            message={msgItem.body}
-            isCurrentUserSender={msgItem.senderId === senderId}
-          />
-        </UserMessageBlock>
-      ))}
+      <MessagesStyled>
+        {data.items.map((msgItem: TypeMessage) => (
+          <UserMessageStyled
+            key={msgItem.id}
+            $isCurrentUserSender={msgItem.senderId === senderId}
+          >
+            <Avatar src={photos.large} width={20} alt="Message avatar" />
+            <Message
+              message={msgItem.body}
+              isCurrentUserSender={msgItem.senderId === senderId}
+            />
+          </UserMessageStyled>
+        ))}
+      </MessagesStyled>
       <SendMessage sendMessage={handleSendMessage} />
     </UserMessagesBlock>
   );
